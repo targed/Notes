@@ -1,0 +1,12 @@
+- [[The Goal of Relational Database Design]]
+- [[Mapping relationship types]]
+- [[Mapping of Weak Entity Types]]
+- [[Mapping Specialization/Generalization]]
+-
+- [[Introduction to Data Model Mapping]]
+- [[Mapping of Weak Entity Types]]
+- [[Mapping of Multivalued Attributes]]
+- [[Mapping of Binary 1:1 Relationship Types]]
+- [[Mapping of Binary M:N Relationship Types]]
+- [[Mapping Specialization and Generalization]]
+- [[Mapping of Shared Subclasses]]

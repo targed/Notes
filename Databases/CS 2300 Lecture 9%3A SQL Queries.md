@@ -1,0 +1,7 @@
+- [[Basic Structure of SQL Queries]]
+- [[Filtering Data with the WHERE Clause]]
+- [[Ordering Results, the Evaluation Order, and Aliases]]
+- [[Multi-Table Queries and Joins]]
+- [[Aggregate Operators and Grouping]]
+- [[Nested Queries]]
+- [[Joins syntax, CASE statements, Assertions, and Views]]

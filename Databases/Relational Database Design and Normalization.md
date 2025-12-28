@@ -1,0 +1,5 @@
+- [[Goals of Design and Informal Guidelines]]
+- [[Functional Dependency Analysis]]
+- [[Candidate Keys, Equivalence, and Minimal Covers]]
+- [[Normal Forms (1NF, 2NF, 3NF, BCNF)]]
+- [[Second Normal Form (2NF) and Third Normal Form (3NF)]]

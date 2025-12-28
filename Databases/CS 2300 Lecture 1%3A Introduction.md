@@ -1,0 +1,5 @@
+- [[Introduction to CS2300: File Structures and Database Systems]]
+- [[Basic Definitions: Data and Databases]]
+- [[Database Management System (DBMS)]]
+- [[Characteristics of the Database Approach]]
+- [[Database Users, Career Opportunities, and When (or When Not) to Use a DBMS]]
