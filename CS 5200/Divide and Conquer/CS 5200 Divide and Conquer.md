@@ -1,0 +1,4 @@
+- [[CS 5200 The Paradigm and Standard Merge Sort]]
+- [[CS 5200 Optimized "Hybrid" Merge Sort]]
+- [[CS 5200 The Tournament Method]]
+- [[CS 5200 Counting Inversions and Collaborative Filtering]]
