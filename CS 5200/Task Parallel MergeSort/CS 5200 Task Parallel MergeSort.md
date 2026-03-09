@@ -1,0 +1,4 @@
+- [[CS 5200 Naive Parallel Merge Sort]]
+- [[CS 5200 The Logic of Parallel Merging]]
+- [[CS 5200 Analyzing the Parallel Merge]]
+- [[CS 5200 The Final Analysis of Parallel Merge Sort]]

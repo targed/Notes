@@ -1,0 +1,3 @@
+- [[CS 5200 The Task-Parallel Paradigm and Keywords]]
+- [[CS 5200 The Computation DAG Model]]
+- [[CS 5200 The Laws of Parallelism]]
