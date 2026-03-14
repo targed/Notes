@@ -1,0 +1,4 @@
+- [[CS 5402 Probability Fundamentals]]
+- [[CS 5402 Bayes Theorem and Random Variables]]
+- [[CS 5402 Information Theory]]
+- [[CS 5402 The Naive Bayes Classifier]]

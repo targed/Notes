@@ -1,0 +1,5 @@
+- [[CS 5402 Logistic Regression]]
+- [[CS 5402 SVM Foundations]]
+- [[CS 5402 SVM Optimization]]
+- [[CS 5402 Advanced SVM]]
+- [[CS 5402 SVM Summary and Application]]

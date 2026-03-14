@@ -1,0 +1,3 @@
+- [[CS 5402 Foundations of Data Mining]]
+- [[CS 5402 Core Data Mining Tasks]]
+- [[CS 5402 Logistics, Roadmap, and Policies]]

@@ -1,0 +1,3 @@
+- [[CS 5402 Quantifying Similarity and Distance]]
+- [[CS 5402 Model Validation and Generalization]]
+- [[CS 5402 Evaluation Metrics (Classification and Regression)]]

@@ -1,0 +1,4 @@
+- [[CS 5402 Foundations of the Perceptron]]
+- [[CS 5402 The Learning Engine]]
+- [[CS 5402 The Algorithm and Update Rules]]
+- [[CS 5402 Theory, Limits, and Evolution]]

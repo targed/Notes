@@ -1,0 +1,5 @@
+- [[CS 5402 Foundations of Decision Trees]]
+- [[CS 5402 The Math of Splitting]]
+- [[CS 5402 Handling Data Types and The Gain Ratio]]
+- [[CS 5402 Overfitting and Pruning]]
+- [[CS 5402 Interpretability and Algorithms]]

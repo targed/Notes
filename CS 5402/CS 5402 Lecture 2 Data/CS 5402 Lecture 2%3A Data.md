@@ -1,0 +1,5 @@
+- [[CS 5402 The Algorithm-First Fallacy and Foundational Terminology]]
+- [[CS 5402 Levels of Measurement]]
+- [[CS 5402 Data Domains and Structural Formats]]
+- [[CS 5402 Data Quality (The GIGO Principle)]]
+- [[CS 5402 Remediating Data and Evaluation Contexts]]
