@@ -1,0 +1,4 @@
+- [[CS 3402 History, Evolution, and Applications of NLP]]
+- [[CS 3402 The Traditional NLP Pipeline]]
+- [[CS 3402 Modern NLP and Embeddings]]
+-
