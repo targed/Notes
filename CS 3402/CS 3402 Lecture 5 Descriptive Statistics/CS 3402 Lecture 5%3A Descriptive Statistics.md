@@ -1,0 +1,7 @@
+- [[CS 3402 Foundations of Data: Population, Samples, and Preparation]]
+- [[CS 3402 Case Study: The "Adult" Dataset Workflow]]
+- [[CS 3402 Statistical Measures and Distributions]]
+- [[CS 3402 Homework 1 and Project Logistics]]
+- [[CS 3402 Continuous Probability Distributions]]
+- [[CS 3402 Statistical Estimation and Relationships]]
+- [[CS 3402 The Calculus of AI: Derivatives and Backpropagation]]

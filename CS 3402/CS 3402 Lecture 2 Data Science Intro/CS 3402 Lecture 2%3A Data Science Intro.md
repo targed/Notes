@@ -1,0 +1,3 @@
+- [[CS 3402 Logistics and The Data Science Landscape]]
+- [[CS 3402 Core Concepts: Data, Statistics, and Machine Learning]]
+- [[CS 3402 Applications and The Toolstack]]

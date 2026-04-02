@@ -1,0 +1,4 @@
+- [[CS 3402 The Evolution and Purpose of IDEs]]
+- [[CS 3402 VS Code Power User Features]]
+- [[CS 3402 PyTorch and Deep Learning Theory]]
+- [[CS 3402 The Professional Setup and Student Toolkit]]

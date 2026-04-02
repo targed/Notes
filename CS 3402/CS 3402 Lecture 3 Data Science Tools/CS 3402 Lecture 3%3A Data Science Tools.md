@@ -1,0 +1,3 @@
+- [[CS 3402 Environment Management and Package Installation]]
+- [[CS 3402 The Anatomy of a DS Problem: Spam Classification]]
+- [[CS 3402 Personalized Modeling and Practical Homework]]

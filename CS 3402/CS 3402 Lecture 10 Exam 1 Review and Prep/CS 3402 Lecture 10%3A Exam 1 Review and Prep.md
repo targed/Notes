@@ -1,0 +1,5 @@
+- [[CS 3402 Quiz 1 Logistics and Foundations/Tools Review]]
+- [[CS 3402 Math, Stats, and Gradient Descent Review]]
+- [[CS 3402 Group Project Topic 2: LLM Linguistics]]
+- [[CS 3402 Quiz 1 Topics List and Study Guide]]
+- [[CS 3402 Quiz 1 Practice Questions and Answers]]

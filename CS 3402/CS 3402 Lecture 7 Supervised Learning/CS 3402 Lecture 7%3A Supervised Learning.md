@@ -1,0 +1,3 @@
+- [[CS 3402 The Mechanics of Learning: A Gradient Descent Walkthrough]]
+- [[CS 3402 Supervised Learning Tasks and The Data Science Pipeline]]
+- [[CS 3402 Group Project Topic 1: Medical AI]]

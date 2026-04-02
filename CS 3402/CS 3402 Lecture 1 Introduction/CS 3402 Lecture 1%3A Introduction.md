@@ -1,0 +1,3 @@
+- [[CS 3402 Course Logistics and Expectations]]
+- [[CS 3402 Working with AI in Data Science]]
+- [[CS 3402 The Philosophy of Data Science]]

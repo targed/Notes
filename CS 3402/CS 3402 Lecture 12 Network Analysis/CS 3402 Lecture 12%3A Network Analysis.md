@@ -1,0 +1,4 @@
+- [[CS 3402 Foundations of Graph Theory]]
+- [[CS 3402 Graph Metrics and Topology]]
+- [[CS 3402 Python Implementation of NetworkX]]
+- [[CS 3402 Neural Networks as Graphs]]

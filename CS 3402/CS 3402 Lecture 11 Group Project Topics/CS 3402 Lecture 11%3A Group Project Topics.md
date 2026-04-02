@@ -1,0 +1,3 @@
+- [[CS 3402 The Pretraining Paradigm and Foundation Models]]
+- [[CS 3402 Group Project Topic 3: Data Size and The Bias-Variance Tradeoff]]
+-
