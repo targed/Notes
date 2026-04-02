@@ -1,0 +1,5 @@
+- [[CS 3402 Quiz 2 Logistics and Network Analysis Review]]
+- [[CS 3402 Natural Language Processing and Tokenization]]
+- [[CS 3402 Deep Neural Networks and Transformers]]
+- [[CS 3402 Quiz 2 Topic list and Study Guide]]
+- [[CS 3402 Quiz 2 Practice Questions and Answers]]
