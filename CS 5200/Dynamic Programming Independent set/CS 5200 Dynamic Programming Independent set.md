@@ -1,0 +1,4 @@
+- [[CS 5200 The Problem Definition and Why Greedy/DC Fail]]
+- [[CS 5200 Optimal Substructure and The Two Cases]]
+- [[CS 5200 The Recurrence Relation and Algorithm]]
+- [[CS 5200 Reconstructing the Answer and DP Principles]]

@@ -1,0 +1,4 @@
+- [[CS 5200 Problem Definition and The Greedy Failure]]
+- [[CS 5200 The logic behind the recurrence]]
+- [[CS 5200 The 2D DP Matrix and Complexity]]
+- [[CS 5200 Reconstruction and The Practice Problem]]
