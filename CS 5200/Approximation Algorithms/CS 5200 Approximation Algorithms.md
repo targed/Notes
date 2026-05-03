@@ -1,0 +1,4 @@
+- [[CS 5200 Introduction to Approximation and Vertex Cover]]
+- [[CS 5200 The Set Cover Problem]]
+- [[CS 5200 Minimum Makespan Scheduling]]
+- [[CS 5200 Subset Sum and FPTAS]]

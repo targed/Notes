@@ -1,0 +1,5 @@
+- [[CS 4610 The Malware Taxonomy and Virus Anatomy]]
+- [[CS 4610 The Anatomy of a Worm]]
+- [[CS 4610 The Trojan Horse and Remote Access]]
+- [[CS 4610 Anti-Virus Detection and The Aho-Corasick Algorithm]]
+- [[CS 4610 OS Hardening and The Buffer Overflow Attack]]

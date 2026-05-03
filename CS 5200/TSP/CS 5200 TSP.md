@@ -1,0 +1,3 @@
+- [[CS 5200 The Goal of Approximation and The Triangle Inequality]]
+- [[CS 5200 The APPROX-TSP-TOUR Algorithm]]
+- [[CS 5200 The Mathematical Proof of the 2-Approximation]]

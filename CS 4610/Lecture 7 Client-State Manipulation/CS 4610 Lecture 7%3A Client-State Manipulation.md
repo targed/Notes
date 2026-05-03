@@ -1,0 +1,4 @@
+- [[CS 4610 The Stateless Web and Client-State Manipulation]]
+- [[CS 4610 Securing State: Session IDs vs. MACs]]
+- [[CS 4610 Data Transmission and The Referer Leak: GET vs. POST]]
+- [[CS 4610 Cookies, JavaScript, and Final Best Practices]]

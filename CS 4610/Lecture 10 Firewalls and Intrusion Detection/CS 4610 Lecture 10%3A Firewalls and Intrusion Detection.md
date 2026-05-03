@@ -1,0 +1,4 @@
+- [[CS 4610 Perimeter Defense: Firewalls and Proxies]]
+- [[CS 4610 Introduction to Intrusion Detection and The Base-Rate Fallacy]]
+- [[CS 4610 Detection Methodologies: Signature vs. Anomaly]]
+- [[CS 4610 Deployment Strategies: Host vs. Network IDS and Evasion]]
