@@ -1,0 +1,4 @@
+- [[CS 5420 Non-Parametric and Instance-Based Learning]]
+- [[CS 5420 Metric Space Topology and The Curse of Dimensionality]]
+- [[CS 5420 Generative Probabilistic Modeling: Bayes' Rule and The Naive Bayes Classifier]]
+- [[CS 5420 The Empirical Showdown: k-NN, Naive Bayes & Logistic Regression]]

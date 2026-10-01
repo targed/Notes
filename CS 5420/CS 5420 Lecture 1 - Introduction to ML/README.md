@@ -1,0 +1,5 @@
+- [[CS 5420 Course Identity, Core Philosophy, and The Applied ML Toolchain]]
+- [[CS 5420 The 15-Module Roadmap & Prerequisite Mathematical Foundations]]
+- [[CS 5420 Assessment Strategy, Grade Computation, and Course Mechanics]]
+- [[CS 5420 The Graduate Project Blueprint and Avoiding Methodological Traps]]
+- [[CS 5420 AI Policy, Classroom Presentations and Immediate Action Items]]

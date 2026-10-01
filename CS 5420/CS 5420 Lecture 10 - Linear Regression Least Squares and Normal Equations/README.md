@@ -1,0 +1,5 @@
+- [[CS 5420 The Linear Hypothesis and The Least-Squares Optimization Criterion]]
+- [[CS 5420 Loss Function Foundations: L2 Squared Error vs. L1 Absolute Error]]
+- [[CS 5420 Analytical Derivation of the Normal Equations: 1D Scalar to Matrix Calculus]]
+- [[CS 5420 Geometric Orthogonality and Numerical Linear Algebra Mechanics]]
+- [[CS 5420 Implementation, Benchmarking, and Scikit-Learn vs. Scratch Parity]]

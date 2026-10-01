@@ -1,0 +1,4 @@
+- [[CS 5420 The Geometry and Optimization Theory of Feature Scaling]]
+- [[CS 5420 The Scaler Taxonomy, Mathematical Formulations, and Non-Linear Transformations]]
+- [[CS 5420 Categorical Taxonomy and Encoding Mechanics ]]
+- [[CS 5420 The Live Coding Relay: End-to-End Leak-Free Pipeline Architecture]]

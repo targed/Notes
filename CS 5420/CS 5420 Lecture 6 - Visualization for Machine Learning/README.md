@@ -1,0 +1,4 @@
+- [[CS 5420 The Geometry of Data: Why Summary Statistics Deceive and The Visual Imperative]]
+- [[CS 5420 Tabular Profiling and The Scale Disparity Dilemma]]
+- [[CS 5420 Bivariate Scatter Geometries and Class Separability Diagnostics]]
+- [[CS 5420 Univariate Density Estimation and Histogram Mechanics]]

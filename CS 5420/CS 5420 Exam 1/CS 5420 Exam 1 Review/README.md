@@ -1,0 +1,5 @@
+- [[CS 5420 Exam 1 Conceptual Foundations]]
+- [[CS 5420 Exam 1 Methodological Invariants]]
+- [[CS 5420 Exam 1 Applied Diagnostics]]
+- [[CS 5420 Exam 1 Computational Mastery I]]
+- [[CS 5420 Exam 1 Computational Mastery II]]

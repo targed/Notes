@@ -1,0 +1,4 @@
+- [[CS 5420 The Geometry of Decision Boundaries and The Logit Link Function]]
+- [[CS 5420 The Loss Surface: Binary Cross-Entropy vs. The Failure of Squared Error]]
+- [[CS 5420 Optimization Mechanics and Multiclass Generalization: Softmax]]
+- [[CS 5420 Clinical Classification Lab: Pipelining, Baseline Evaluation and Threshold Moving]]

@@ -1,0 +1,4 @@
+- [[CS 5420 The Epistemology of ML Reproducibility and The ACM Scientific Triad]]
+- [[CS 5420 Stochasticity in Computational Graphs and The Global Seeding Harness]]
+- [[CS 5420 Dependency Hygiene, Kernel Amnesia, and Ephemeral Cloud Virtualization]]
+- [[CS 5420 GPU Acceleration Dynamics, Asynchronous CUDA Streams, and The Crossover Benchmark]]

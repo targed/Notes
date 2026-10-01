@@ -1,0 +1,5 @@
+- [[CS 5420 First-Order Optimization: Gradient Descent Mechanics and Learning Rate Dynamics]]
+- [[CS 5420 Gradient Regimes: Batch, Stochastic, and Mini-Batch Dynamics]]
+- [[CS 5420 The Theory of Regularization and Ridge Regression]]
+- [[CS 5420 Lasso Regression Coordinate Descent and The Dueling Geometries]]
+- [[CS 5420 Hyperparameter Calibration, Coefficient Paths, and Scratch Implementation]]

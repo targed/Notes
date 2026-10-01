@@ -1,0 +1,4 @@
+- [[CS 5420 The Geometry of Feature Engineering: Domain Construction, Cyclical Projections, and Interaction Manifolds]]
+- [[CS 5420 Dimensionality Optimization: Feature Selection vs. Feature Extraction]]
+- [[CS 5420 Data Leakage: Formal Taxonomy and Diagnostic Case Studies]]
+- [[CS 5420 The Empirical Anatomy of a Leak]]

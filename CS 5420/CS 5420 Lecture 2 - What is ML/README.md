@@ -1,0 +1,5 @@
+- [[CS 5420 The AI Taxonomy, Representation Learning, and Learning Paradigms]]
+- [[CS 5420 Mathematical Formalization of the Training Loop and Optimization Mechanics]]
+- [[CS 5420 Generalization Theory, Overfitting, and The Bias-Variance Trade-Off]]
+- [[CS 5420 The Four Systemic Failure Modes and Evaluation Diagnostics]]
+- [[CS 5420 Case File Autopsies, Production Case Studies, and Assignment 1 Setup]]

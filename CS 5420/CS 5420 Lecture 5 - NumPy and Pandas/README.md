@@ -1,0 +1,4 @@
+- [[CS 5420 The Tensor Substrate: NumPy Memory Architecture, Dimension Collapses, and Axis Semantics]]
+- [[CS 5420 The Computational Engine: Vectorization, SIMD, and The Python Overhead Dissection]]
+- [[CS 5420 The Tabular Abstraction: Pandas DataFrames and The Initial 5-Minute Ingestion Audit]]
+- [[CS 5420 Data Selection Mechanics: Label vs. Positional Indexing and Boolean Predicates]]

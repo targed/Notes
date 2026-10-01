@@ -1,0 +1,4 @@
+- [[CS 5420 The Computational Substrate: Notebook Architecture, Kernel State, and The Reproducibility Contract]]
+- [[CS 5420 Runtimes, System Virtualization, and Hardware Profiling]]
+- [[CS 5420 The Canonical 5-Stage Machine Learning Pipeline in Scikit-Learn]]
+- [[CS 5420 Coding Assignment 1 Blueprint, Systems Auditing, and Grading Rubric]]

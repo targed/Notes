@@ -1,0 +1,4 @@
+- [[CS 5420 The Anatomy of a Coefficient: Ceteris Paribus, Rates vs. Importance, and The Four Negations]]
+- [[CS 5420 The Collinearity Collapse: Sign Flips, Omitted Variable Bias, and The Frisch-Waugh-Lovell Theorem]]
+- [[CS 5420 The Causation Trap: Structural DAGs, Selection Bias, and Simpson's Paradox]]
+- [[CS 5420 Residual Diagnostics, High-Leverage Outliers, and The Four Anscombe Stories]]
