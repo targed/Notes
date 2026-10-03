@@ -1,0 +1,3 @@
+- [[CS 5404 Invariance vs. Equivariance and the Scale Failure of Classical Detectors]]
+- [[CS 5404 Scale-Space Theory, The Normalized Laplacian of Gaussian (LoG), and Blob Detection]]
+- [[CS 5404 3D Scale-Space Extrema, The SIFT Difference-of-Gaussians (DoG) Approximation, and Feature Representation]]

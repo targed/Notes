@@ -1,0 +1,6 @@
+- [LEGv8-Greencard-fixed.pdf](https://drive.google.com/file/d/1S-T8rXEh0qAPBlxyLmPjapcoJFfBBgQs/view?usp=sharing)
+- [Chapter 1 Computer Abstractions and Technology-mst.pdf](https://drive.google.com/file/d/1KQbfLxjZUr5583E7PonzqtG7003N8L7d/view?usp=sharing)
+- [Chapter 2 Instructions Language of the Computer-mst.pdf](https://drive.google.com/file/d/1h-g4J4adntp2rBNzVbNnuLQ4DusA1QZn/view?usp=sharing)
+- [Chapter 3 Arithmetic for Computers-mst.pdf](https://drive.google.com/file/d/1rA26k1UZqAAW9vncjRP1MVGAZAVz6Fpm/view?usp=sharing)
+- [Chapter 4 The Processor-mst.pdf](https://drive.google.com/file/d/1Yn2vuhcufiTis0Iz9OWMLTTmRcHMkN_P/view?usp=sharing)
+- [Chapter 5 Large and Fast Exploiting Memory Hierarchy-mst.pdf](https://drive.google.com/file/d/1CX0rq6ots8ohUlHg645T-IgVY2ZYFHIO/view?usp=sharing)

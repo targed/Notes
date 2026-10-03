@@ -1,0 +1,6 @@
+- **Topics covered:** Lessons 26–35
+- **One-Way ANOVA** (F-test, multiple comparisons, assumptions: normality, equal variances, independence)
+- **Two-Way ANOVA** (main effects, interaction, treatment combinations, order of testing, assumptions)
+- **2³ Factorial Experiments** (main effects, 2-way and 3-way interactions, treatment combinations, order of testing, assumptions)
+- **Scatter plots and Correlation** (visual relationship, strength/direction via correlation coefficient)
+- **Simple Linear Regression** (least-squares regression, interpretation of intercept/slope, significance test, $R^2$, assumptions: linearity, independence, equal variance, normality)

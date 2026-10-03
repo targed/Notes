@@ -1,0 +1,1 @@
+- ![p2145_lec05_force and field_new.pdf](../assets/p2145_lec05_force_and_field_new_1738445426117_0.pdf)

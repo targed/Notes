@@ -1,0 +1,25 @@
+# Dark energy
+- There was a very small moment where the universe expanded rapidly called inflation
+- Dark matter is an undetected form of mass that does not interact with light
+- Dark energy is and unknown form of energy that seems to be the source of a repulsive force causing the expansion of the universe to accelerate
+- Dark matter and dark energy make up around 95% of the matter and energy in the universe
+- Dark matter is likely a set of particles we have not found yet
+- Dark energy is something we don’t really know about and is something all across the universe and is created as the universe expands
+- There is around 10 times more dark matter than regular matter in galaxies
+- There is some evidence for dark matter including the cluster dynamics of galaxies, the X-Ray emissions, and the gravitational distortion of far away galaxies
+- We observe dark matter through the effects of its gravitational attraction
+- We have no idea what dark energy really is
+- Dark energy seems to be associated with specs time itself
+- Dark energy causes the universe to accelerate
+- Either dark energy is evolving over time or dark energy is not responsible for inflation of the early universe
+- Dark matter dominates the formation of large scale structure in the universe
+- Our simulations of the formation of the universe require the right amounts of dark matter and dark energy
+- Dark energy is what will decide the fate of the universe
+  - ![2024-05-01-15-27-29.jpeg](../assets/2024-05-01-15-27-29.jpeg)
+  - Dark energy wants to rip space time appart
+  - If there is too much dark energy or if it becomes stronger with time, the universe will rip apart
+  - If there is not enough dark energy or if is weaker than expected, then the universe will expand crunch the universe
+  - ![2024-05-01-15-29-34.jpeg](../assets/2024-05-01-15-29-34.jpeg)
+- There are many models for the universe and the devotion is j what we have measured so far makes us unsure about which one is potentially correct
+- Accentuating universe seems to be our best hypothesis
+- There was a recent discovery that dark energy may not be constant but it is too early to tell

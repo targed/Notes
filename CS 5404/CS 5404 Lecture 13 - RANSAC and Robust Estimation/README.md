@@ -1,0 +1,3 @@
+- [[CS 5404 The Breakdown of Least Squares and the Core RANSAC Algorithm]]
+- [[CS 5404 Statistical Parameterization, The Chi-Squared Inlier Test, and Theoretical Iteration Bounds]]
+- [[CS 5404 Robust M-Estimation, Iteratively Reweighted Least Squares, and the 360 Panorama Singularity]]

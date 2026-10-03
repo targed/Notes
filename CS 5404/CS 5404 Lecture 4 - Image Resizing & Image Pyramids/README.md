@@ -1,0 +1,3 @@
+- [[CS 5404 The Problem of Scale, Nyquist Sampling Theory, and Anti-Aliasing]]
+- [[CS 5404 The Gaussian Pyramid & The Burt-Adelson Mathematical Framework]]
+- [[CS 5404 The Laplacian Pyramid, Lossless Reconstruction, and Scale-Space Foundations]]

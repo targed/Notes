@@ -1,0 +1,2 @@
+- [[CS 5404 The Alignment Framework, Panorama Foundations, and Solving for 2D Translation]]
+- [[CS 5404 Affine Alignment, The Direct Linear Transform for Homographies, and Conditioning]]

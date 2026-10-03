@@ -1,0 +1,3 @@
+- [[CS 5404 The Geometry of 2D Coordinate Transformations]]
+- [[CS 5404 Projective Geometry, Planar Homographies, and the Complete 2D Transformation Hierarchy]]
+- [[CS 5404 The Mechanics of Image Warping: Forward Splatting vs. Inverse Mapping and Resampling]]

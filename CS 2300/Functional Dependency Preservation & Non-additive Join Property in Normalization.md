@@ -1,29 +1,29 @@
 ### **Part 1: Functional Dependency Preservation**
-
-**1. The Goal**
-When we break a large table (relation) `R` into smaller tables ($R_1, R_2, ... R_n$), we want to ensure that all the original rules (Functional Dependencies) are still enforceable without having to join the tables back together.
-
-**2. Definition**
-A decomposition **preserves dependencies** if the union of all the FDs that hold in the individual smaller tables ($R_i$) is logically equivalent to the set of FDs in the original table ($R$).
-*   **Formula:** $(F_1 \cup F_2 \cup ... \cup F_n)^+ = F^+$
-
-**3. Why is this important?**
-*   **Performance:** If dependencies are preserved, the DBMS can check constraints (like "Manager determines Department") efficiently within a single table during updates.
-*   **Cost:** If dependencies are *not* preserved, the DBMS would have to join tables every time a user inserts or updates data to verify the constraint, which is extremely expensive.
-
-**4. Examples**
-*   **Preserved (Good):**
+  
+  **1. The Goal**
+  When we break a large table (relation) `R` into smaller tables ($R_1, R_2, ... R_n$), we want to ensure that all the original rules (Functional Dependencies) are still enforceable without having to join the tables back together.
+  
+  **2. Definition**
+  A decomposition **preserves dependencies** if the union of all the FDs that hold in the individual smaller tables ($R_i$) is logically equivalent to the set of FDs in the original table ($R$).
+  *   **Formula:** $(F_1 \cup F_2 \cup ... \cup F_n)^+ = F^+$
+  
+  **3. Why is this important?**
+  *   **Performance:** If dependencies are preserved, the DBMS can check constraints (like "Manager determines Department") efficiently within a single table during updates.
+  *   **Cost:** If dependencies are *not* preserved, the DBMS would have to join tables every time a user inserts or updates data to verify the constraint, which is extremely expensive.
+  
+  **4. Examples**
+  *   **Preserved (Good):**
   *   Original: $R(A, B, C)$, $F = \{A \rightarrow B, B \rightarrow C\}$.
   *   Decomposed: $R_1(A, B)$ with $\{A \rightarrow B\}$, $R_2(B, C)$ with $\{B \rightarrow C\}$.
   *   Since both original rules are present in the new tables, FDs are preserved. This is typical of **3NF**.
-*   **Not Preserved (Bad):**
+  *   **Not Preserved (Bad):**
   *   Original: $R(A, B, C)$, $F = \{AB \rightarrow C, C \rightarrow B\}$.
   *   Decomposed: $R_1(A, C)$, $R_2(C, B)$.
   *   The rule $C \rightarrow B$ is preserved in $R_2$.
   *   However, the rule $AB \rightarrow C$ is **lost** because $A$ and $B$ are now in different tables. We cannot check this rule without joining. This typically happens in **BCNF**.
-
----
-- ### **Part 2: Non-Additive (Lossless) Join Property**
+  
+  ---
+### **Part 2: Non-Additive (Lossless) Join Property**
   
   **1. The Goal**
   When we decompose a table $R$ into $R_1$ and $R_2$, we must be able to rejoin them ($R_1 \bowtie R_2$) and get back **exactly** the original table $R$.
@@ -40,7 +40,7 @@ A decomposition **preserves dependencies** if the union of all the FDs that hold
   *   **Formal Condition:** Either $(R_1 \cap R_2) \rightarrow R_1$ OR $(R_1 \cap R_2) \rightarrow R_2$ must be a valid FD.
   
   ---
-- ### **Part 3: Examples of Lossless vs. Lossy Joins**
+### **Part 3: Examples of Lossless vs. Lossy Joins**
   
   **1. Example: Lossless Join**
   *   **Original:** $R(A, B, C)$, $F = \{C \rightarrow B\}$.

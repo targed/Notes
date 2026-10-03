@@ -1,0 +1,3 @@
+- [[CS 5404 The Descriptor Design Space: From Raw Patches and Binary Vectors to Spatial Histograms]]
+- [[CS 5404 Canonical Descriptors in Depth]]
+- [[CS 5404 Feature Matching Mechanics, Ambiguity Resolution, and ROC Performance Evaluation]]

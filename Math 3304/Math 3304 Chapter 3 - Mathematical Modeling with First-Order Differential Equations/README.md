@@ -1,0 +1,1 @@
+- [[Math 3304 Section 3.2: Compartmental Analysis, Population Dynamics, and Physical Systems]]

@@ -1,0 +1,3 @@
+- [[Math 3304 Section 4.2: Theory of Second-Order Linear Equations and The Wronskian]]
+- [[Math 3304 Section 4.3: Homogeneous Equations with Constant Coefficients]]
+- [[Math 3304 Section 4.4 & 4.5: Nonhomogeneous (Forced) Differential Equations & The Method of Undetermined Coefficients]]

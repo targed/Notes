@@ -1,0 +1,24 @@
+# Dark matter
+- ![2024-04-29-15-11-35.jpeg](../assets/2024-04-29-15-11-35.jpeg)
+- Because the universe is so big, it appears flat
+- There are 3 possible geometries of the universe
+  - Flat
+  - Closed sphere
+  - Open/saddle
+- Matter curves space time
+- Since the density of the universe is near the critical point we don’t know what its geometry is
+- The evidence for the structure of our universe is from measuring the fluctuations in the CMBR
+- In order to get the correct model for the seeds of the universe you have to introduce dark matter and dark energy into the equation to get a flat universe
+- ![2024-04-29-15-22-35.jpeg](../assets/2024-04-29-15-22-35.jpeg)
+- We have no idea what dark matter or dark energy are
+- The universe is accelerating probably due to dark energy
+- All that we know in particle physics is just 5% of the universe, the rest we don’t know about
+- Dark energy repels space time and has negative pressure
+- The evidence for dark matter
+  - The orbits of planets and galaxies
+  - Galaxies should obey Kepler’s laws but they don’t.
+  - Galaxies orbit at a constant speed no matter how far away they are from the center
+  - This means that there is some energy that keeps accelerating the stars in the galaxy
+  - You can estimate the amount of dark matter there is about a trillion solar masses of dark matter that we don’t see
+  - ![2024-04-29-15-42-08.jpeg](../assets/2024-04-29-15-42-08.jpeg)
+  - ![2024-04-29-15-43-30.jpeg](../assets/2024-04-29-15-43-30.jpeg)

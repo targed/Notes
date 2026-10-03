@@ -1,0 +1,35 @@
+## Role of mass
+- A stars mass determines its entire life story
+- For stars with less than 2 solar masses, it ends its life in a white dwarf
+- Intermediate mass stars can make elements heavier than carbon then end as white dwarfs
+- High mass stars, over 8 stellar masses, have shot life’s and become hot enough to make iron. They end with a supernova and leave behind a neutron star
+- For massive stars, they follow the CNO cycle
+  - ![2024-03-18-15-12-11.jpeg](../assets/2024-03-18-15-12-11.jpeg)
+  - Since these stars have greater gravitational al potential energy, the star can get hotter and fuse heavier elements than the sun or carbon, up to iron.
+  - ![2024-03-18-15-13-37.jpeg](../assets/2024-03-18-15-13-37.jpeg)
+  - ![2024-03-18-15-16-06.jpeg](../assets/2024-03-18-15-16-06.jpeg)
+- ![2024-03-18-15-22-26.jpeg](../assets/2024-03-18-15-22-26.jpeg)
+- Massive stars can only fuse elements as massive as iron because the star has layers of heavier and heavier elements
+- This only works because the previous element is a little unstable so when you put energy into it, it breaks and fuses with another.
+- However, iron is the most stable element so neither fission nor fusion releases energy from iron because it has the lowest mass per particle
+- ![2024-03-18-15-26-25.jpeg](../assets/2024-03-18-15-26-25.jpeg)
+- Eventually the star cannot fuse iron anymore and begins collapsing while getting hotter. This turns the protons of the iron into neutrons and happens very fast.
+- The protons turn into neutrons and release neutrinos
+- This causes a bounce back and creates a supernovae and a possible neutron star core
+- The supernovae form shockwaves of material that propagate through the galaxy, kickstarting other solar systems.
+- ![2024-03-18-15-33-29.jpeg](../assets/2024-03-18-15-33-29.jpeg)
+## Neutron stars
+- Neutron stars are the remnants left behind by the explosion of a high mass star
+- They are mainly made of neutrons that are supported by degeneracy pressure
+- Neutron stars have density’s of a million times that of a white dwarf in a radius a 100/th the size (10-20km)
+- Neutron stars have an extremely powerful magnetic field and we really don’t know what they are made of
+- ![2024-03-18-15-40-53.jpeg](../assets/2024-03-18-15-40-53.jpeg)
+- We can detect neutron stars by detecting the radio waves coming from their magnetic field
+- ![2024-03-18-15-45-30.jpeg](../assets/2024-03-18-15-45-30.jpeg)
+- This spinning neutron star is called a pulsar
+- ![2024-03-18-15-46-30.jpeg](../assets/2024-03-18-15-46-30.jpeg)
+- Pulsars must be neutron stars because anything else would have been torn apart by the rotational velocity if not for the magnetic field
+- ![2024-03-18-15-47-35.jpeg](../assets/2024-03-18-15-47-35.jpeg)
+- Pulsars spin fast because a stars core speeds sup as it collapses into a neutron star
+- ![2024-03-18-15-49-15.jpeg](../assets/2024-03-18-15-49-15.jpeg)
+- There are two types of supernovae.

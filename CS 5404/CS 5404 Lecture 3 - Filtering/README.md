@@ -1,0 +1,3 @@
+- [[CS 5404 Linear Shift-Invariant Systems, 2D Convolution Mechanics, and Separability]]
+- [[CS 5404 The Classical Kernel Zoo: Shift, Unsharp Masking, and Gaussian Smoothing]]
+- [[CS 5404 Image Calculus & Differential Edge Detection: Finite Differences, Sobel, Gradients, and the Laplacian of Gaussian (LoG)]]

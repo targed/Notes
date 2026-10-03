@@ -1,0 +1,3 @@
+- [[CS 5404 The Foundations of Frequency Analysis: Fourier Series, Orthogonality, and the Discrete Fourier Transform]]
+- [[CS 5404 2D Image Spectra, The Convolution Theorem, and Frequency-Domain Filtering]]
+- [[CS 5404 Perceptual Vision & Advanced Applications: Hybrid Images, The Campbell-Robson Curve, and Spectral Derivatives]]

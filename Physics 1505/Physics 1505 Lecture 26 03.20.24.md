@@ -1,0 +1,51 @@
+## How do neutron stars form
+- Massive star supernovae - type 2
+  - Iron core of a massive star tea co es white dwarf limit and collapsed into a neutron star, causing a total explosion
+  - After losing the ability to fuse heavier elements, the star can no longer retain a gravitational equilibrium, thus the core collapses in on itself
+  - The core rebounds in a quick supernova explosion
+- White dwarf supernovae -type 1
+  - Carbon during suddenly begins as a white dwarf in a close binary system, reaches white dwarf limit, causing a total explosion
+  - Takes place in a binary star system with one classified as a white dwarf
+  - The dwarf accreted material from the larger star eventually leading to a chain reaction
+  - The culminates in the star reaching critical density and exploding
+  - Since the supernova are very bright they can be used as a measurement for the universe
+- Bothered these explosions either leave behind a neutron star or a black hole
+- One way to tell supernova types apart is with a light curve showing how luminosity changes over time
+- ![2024-03-20-15-09-47.jpeg](../assets/2024-03-20-15-09-47.jpeg)
+- The spectra differs as well between type 1 and type 2 supernova
+- Supernovae are EXTREMELY bright
+## Supernova remnants
+- Energy released by the collapse of the core drives the stars outer layers into space
+- The Crab Nebula is the remnant of a supernova seen in 1054 AD
+  - It is still expanding very fast
+- The supernovas flash of light caused rings of gas around the supernova to glow
+  - ![2024-03-20-15-17-05.jpeg](../assets/2024-03-20-15-17-05.jpeg)
+- Supernova are amongst the most complicated physical objects possible
+- The star explodes in a supernova in a few milliseconds
+# Black Holes
+- Black holes are “very simple” objects
+- We really don’t have a good understanding of what black holes are and how the form
+## What is a black hole
+- Low mass stars end up as white dwarfs
+- Medium mass stars produce neutron stars and supernovas
+- High mass stars form black holes
+- ![2024-03-20-15-25-15.jpeg](../assets/2024-03-20-15-25-15.jpeg)
+- If a white dwarf gets too big, (1.4 solar masses) then it can no longer be stable
+- If a neutron star gets too big (around 3 solar masses) then it can no longer be stable
+- If you try to exceed the neutron star limit, gravity takes over and collapses the star into a black hole
+## Gravity
+- Gravity is considered a “force” but is really just the curvature of space time
+- ![2024-03-20-15-29-47.jpeg](../assets/2024-03-20-15-29-47.jpeg)
+- ![2024-03-20-15-32-12.jpeg](../assets/2024-03-20-15-32-12.jpeg)
+- Laplace figured out that if gravity was strong enough, then the escape velocity would be greater than the speed of light
+- ![2024-03-20-15-35-59.jpeg](../assets/2024-03-20-15-35-59.jpeg)
+- If the escape velocity is greater than the speed of light, then no light will reach you and the object will appear black
+- Einstein figures out that nothing can travel faster than the speed of light. Therefore, nothing can escape a black hole.
+- ![2024-03-20-15-39-03.jpeg](../assets/2024-03-20-15-39-03.jpeg)
+- A black hole is a trapped region of space from which nothing can escape
+- A black hole is an object that curves space time infinitely
+- Matter tells space time how to curve, and curved space time tells matter how to move
+- Gravity is not a force, it is an effect of the curvature of fabric of space time
+- Space time is a 4-D manifold
+- ![2024-03-20-15-49-36.jpeg](../assets/2024-03-20-15-49-36.jpeg)
+- ![2024-03-20-15-50-04.jpeg](../assets/2024-03-20-15-50-04.jpeg)

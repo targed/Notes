@@ -1,0 +1,75 @@
+# Telesopes
+- Two most important properties of a telescope
+  - Light collecting area
+    - ![2024-02-07-15-04-17.jpeg](../assets/2024-02-07-15-04-17.jpeg)
+  - Angular resolution
+    - ![2024-02-07-15-06-05.jpeg](../assets/2024-02-07-15-06-05.jpeg)
+  - The minimum angular separation that the telescope can distinguish
+  - The limit of resolution in a telescope is because of the interference between light waves
+  - The limit on angular resolution is known as the diffraction limit
+- Types if telescopes
+  - Refracting telescopes
+    - Focuses light by condensing light off lenses
+    - Very finicky, needs to be perfect
+  - Reflecting telescopes
+    - Focuses light by bouncing light off lenses
+    - Reflecting telescopes can have much greater diameters than refracting telescopes
+    - Most modern telescopes are reflecting telescopes
+    - It is better than refracting because it is easier to make, lighter, and cheaper
+- What telescopes can do
+  - Imaging
+    - Take pictures of different filters of light and then combines them
+    - All space pictures are taken in black and white and then have filters applied to them
+    - Astronomical detectors can record light that humans can’t see
+    - Color is sometimes used to represent different energies than the visible spectrum
+  - Spectroscopy
+    - A spectrograph separates the different wavelengths of light before they hit the sensor
+    - Data visualizing the different wavelengths create a spectrum
+  - Time monitoring
+    - A light curve represents a series of mean summers made over time
+- Astronomical data sets
+  - There are large collections of datasets from many telescopes from all over the world
+- Where to star watch
+  - Ground based
+    - Calm air
+    - High so there is less atmosphere
+    - Dark so it can see
+    - Dry so there is less water vapor to distort the image
+- Adaptive optics
+  - To compensate for the effects of atmospheric distortion, telescopes shine a laser into the sky and then measure the atmospheric distortion on its return.
+  - This allows the mirrors to be adjusted to improve their resolution
+- Light pollution and starlink
+  - The human made light that lights up the atmosphere
+  - Starlink affects long time exposure shots of the Milky Way
+- Earths atmosphere
+  - Only radio and visible light can pass through earths atmosphere
+  - Thus, only optical and radio telescopes can be in earth
+  - Thus, to see the other bands of light, telescopes need to be outside the atmosphere
+- Beyond light
+  - Neutrinos
+  - Cosmic waves
+  - Gravitational waves
+# The solar system
+- There are 8 major planets with nearly circular orbits
+- There are many dead planets, asteroids, and commits
+- Most planets orbit on or very close to the ecliptic plane
+- Most of the mass in the solar system is in the sun
+- Planets are very tiny when compared to the distances between them
+- Comparative planetology
+- ![2024-02-07-15-44-32.jpeg](../assets/2024-02-07-15-44-32.jpeg)
+- The planets of the solar system
+  - There are two types of planets
+    - Rocky
+      - Rock, small, and close to the sun
+    - Jovian
+      - Gas giants, larger, further from the sun
+  - The sun
+    - Over 99.9% of the mass of the solar system is in the sun
+    - Is mostly made out of hydrogen and helium
+  - Mercury
+    - Has a day that is 59 earth days
+    - Has a year that is 88 earth days
+    - Mercury is tidally locked to the sun
+    - Has a radius of 1516 miles or 2439 km
+    - No moons or atmosphere
+    - The face of the planet facing the sun is very hot while the side facing away is very cold

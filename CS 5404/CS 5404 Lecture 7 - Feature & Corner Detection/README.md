@@ -1,0 +1,4 @@
+- [[CS 5404 The Failure of Template Matching and the Geometric Essence of Salient Features]]
+- [[CS 5404 The Mathematics of the Structure Tensor (Second Moment Matrix)]]
+- [[CS 5404 Spectral Analysis & Corner Response Formulations]]
+- [[CS 5404 The End-to-End Harris Detector: Gaussian Windowing, Non-Maximum Suppression, and Invariance Limits]]

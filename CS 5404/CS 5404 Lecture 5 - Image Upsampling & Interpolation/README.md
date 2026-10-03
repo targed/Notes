@@ -1,0 +1,2 @@
+- [[CS 5404 The Continuous Reconstruction Problem and the Cardinal Interpolation Kernels]]
+- [[CS 5404 2D Interpolation Mechanics, Push vs. Pull Formulations, and Frequency-Domain Upsampling]]

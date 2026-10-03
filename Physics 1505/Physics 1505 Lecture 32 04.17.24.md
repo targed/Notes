@@ -1,0 +1,37 @@
+# Hubbles law
+- ![2024-04-17-15-01-36.jpeg](../assets/2024-04-17-15-01-36.jpeg)
+- You need to calibrate the redshift equation for the galaxy by using the known distances to other galaxies
+- ![2024-04-17-15-05-00.jpeg](../assets/2024-04-17-15-05-00.jpeg)
+- We see most galaxies going further away from us because of their redshift
+- The only explanation is the universe is expanding for every observer
+- The velocity of the galaxies is proportional to how far away they are from us
+- ![2024-04-17-15-10-05.jpeg](../assets/2024-04-17-15-10-05.jpeg)
+- ![2024-04-17-15-12-01.jpeg](../assets/2024-04-17-15-12-01.jpeg)
+- The Hubble constant is our best estimate about the rate of expansion of the universe
+- ![2024-04-17-15-15-00.jpeg](../assets/2024-04-17-15-15-00.jpeg)
+- The relation of the speed of light and time is not linear for large distances
+- Space stretches the light as it goes through large distances
+- ![2024-04-17-15-25-18.jpeg](../assets/2024-04-17-15-25-18.jpeg)
+- Almost every place is the center of the universe
+- The cosmological principle states that on very large scales the universe looks the same in all places and all directions
+- ![2024-04-17-15-29-25.jpeg](../assets/2024-04-17-15-29-25.jpeg)
+- The universe has no center
+- ![2024-04-17-15-29-54.jpeg](../assets/2024-04-17-15-29-54.jpeg)
+- No mater where you are in the universe, you will see everything going further away from you
+- The universe is a finite space with no center and no edges
+- ![2024-04-17-15-35-18.jpeg](../assets/2024-04-17-15-35-18.jpeg)
+- Nothing can travel faster than the speed of light except nothing
+- The stuff in the universe is basically stationary, it is the space in between that is expanding
+- The complication of the space in between space expanding causes us to have trouble determining the size of the universe. Thus, we can only measure the observable universe
+- We can tell the age of the universe by using twine as a measurement
+- ![2024-04-17-15-41-17.jpeg](../assets/2024-04-17-15-41-17.jpeg)
+- ![2024-04-17-15-42-25.jpeg](../assets/2024-04-17-15-42-25.jpeg)
+- The Hubble sphere is a sphere that is determined by objects on that sphere going away faster than the speed of light
+- ![2024-04-17-15-44-09.jpeg](../assets/2024-04-17-15-44-09.jpeg)
+- Objects beyond the Hubble sphere recede faster than the speed of light
+- ![2024-04-17-15-45-55.jpeg](../assets/2024-04-17-15-45-55.jpeg)
+- ![2024-04-17-15-47-15.jpeg](../assets/2024-04-17-15-47-15.jpeg)
+- You can see beyond the Hubble sphere
+- Since the universe is expanding, you are seeing the galaxy in the past
+- ![2024-04-17-15-48-27.jpeg](../assets/2024-04-17-15-48-27.jpeg)
+- ![2024-04-17-15-49-14.jpeg](../assets/2024-04-17-15-49-14.jpeg)

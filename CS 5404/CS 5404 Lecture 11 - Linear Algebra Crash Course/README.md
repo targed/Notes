@@ -1,0 +1,2 @@
+- [[CS 5404 Overdetermined Linear Systems, The Normal Equations, and the Moore-Penrose Pseudo-Inverse]]
+- [[CS 5404 Spectral Theory, SVD, Homogeneous Total Least Squares, and Low-Rank Factorization]]

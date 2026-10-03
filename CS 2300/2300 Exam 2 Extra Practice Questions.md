@@ -1,5 +1,5 @@
 ## Quiz 14
-- ### **Topic: Outer Joins (Relational Algebra)**
+### **Topic: Outer Joins (Relational Algebra)**
   
   **1. Which of the following relational algebra expressions is equivalent to a Right Outer Join ($R \rightouterjoin S$)?**
   A. $S \leftouterjoin R$
@@ -32,7 +32,7 @@
   D. $(R - S) \cup (S - R)$
   
   ---
-- ### **Topic: SQL Table Definitions (DDL)**
+### **Topic: SQL Table Definitions (DDL)**
   
   **6. Consider the following SQL snippet. What is syntactically WRONG with this definition?**
   ```sql
@@ -72,9 +72,9 @@
   D. `OrderDate DATE CHECK (CURRENT_DATE)`
   
   ---
-- ## Quiz 15
+## Quiz 15
 - ---
-- ### **Topic: SQL Language & Architecture**
+### **Topic: SQL Language & Architecture**
   
   **1. Which of the following SQL commands is categorized as Data Definition Language (DDL)?**
   A. `INSERT INTO`
@@ -95,7 +95,7 @@
   D. The DDL Compiler
   
   ---
-- ### **Topic: Constraints (CHECK, etc.)**
+### **Topic: Constraints (CHECK, etc.)**
   
   **4. You want to ensure that in the `Project` table, the `EndDate` is always later than the `StartDate`. Which SQL constraint is most appropriate for this?**
   A. `FOREIGN KEY`
@@ -110,7 +110,7 @@
   D. It is only checked when data is deleted, not when it is inserted.
   
   ---
-- ### **Topic: Grouping and Aggregation**
+### **Topic: Grouping and Aggregation**
   
   **6. Consider the following query: `SELECT DeptID, AVG(Salary) FROM Employees GROUP BY DeptID`. If a specific `DeptID` has 5 employees, how many rows will that department generate in the final output?**
   A. 1 row
@@ -148,9 +148,8 @@
   D. It is removing NULL values from the result.
   
   ---
--
-- ## Quiz 16
-- ### **Topic: Handling NULLs and Aggregates**
+## Quiz 16
+### **Topic: Handling NULLs and Aggregates**
   
   **1. Consider a table `Orders` with a column `ShipDate`. If 5 orders have been placed but not shipped (so `ShipDate` is NULL) and 10 orders have a valid `ShipDate`, what will `SELECT COUNT(ShipDate) FROM Orders` return?**
   A. 15
@@ -171,7 +170,7 @@
   D. It throws a syntax error.
   
   ---
-- ### **Topic: Cartesian Products & Joins**
+### **Topic: Cartesian Products & Joins**
   
   **4. Table `A` has 10 rows. Table `B` has 5 rows. You execute `SELECT * FROM A, B`. How many rows does the result contain?**
   A. 15
@@ -186,7 +185,7 @@
   D. Because it removes duplicate rows automatically.
   
   ---
-- ### **Topic: WHERE vs. HAVING**
+### **Topic: WHERE vs. HAVING**
   
   **6. Which of the following queries is syntactically INVALID?**
   A. `SELECT Dept, SUM(Salary) FROM Emp GROUP BY Dept HAVING SUM(Salary) > 10000`
@@ -201,7 +200,7 @@
   D. `SELECT`
   
   ---
-- ### **Topic: Subqueries & Operators**
+### **Topic: Subqueries & Operators**
   
   **8. If a subquery returns multiple rows (e.g., a list of IDs), which operator CANNOT be used to compare the outer query attribute to the subquery result?**
   A. `IN`
@@ -222,8 +221,8 @@
   D. First, before any other clause.
   
   ---
-- ## Quiz 17
-- ### **Topic: Aggregate Function Rules**
+## Quiz 17
+### **Topic: Aggregate Function Rules**
   
   **1. Which of the following SQL statements causes a syntax error?**
   A. `SELECT Dept, MAX(Salary) FROM Emp GROUP BY Dept`
@@ -250,7 +249,7 @@
   D. No, unless the string contains only numbers.
   
   ---
-- ### **Topic: Subquery Placement & Behavior**
+### **Topic: Subquery Placement & Behavior**
   
   **5. You place a subquery inside the `FROM` clause, like this: `SELECT * FROM (SELECT ... ) AS T`. What is this subquery formally called?**
   A. A Correlated Subquery.
@@ -289,8 +288,8 @@
   D. `WHERE Salary IN (SELECT Salary FROM Emp WHERE Dept='Sales')`
   
   ---
-- ## Quiz 18
-- ### **Topic: GROUP BY and Selection Rules**
+## Quiz 18
+### **Topic: GROUP BY and Selection Rules**
   
   **1. Consider the query: `SELECT Department, JobTitle, COUNT(*) FROM Employees GROUP BY Department`. Why will this generate an error in standard SQL?**
   A. You cannot group by `Department` without also grouping by `JobTitle`.
@@ -311,7 +310,7 @@
   D. `SELECT Dept, JobTitle FROM Emp GROUP BY Dept`
   
   ---
-- ### **Topic: HAVING vs. WHERE**
+### **Topic: HAVING vs. WHERE**
   
   **4. When the database engine processes a query, which of the following happens LAST?**
   A. Rows are filtered by `WHERE`.
@@ -332,7 +331,7 @@
   D. `HAVING` Status='FT' ... `WHERE` AVG(Salary) > 50000
   
   ---
-- ### **Topic: Correlated Subqueries**
+### **Topic: Correlated Subqueries**
   
   **7. Which characteristic defines a "Correlated Subquery"?**
   A. The inner query returns multiple rows.
@@ -363,8 +362,8 @@
   D. Neither query can reference the other's columns.
   
   ---
-- ## Quiz 19
-- ### **Topic: Relational Division ("For All" Queries)**
+## Quiz 19
+### **Topic: Relational Division ("For All" Queries)**
   
   **1. You want to find students who have taken **every** Biology course offered by the university. Which of the following SQL logic patterns is the standard way to achieve this using **Double Negation**?**
   A. Select Students where `COUNT(Courses) = ALL`.
@@ -391,7 +390,7 @@
   D. It calculates the Cartesian product.
   
   ---
-- ### **Topic: Correlated Queries & Decorrelation**
+### **Topic: Correlated Queries & Decorrelation**
   
   **5. While not *every* correlated query can be turned into a standard subquery, most can be rewritten using which standard SQL construct to improve performance?**
   A. `JOIN` (specifically mapping derived tables).
@@ -406,7 +405,7 @@
   D. Correlated subqueries are not standard SQL.
   
   ---
-- ### **Topic: Redundancy, Normalization, & Denormalization**
+### **Topic: Redundancy, Normalization, & Denormalization**
   
   **7. Which of the following is the primary **disadvantage** of redundancy (storing the same data in multiple places)?**
   A. Slower read speeds.
@@ -433,9 +432,8 @@
   D. Necessary for Referential Integrity.
   
   ---
--
-- ## Quiz 20
-- ### **Topic: Functional Dependencies (Definition & Axioms)**
+## Quiz 20
+### **Topic: Functional Dependencies (Definition & Axioms)**
   
   **1. Which of the following statements about Functional Dependencies is FALSE?**
   A. FDs are a property of the relation schema, not just a specific state of the relation.
@@ -456,7 +454,7 @@
   D. It violates 2NF.
   
   ---
-- ### **Topic: Attribute Closure ($X^+$)**
+### **Topic: Attribute Closure ($X^+$)**
   
   **4. Given the dependencies $A \rightarrow B$ and $B \rightarrow C$. What is the closure of $\{A\}$ (denoted as $A^+$)?**
   A. $\{A, B\}$
@@ -477,7 +475,7 @@
   D. Calculate $X^+$ including the rule $X \rightarrow Y$.
   
   ---
-- ### **Topic: Minimal Cover (Canonical Cover)**
+### **Topic: Minimal Cover (Canonical Cover)**
   
   **7. Which of the following is NOT a requirement for a set of FDs to be a Minimal Cover?**
   A. The right-hand side of every FD must be a single attribute (Singleton RHS).
@@ -504,8 +502,8 @@
   D. Their Minimal Covers have the same number of lines.
   
   ---
-- ## Quiz 21
-- ### **Topic: Data vs. Schema Constraints**
+## Quiz 21
+### **Topic: Data vs. Schema Constraints**
   
   **1. You analyze a database table with 1,000 rows. You find that every time `ZipCode` is '90210', the `State` is 'CA'. Can you conclude that the functional dependency `ZipCode` $\rightarrow$ `State` holds for this relation?**
   A. Yes, the data proves it is true.
@@ -532,7 +530,7 @@
   D. $Y$ must be a prime attribute.
   
   ---
-- ### **Topic: Armstrong's Axioms & Logic**
+### **Topic: Armstrong's Axioms & Logic**
   
   **5. Armstrong's Axioms are described as "Sound". What does this mean?**
   A. If the axioms derive an FD $X \rightarrow Y$, then $X \rightarrow Y$ is guaranteed to be valid/true.
@@ -571,9 +569,8 @@
   D. Both A and B are valid approaches (one empirical, one logical).
   
   ---
--
-- ## Quiz 22
-- ### **Topic: Normal Form Violations**
+## Quiz 22
+### **Topic: Normal Form Violations**
   
   **1. Consider a relation $R(A, B, C)$ with a Composite Primary Key $\{A, B\}$. Which of the following functional dependencies represents a violation of **2NF**?**
   A. $A \to C$
@@ -594,7 +591,7 @@
   D. If $X$ and $Y$ are both non-prime attributes.
   
   ---
-- ### **Topic: Lossless Join Property**
+### **Topic: Lossless Join Property**
   
   **4. You decompose relation $R(A, B, C)$ into $R1(A, B)$ and $R2(B, C)$. The only functional dependency is $A \to C$. Is this decomposition lossless?**
   A. Yes, because $B$ is the common attribute.
@@ -615,7 +612,7 @@
   D. You can no longer perform `UPDATE` operations.
   
   ---
-- ### **Topic: Dependency Preservation**
+### **Topic: Dependency Preservation**
   
   **7. Consider $R(A, B, C, D)$ with FDs $\{A \to B, B \to C, C \to D\}$. You decompose it into $R1(A, B)$, $R2(B, C)$, and $R3(C, D)$. Is this decomposition dependency-preserving?**
   A. Yes, all FDs are covered by the individual tables.
@@ -630,7 +627,7 @@
   D. No, because $C$ is extraneous.
   
   ---
-- ### **Topic: Normalization Logic**
+### **Topic: Normalization Logic**
   
   **9. You have a relation `Enrollment(StudentID, CourseID, ProfessorName)` with Primary Key `{StudentID, CourseID}`. You find that `CourseID` uniquely determines `ProfessorName`. Which Normal Form is violated?**
   A. 1NF (Atomic values)
@@ -645,8 +642,8 @@
   D. 4NF
   
   ---
-- ## Quiz 23
-- ### **Topic: BCNF and Normalization Analysis**
+## Quiz 23
+### **Topic: BCNF and Normalization Analysis**
   
   **1. Consider relation $R(A, B, C)$ with functional dependencies $\{A \to B, B \to C\}$. The only Candidate Key is $\{A\}$. Which of the following statements is TRUE?**
   A. The relation is in BCNF.
@@ -667,7 +664,7 @@
   D. No, because there is a partial dependency.
   
   ---
-- ### **Topic: Lossless Join Decomposition**
+### **Topic: Lossless Join Decomposition**
   
   **4. You decompose $R(A, B, C, D, E)$ into $R1(A, B, C)$ and $R2(C, D, E)$. The functional dependencies are $\{A \to B, C \to D, D \to E\}$. Is this decomposition lossless?**
   A. Yes, because $C$ is the common attribute and $C \to \{D, E\}$ is implied by the FDs.
@@ -688,7 +685,7 @@
   D. No, this is a lossy decomposition.
   
   ---
-- ### **Topic: Physical File Organization**
+### **Topic: Physical File Organization**
   
   **7. Which of the following is a characteristic of a **Heap File**?**
   A. Records are physically stored in order by the Primary Key.
@@ -715,8 +712,8 @@
   D. Linked File
   
   ---
-- ## Quiz 24
-- ### **Topic: Primary File Organizations (Heap, Sorted, Hash)**
+## Quiz 24
+### **Topic: Primary File Organizations (Heap, Sorted, Hash)**
   
   **1. Which file organization provides the fastest possible performance for retrieving a record based on an exact match of its key (Equality Search), assuming no collisions?**
   A. Heap File
@@ -749,7 +746,7 @@
   D. The file must have a secondary index.
   
   ---
-- ### **Topic: File Allocation Methods**
+### **Topic: File Allocation Methods**
   
   **6. Which disk allocation method requires the file to be stored in consecutive blocks, making it very fast to read sequentially but difficult to expand (grow) later?**
   A. Linked Allocation
@@ -770,7 +767,7 @@
   D. It wastes significant space due to pointers.
   
   ---
-- ### **Topic: General Physical Storage Concepts**
+### **Topic: General Physical Storage Concepts**
   
   **9. When a record is "Deleted" from a Heap or Sorted file, it is rarely physically erased immediately. Instead, a **Deletion Marker** is used. Why?**
   A. To allow the user to "Undo" the delete later.
@@ -785,8 +782,8 @@
   D. Tuple ID
   
   ---
-- ## Quiz 25
-- ### **Topic: Index Definitions (Primary, Clustering, Secondary)**
+## Quiz 25
+### **Topic: Index Definitions (Primary, Clustering, Secondary)**
   
   **1. You have a data file containing `Student` records. The file is physically sorted by `Major` (e.g., all Biology students are stored together, followed by Chemistry). Since `Major` is not unique, what type of index would you create on the `Major` field?**
   A. Primary Index
@@ -813,7 +810,7 @@
   D. No, because Primary Indexes are dense and Clustering Indexes are sparse.
   
   ---
-- ### **Topic: Sparse vs. Dense Indexes**
+### **Topic: Sparse vs. Dense Indexes**
   
   **5. Which type of index is typically **Dense** (contains an index entry for every single record in the data file)?**
   A. Primary Index
@@ -834,7 +831,7 @@
   D. It points to the file header.
   
   ---
-- ### **Topic: Index mechanics**
+### **Topic: Index mechanics**
   
   **8. You have a file sorted by `SSN`. You want to find a record by `EmployeeID` (which is unique, but the file is not sorted by it). What structure is required for the `EmployeeID` index?**
   A. It must be Sparse.
@@ -855,8 +852,8 @@
   D. Secondary indexes are faster to update than Primary indexes.
   
   ---
-- ## Quiz 26
-- ### **Topic: Sparse vs. Dense Indexes**
+## Quiz 26
+### **Topic: Sparse vs. Dense Indexes**
   
   **1. Why can a Primary Index be **Sparse** (contain fewer entries than there are records), whereas a Secondary Index must be **Dense**?**
   A. Because Primary Indexes use hashing.
@@ -877,7 +874,7 @@
   D. 10
   
   ---
-- ### **Topic: Performance (Range vs. Equality)**
+### **Topic: Performance (Range vs. Equality)**
   
   **4. Why is a **Secondary Index** generally poor for **Range Queries** (e.g., `SELECT * FROM Emp WHERE Salary BETWEEN 50k AND 60k`)?**
   A. Secondary indexes cannot support inequality operators.
@@ -898,7 +895,7 @@
   D. The Secondary Index, because it uses hashing.
   
   ---
-- ### **Topic: Index Structure & Maintenance**
+### **Topic: Index Structure & Maintenance**
   
   **7. A **Secondary Index** is created on a field that is **NOT** a candidate key (e.g., `DepartmentName`). Since multiple employees can be in "Sales", how does the index handle the duplicate values?**
   A. It repeats the key value "Sales" for every employee in the index file.
@@ -929,8 +926,8 @@
 - ---
 - ---
 - ---
-- # **Answers and Explanations**
-- ## Quiz 14 Answers
+# **Answers and Explanations**
+## Quiz 14 Answers
 - **1. A ($S \leftouterjoin R$)**
   *   **Explanation:** A Right Outer Join keeps all rows from the right table ($S$). A Left Outer Join keeps all rows from the left table. If you swap the order of tables ($S$ on the left), a Left Join achieves the same result as the original Right Join (assuming attributes are matched correctly).
   
@@ -964,8 +961,8 @@
   
   **10. A (`OrderDate DATE DEFAULT CURRENT_DATE`)**
   *   **Explanation:** The `DEFAULT` keyword is used in DDL to assign values when the user skips a column during an INSERT statement.
-- ## Quiz 15 Answers
-- ### **Answers and Explanations**
+## Quiz 15 Answers
+### **Answers and Explanations**
   
   **1. C (`DROP TABLE`)**
   *   **Explanation:** DDL commands define structure (`CREATE`, `ALTER`, `DROP`). DML commands manipulate data (`INSERT`, `UPDATE`, `DELETE`, `SELECT`).
@@ -996,8 +993,8 @@
   
   **10. A (It is treating the table as a Set...)**
   *   **Explanation:** By default, SQL tables are Bags (Multisets), meaning they allow duplicates. `DISTINCT` forces Set behavior by eliminating duplicate tuples.
-- ## Quiz 16 Answers
-- ### **Answers and Explanations**
+## Quiz 16 Answers
+### **Answers and Explanations**
   
   **1. B (10)**
   *   **Explanation:** `COUNT(column_name)` counts non-NULL values. `COUNT(*)` counts rows. Since 5 rows are NULL, they are ignored.
@@ -1028,8 +1025,8 @@
   
   **10. C (After WHERE and GROUP BY, but before ORDER BY)**
   *   **Explanation:** This is why you cannot use an alias defined in `SELECT` inside the `WHERE` clause (the alias doesn't exist yet), but you *can* use it in `ORDER BY`.
-- ## Quiz 17 Answers
-- ### **Answers and Explanations**
+## Quiz 17 Answers
+### **Answers and Explanations**
   
   **1. D (`WHERE Salary > AVG(Salary)`)**
   *   **Explanation:** You cannot use an aggregate function directly in the `WHERE` clause. `WHERE` filters rows before aggregates are calculated. You must use a subquery (like option C) or `HAVING`.
@@ -1060,8 +1057,8 @@
   
   **10. B (`WHERE Salary > (SELECT MIN(Salary)...)`)**
   *   **Explanation:** If you are richer than *ANY* person in Sales, you only need to be richer than the *poorest* person in Sales. If you are richer than the poorest person, you have fulfilled the "Any" condition.
-- ## Quiz 18 Answers
-- ### **Answers and Explanations**
+## Quiz 18 Answers
+### **Answers and Explanations**
   
   **1. B (`JobTitle` is in the SELECT list but not...)**
   *   **Explanation:** The Single-Value Rule. If you group by Dept, you have one row per Dept. If that Dept has 5 different JobTitles, the database doesn't know which one to display unless you aggregate them or add JobTitle to the grouping bucket.
@@ -1095,8 +1092,8 @@
   
   **10. A (The inner query can see the outer query's columns...)**
   *   **Explanation:** Scope drills down. A child (inner query) can see variables defined in the parent (outer query), but the parent cannot see variables defined inside the child (unless the child returns them as a result set).
-- ## Quiz 19 Answers
-- ### **Answers and Explanations**
+## Quiz 19 Answers
+### **Answers and Explanations**
   
   **1. B (Select Students where there does not exist a Biology course that the student has not taken)**
   *   **Explanation:** This is the classic logical equivalent of division. If there is no course you *haven't* taken, you must have taken *all* of them.
@@ -1127,8 +1124,8 @@
   
   **10. B (Redundant/Denormalized)**
   *   **Explanation:** "TotalSales" can be calculated by summing the "Orders" table. Storing it physically in "Customers" is redundant. It improves read speed (don't need to sum every time) but risks inconsistency (if the update logic fails).
-- ## Quiz 20 Answers
-- ### **Answers and Explanations**
+## Quiz 20 Answers
+### **Answers and Explanations**
   
   **1. C (You can prove an FD is universally true by looking at a single snapshot...)**
   *   **Explanation:** You can only prove an FD is *false* (by finding a counter-example) using data. You cannot prove it is *true* for all future data just by looking at current data; FDs must come from business rules.
@@ -1159,8 +1156,8 @@
   
   **10. C ($F$ covers $G$ AND $G$ covers $F$)**
   *   **Explanation:** Equivalence means they generate the exact same closure ($F^+ = G^+$). Logically, this means every rule in one set can be proven using the rules in the other.
-- ## Quiz 21 Answers
-- ### **Answers and Explanations**
+## Quiz 21 Answers
+### **Answers and Explanations**
   
   **1. B (No, the dataset might be too small...)**
   *   **Explanation:** Data can only **disprove** an FD. Just because a rule holds for current data doesn't mean it's a business rule. There might be a zip code that crosses state lines that just hasn't been entered into the database yet.
@@ -1191,8 +1188,8 @@
   
   **10. D (Both A and B are valid approaches)**
   *   **Explanation:** You can verify an FD by checking the data (looking for violations/counter-examples, Option A) OR by proving it logically from existing rules (Option B). Both are valid methods of verification, though B is preferred for design theory.
-- ## Quiz 22 Answers
-- ### **Answers and Explanations**
+## Quiz 22 Answers
+### **Answers and Explanations**
   
   **1. A ($A \to C$)**
   *   **Explanation:** The key is $\{A, B\}$. $C$ is a non-prime attribute.
@@ -1237,8 +1234,8 @@
   
   **10. A (2NF)**
   *   **Explanation:** Partial Dependencies (the violation of 2NF) can **only** occur if the Primary Key is composite (made of multiple columns). If the key is a single column, it's impossible to depend on "part" of it. Therefore, all single-key tables are automatically 2NF.
-- ## Quiz 23 Answers
-- ### **Answers and Explanations**
+## Quiz 23 Answers
+### **Answers and Explanations**
   
   **1. C (The relation violates BCNF because $B \to C$ holds, but $B$ is not a superkey)**
   *   **Explanation:** Key is $A$. $A \to B$ is fine (Superkey $\to$ ...). However, $B \to C$ is a transitive dependency. $B$ determines $C$, but $B$ is not a superkey (it cannot determine A). Therefore, BCNF is violated.
@@ -1275,8 +1272,8 @@
   
   **10. C (Ordered File)**
   *   **Explanation:** Binary search requires sorted data. You cannot binary search a heap or a hash bucket.
-- ## Quiz 24 Answers
-- ### **Answers and Explanations**
+## Quiz 24 Answers
+### **Answers and Explanations**
   
   **1. C (Hash File)**
   *   **Explanation:** Hashing calculates the address directly using a mathematical function. It is $O(1)$ access. Sorted files require Binary Search ($O(\log N)$), and Heap files require Linear Search ($O(N)$).
@@ -1307,8 +1304,8 @@
   
   **10. D (Tuple ID)**
   *   **Explanation:** Physical disk addresses are based on hardware geometry: Cylinder, Track, and Sector/Block. A Tuple ID is a logical concept inside the database software, not a hardware address.
-- ## Quiz 25 Answers
-- ### **Answers and Explanations**
+## Quiz 25 Answers
+### **Answers and Explanations**
   
   **1. C (Clustering Index)**
   *   **Explanation:** A Clustering Index is defined as an index on the **Ordering Field** where that field is **Non-Unique** (Non-Key).
@@ -1339,8 +1336,8 @@
   
   **10. A (Indexes speed up reads but slow down writes)**
   *   **Explanation:** Indexes are great for finding data. However, every time you `INSERT` or `DELETE` a row, the DBMS must update the table *and* update every single index attached to that table. This adds overhead to write operations.
-- ## Quiz 26 Answers
-- ### **Answers and Explanations**
+## Quiz 26 Answers
+### **Answers and Explanations**
   
   **1. B (Because the underlying data file is sorted...)**
   *   **Explanation:** If I know Block 1 starts with ID 10 and Block 2 starts with ID 20, I know that ID 15 *must* be in Block 1. I don't need a specific pointer for 15. This logic only works if the file is sorted.

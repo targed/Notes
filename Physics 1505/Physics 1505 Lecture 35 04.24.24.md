@@ -1,0 +1,28 @@
+# The Big Bang theory
+- We know form hubbles law that the universe is expanding
+- By looking at galaxies, we know that the universe is evolving
+- Thus, the universe must have a part and a future.
+- We have a pretty good idea of where the universe is going but we want to know where the universe has been
+- The entire u inverse is expanding in itself
+- The universe stared of where its volume was small and then expanded very rapidly. Then it started expanding decelerating.
+- We do not know a lot about the expansion of the universe
+- We know the physics from about 3 minutes after the Big Bang
+## The CMBR
+- The major evidence for the Big Bang is the CMBR
+- The CMBR is a detailed picture of the universe when it became transparent at around 300,000 years old
+- The CMBR is a projection of the universe in microwaves
+- The blue points of the CMBR are regions where you have less radiation. The red points are where there is more radiation. Thus, the CMBR is a heat map of the universe of empty space
+- The CMBR is the same across the universe
+- There is universal radiation everywhere
+- The CMBR is the remains of the hot universe directly after the Big Bang
+- The CMBR is the main evidence to sure at that the universe stared very uniform and small
+- The CMBR was discovered by accident while we were looking for it
+- By measuring the wavelengths of the early opaque universe, you can tell the temperature of the universe at that time
+- ![2024-04-24-15-31-37.jpeg](../assets/2024-04-24-15-31-37.jpeg)
+- The universe has a temperature of about 2.73K
+- You get tiny fluctuations in the CMBR
+- Patterns in the CMBR show is the seeds of the large scale structures of the universe
+- The fluctuations in temperature are caused by fluctuations in density
+- ![2024-04-24-15-40-36.jpeg](../assets/2024-04-24-15-40-36.jpeg)
+- Helium was formed about 3 minutes after the Big Bang
+- ![2024-04-24-15-42-13.jpeg](../assets/2024-04-24-15-42-13.jpeg)

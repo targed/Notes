@@ -1,0 +1,51 @@
+- ![2024-03-04-15-01-29.jpeg](../assets/2024-03-04-15-01-29.jpeg)
+- The temperature and density go down as you get further from the core
+## Nuclear fusion
+- The sun creates energy through nuclear fusion
+  - Start with 4 ionized hydrogen atoms which form 1 atom of helium and releases heat in the process
+  - ![2024-03-04-15-06-27.jpeg](../assets/2024-03-04-15-06-27.jpeg)
+  - The two protons colide
+  - Form a proton and neutron atom (proton is made into a neutron)
+  - Energy is conserved
+  - When a proton turns into a neutron, it emits a neutron, a positron, and a neutrino
+  - This is called the proton to proton chain
+  - ![2024-03-04-15-12-51.jpeg](../assets/2024-03-04-15-12-51.jpeg)
+  - The fusion chain acts as a thermostat where a decline in core temperature causes fusion rate to drop, so core contacts and heats up. Furthermore, a rise in core temperature causes fusion rates to rise, so the core expands and cools down. The sun balances itself
+## Energy escaped
+- Energy eventually escapes from the sun but it takes a long time.
+- The gamma photons get out of the sun via a random walk
+- ![2024-03-04-15-16-57.jpeg](../assets/2024-03-04-15-16-57.jpeg)
+- It takes around 50000 years for light to get out of the core
+- Convection currents take energy to the surface
+- We know this by observing the suns wavelengths, magnetic field, solar vibrations, solar neutrinos to build mathematical model
+- Solar magnetic field
+  - The magnetic field on the surface depends on the suns inner structure
+  - The magnetic field is stronger at sun spots
+- Solar vibrations
+  - Patterns of vibration on the surface tell us about what the sun is like on the inside
+  - Matter is sinking into the sunspots
+- Solar neutrinos
+  - Neutrinos created during fusion fly directly through the sun
+  - Observations of these call tell us what is happening on the inside
+  - We only found 1/3rd of the expected neutrinos that our models predicted
+    - Neutrinos oscillate between different types of neutrinos
+    - ![2024-03-04-15-31-09.jpeg](../assets/2024-03-04-15-31-09.jpeg)
+## Solar activity
+- Sunspots
+  - Are cooler than other parts of the suns surface
+  - Are regions with strong twisting magnetic fields
+  - These magnetic fields pulls matter down into the sun
+  - The Zeeman effect is where we observe the splitting of the spectral lines of the magnetic fields
+  - Charged particles spiral along magnetic field lines
+  - Sunspots always come in pairs and the also drift
+  - The sunspot cycle has to do with the twisting of the suns magnetic field
+- Solar flares
+  - Magnetic activity causes solar flares that send bursts of x-rays and charged particles into space
+  - When matter is ejected into space, it becomes the solar wind
+  - Sometimes there are coronal holes which are the opposite of flares where much less energy is coming out of that area of the sun
+- Solar prominence
+  - Magnetic activity causes eruptions which eject material into space causing solar prominences
+  - Coronal mass ejections are massive ejections of hot plasma which is bad for the earth
+  - Aurora's are caused by the solar wind interacting with earths magnetosphere
+- There are variations in solar activity over time.
+  - The sun has about an 11 year cycle where activity goes up and down

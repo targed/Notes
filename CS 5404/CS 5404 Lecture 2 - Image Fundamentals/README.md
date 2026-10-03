@@ -1,0 +1,2 @@
+- [[CS 5404 The Anatomy of an Image: Mathematical Representations, Coordinate Spaces, and Statistical Metrics]]
+- [[CS 5404 Image Manipulation via Point Processing: Linear/Nonlinear Tone Mapping, Histogram Operations, and the Limits of Spatial Independence]]

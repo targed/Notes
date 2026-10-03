@@ -1,0 +1,4 @@
+- [[CS 5404 Course Architecture and Foundations of Scene Understanding]]
+- [[CS 5404 Why Computer Vision is Fundamentally Hard: The Ill-Posed Inverse Problem and Perceptual Ambiguity]]
+- [[CS 5404 The Modern Capabilities Spectrum: From Classical Detection to Generative and Foundation Models]]
+- [[CS 5404 Real-World Applications, Ethical Frontiers, and the Course Roadmap]]
