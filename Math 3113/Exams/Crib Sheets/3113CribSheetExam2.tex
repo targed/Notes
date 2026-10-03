@@ -1,0 +1,384 @@
+\documentclass[8pt, letterpaper]{article}
+\usepackage[margin=0.35in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\setlength{\columnsep}{0.5cm}
+\pagestyle{empty}
+\setlist[itemize]{nosep, leftmargin=8pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+
+% MODIFIED: Tighter section header
+\newcommand{\sectionhead}[1]{%
+    \vspace{1.2mm}{\large\bfseries#1}\vspace{0.2mm}\hrule\vspace{0.8mm}%
+}
+
+% Math shortcuts
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\V}{\text{Var}}
+
+\begin{document}
+
+%-------------------------------------------------
+% PAGE 1: FORMULAS
+%-------------------------------------------------
+\begin{center}
+    {\LARGE\bfseries Stat 3113 Formula Sheet (Exam 2)}
+\end{center}
+
+\begin{multicols}{3}
+
+\sectionhead{Continuous RV}
+\textbf{General Properties:}
+\begin{itemize}
+    \item pdf: $f(x) \ge 0$, $\int_{-\infty}^{\infty} f(x)dx = 1$
+    \item $P(a \le X \le b) = \int_a^b f(x)dx$
+    \item $P(X = c) = 0$ for any specific value
+    \item cdf: $F(x) = \int_{-\infty}^x f(t)dt$
+    \item $P(a < X < b) = F(b) - F(a)$
+    \item $P(X > a) = 1 - F(a)$
+    \item $f(x) = F'(x)$
+\end{itemize}
+\textbf{Mean \& Variance:} \\
+$\mu = \E[X] = \int_{-\infty}^{\infty} x f(x)dx$ \\
+$\sigma^2 = \V[X] = \E[X^2] - \mu^2$ \\
+where $\E[X^2] = \int_{-\infty}^{\infty} x^2 f(x)dx$
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, boxrule=0.3pt, left=1.5mm, right=1.5mm, top=1.5mm, bottom=1.5mm, before skip=1.5mm]
+\textbf{Normal: $X \sim N(\mu, \sigma^2)$} \\
+$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ \\
+\textbf{Standardize:} $Z = \frac{X-\mu}{\sigma}$ where $Z \sim N(0,1)$ \\
+\textbf{68-95-99.7 Rule:} \\
+$P(\mu-\sigma \le X \le \mu+\sigma) = 0.68$ \\
+$P(\mu-2\sigma \le X \le \mu+2\sigma) = 0.95$ \\
+$P(\mu-3\sigma \le X \le \mu+3\sigma) = 0.997$
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, boxrule=0.3pt, left=1.5mm, right=1.5mm, top=1.5mm, bottom=1.5mm, before skip=1.5mm]
+\textbf{Exponential: $X \sim \text{Exp}(\lambda)$} \\
+\textit{Waiting time between events} \\
+$f(x) = \lambda e^{-\lambda x}$ for $x \ge 0$ \\
+$F(x) = 1 - e^{-\lambda x}$ \\
+$\mu = \frac{1}{\lambda}$, $\sigma^2 = \frac{1}{\lambda^2}$ \\
+\textbf{Memoryless:} $P(X > s+t | X > s) = P(X > t)$
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, boxrule=0.3pt, left=1.5mm, right=1.5mm, top=1.5mm, bottom=1.5mm, before skip=1.5mm]
+\textbf{$\chi^2$-Distribution} \\
+For inference on variance $\sigma^2$. \\
+$\chi^2 = \frac{(n-1)s^2}{\sigma^2} \sim \chi^2_{n-1}$ \\
+\textbf{Properties:} Right-skewed, df $= n-1$, Always positive.
+\end{tcolorbox}
+
+\columnbreak
+
+\sectionhead{Sampling Distributions}
+\textbf{Sample Mean $\bar{X}$:}
+\begin{itemize}
+    \item $\E[\bar{X}] = \mu$
+    \item $\text{SE}(\bar{X}) = \frac{\sigma}{\sqrt{n}}$
+\end{itemize}
+\textbf{Central Limit Theorem:} \\
+For $n \ge 30$, $\bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)$ regardless of population shape. \\
+$Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \sim N(0,1)$ \\ 
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, boxrule=0.3pt, left=1.5mm, right=1.5mm, top=1.5mm, bottom=1.5mm, before skip=1.5mm]
+\textbf{t-Distribution} \\
+Used when $\sigma$ unknown. \\
+$t = \frac{\bar{x} - \mu}{s/\sqrt{n}}$ \\
+\textbf{df} (degrees of freedom) $= n-1$ \\
+\textbf{Properties:}
+\begin{itemize}
+    \item Bell-shaped, symmetric at 0
+    \item Fatter tails than normal
+    \item As df $\to \infty$, $t \to Z$
+\end{itemize}
+\end{tcolorbox}
+
+
+
+\begin{tcolorbox}[colback=gray!10, colframe=black, boxrule=0.3pt, left=1.5mm, right=1.5mm, top=1.5mm, bottom=1.5mm, before skip=1.5mm]
+\textbf{F-Distribution} \\
+For comparing two variances. \\
+$F = \frac{s_1^2}{s_2^2}$ under $H_0: \sigma_1^2 = \sigma_2^2$ \\
+\textbf{df:} $df_1 = n_1-1$, $df_2 = n_2-1$ \\
+\textbf{Properties:} Right-skewed, Always positive.
+\end{tcolorbox}
+
+\columnbreak
+
+\sectionhead{Confidence Intervals}
+\textbf{General Form:} Estimate $\pm$ (Crit. Val.) $\times$ SE \\
+\textbf{One-Sample Mean ($\sigma$ known):} \\
+$\bar{x} \pm z_{\alpha/2} \frac{\sigma}{\sqrt{n}}$ \\
+\textbf{One-Sample Mean ($\sigma$ unknown):} \\
+$\bar{x} \pm t_{\alpha/2,n-1} \frac{s}{\sqrt{n}}$, df $= n-1$ \\
+\textbf{One-Sample Proportion:} \\
+$\hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$ \\
+\textbf{Two Independent Samples (Means):} \\
+$(\bar{x}_1 - \bar{x}_2) \pm t_{\alpha/2,df} \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$ \\
+\textbf{Paired Samples (Mean Diff):} \\
+$\bar{d} \pm t_{\alpha/2,n-1} \frac{s_d}{\sqrt{n}}$, df $= n-1$ \\
+\textbf{Common Critical Values ($z$):}
+\begin{itemize}
+    \item 90\% CI: $z_{0.05} = 1.645$
+    \item 95\% CI: $z_{0.025} = 1.96$
+    \item 99\% CI: $z_{0.005} = 2.576$
+\end{itemize}
+
+\sectionhead{Hypothesis Testing}
+\textbf{General Test Stat:} $\frac{\text{Est.} - \text{Null Val.}}{\text{SE}}$ \\
+\textbf{Decision Rule:} p-val $\le \alpha \implies$ Reject $H_0$ \\
+\textbf{One-Sample Mean ($\sigma$ known):} $z = \frac{\bar{x} - \mu_0}{\sigma/\sqrt{n}}$ \\
+\textbf{One-Sample Mean ($\sigma$ unknown):} $t = \frac{\bar{x} - \mu_0}{s/\sqrt{n}}$, df $= n-1$ \\
+\textbf{One-Sample Proportion:} $z = \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$ \\
+\textbf{Two Independent Samples:} $t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$, Use Welch's df \\
+\textbf{Paired Samples:} $t = \frac{\bar{d} - 0}{s_d/\sqrt{n}}$, df $= n-1$
+\textbf{Errors:}
+\begin{itemize}
+    \item \textbf{Type I:} Reject true $H_0$ (prob $= \alpha$)
+    \item \textbf{Type II:} Fail to reject false $H_0$ (prob $= \beta$)
+    \item \textbf{Power:} $1 - \beta$ (Prob. of detecting a true effect)
+\end{itemize}
+
+\end{multicols}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{Screenshot 2025-10-30 210705.png}
+\end{figure}
+
+\newpage
+
+%-------------------------------------------------
+% PAGE 2: DEFINITIONS
+%-------------------------------------------------
+
+\begin{center}
+    {\LARGE\bfseries Stat 3113 Definitions \& Concepts (Exam 2)}
+\end{center}
+\vspace{1mm}
+
+\begin{multicols}{3}
+\small
+
+\sectionhead{Continuous Distributions}
+
+\textbf{Continuous Random Variable:}
+Takes any value in an interval \\
+\textbf{Probability Density Function (pdf):}
+Describes likelihood of values
+Area under curve = probability \\
+\textbf{Cumulative Distribution Function (cdf):}
+$F(x) = P(X \le x)$
+Always non-decreasing \\
+\textbf{Key Property:}
+$P(X = c) = 0$ for any specific value
+
+\sectionhead{Normal Distribution}
+
+\textbf{Properties:}
+\begin{itemize}
+    \item Bell-shaped, symmetric
+    \item Mean = median = mode
+    \item Completely determined by $\mu$ and $\sigma$
+    \item Total area under curve = 1
+\end{itemize}
+
+\textbf{Standard Normal (Z):}
+\begin{itemize}
+    \item $\mu = 0$, $\sigma = 1$
+    \item Used for probability tables
+    \item Standardize: $Z = \frac{X-\mu}{\sigma}$
+\end{itemize}
+
+\textbf{Empirical Rule:}
+\begin{itemize}
+    \item 68\% within 1 std dev
+    \item 95\% within 2 std devs
+    \item 99.7\% within 3 std devs
+\end{itemize}
+
+\sectionhead{Exponential Distribution}
+
+\textbf{Use:} Models waiting times \\[1mm]
+\textbf{Parameter $\lambda$:} Rate of occurrence \\[1mm]
+\textbf{Memoryless Property:}
+Past doesn't affect future waiting time
+"Starting over" at any point \\[1mm]
+\textbf{Relationship to Poisson:}
+If events follow Poisson($\lambda$),
+time between events is Exp($\lambda$)
+
+\sectionhead{Sampling Concepts}
+
+\textbf{Sampling Distribution:}
+Distribution of a sample statistic \\
+\textbf{Standard Error (SE):}
+Standard deviation of sampling distribution
+Measures precision of estimate \\
+\textbf{Point Estimate:}
+Single best guess for parameter
+$\bar{x}$ estimates $\mu$, $\hat{p}$ estimates $p$ \\[1mm]
+\textbf{Unbiased Estimator:}
+Expected value equals parameter
+$\E[\bar{X}] = \mu$, $\E[\hat{p}] = p$
+
+\sectionhead{Central Limit Theorem}
+
+\textbf{Key Idea:}
+For large samples ($n \ge 30$),
+$\bar{X}$ is approximately normal
+regardless of population shape \\
+\textbf{Implications:}
+\begin{itemize}
+    \item Can use normal-based inference
+    \item Larger $n$ = better approximation
+    \item Reduces influence of outliers
+\end{itemize}
+
+\columnbreak
+
+
+
+\sectionhead{T-Distribution}
+
+\textbf{When to Use:}
+Population $\sigma$ unknown 
+Estimate with sample $s$ \\
+\textbf{Degrees of Freedom (df):}
+Amount of independent information
+Usually $df = n-1$ \\
+\textbf{Comparison to Normal:}
+\begin{itemize}
+    \item More spread (fatter tails)
+    \item Accounts for uncertainty in $s$
+    \item Approaches normal as df increases
+    \item More conservative (wider CIs)
+\end{itemize}
+
+\sectionhead{Chi-Squared Distribution}
+
+\textbf{Use:} Inference for variance $\sigma^2$ \\[1mm]
+\textbf{Properties:}
+\begin{itemize}
+    \item Right-skewed
+    \item Only positive values
+    \item Shape depends on df
+    \item Less skewed as df increases
+\end{itemize}
+
+\textbf{Application:}
+Test if population variance equals
+hypothesized value
+
+\sectionhead{F-Distribution}
+
+\textbf{Use:} Compare two variances \\[1mm]
+\textbf{Parameters:} \\
+Two df values: $df_1$ and $df_2$ \\
+From two samples \\[1mm]
+\textbf{Properties:}
+\begin{itemize}
+    \item Right-skewed
+    \item Not symmetric
+    \item $F \ge 0$ always
+\end{itemize}
+
+\textbf{Application:}
+ANOVA, regression (later in course)
+
+\sectionhead{Confidence Intervals}
+
+\textbf{Interpretation:}
+We are C\% confident the interval
+contains the true parameter \\
+\textbf{Confidence Level:}
+Probability method works \\
+Most common: 90\%, 95\%, 99\% \\
+\textbf{Margin of Error:} \\
+(Critical Value) $\times$ SE \\
+Half the width of CI \\[1mm]
+\textbf{Factors Affecting Width:}
+\begin{itemize}
+    \item Sample size $n$ (larger $n$ = narrower)
+    \item Confidence level (higher = wider)
+    \item Variability (higher $s$ = wider)
+\end{itemize}
+
+\columnbreak
+
+\sectionhead{Two-Sample Inference}
+
+\textbf{Independent Samples:} \\
+Two separate groups \\
+No pairing or matching \\[1mm]
+\textbf{Paired Samples:} \\
+Natural pairing exists \\
+Before/after, matched pairs \\
+Analyze differences $d_i$ \\[1mm]
+\textbf{Welch's t-test:} \\
+Doesn't assume equal variances \\
+More conservative df calculation \\
+Preferred in practice
+
+\sectionhead{Hypothesis Testing}
+
+\textbf{Null Hypothesis ($H_0$):} \\
+Status quo, no effect \\
+What we assume true initially \\[1mm]
+\textbf{Alternative Hypothesis ($H_a$):} \\
+Research claim \\
+What we want evidence for \\[1mm]
+\textbf{p-value:} \\
+Probability of observing data \\
+this extreme if $H_0$ is true \\
+Small p-value = evidence against $H_0$ \\[1mm]
+\textbf{Significance Level ($\alpha$):} \\
+Threshold for decision \\
+Common: 0.05, 0.01, 0.10 \\[1mm]
+\textbf{Statistically Significant:} \\
+p-value $< \alpha$ \\
+Reject $H_0$ \\[1mm]
+\textbf{Practical Significance:} \\
+Effect size matters, not just p-value \\
+Large sample = small p-values easier
+
+\sectionhead{Test Conclusions}
+
+\textbf{Reject $H_0$:}
+Sufficient evidence for $H_a$ \\[1mm]
+\textbf{Fail to Reject $H_0$:} \\
+Insufficient evidence for $H_a$ \\
+NOT the same as "accepting $H_0$" \\[1mm]
+\textbf{Never say:}
+\begin{itemize}
+    \item "Prove" or "accept"
+    \item Only "evidence for/against"
+\end{itemize}
+
+\sectionhead{Type I \& II Errors}
+
+\textbf{Type I Error ($\alpha$):} \\
+False positive \\
+Reject true $H_0$ \\
+Probability controlled by $\alpha$ \\[1mm]
+\textbf{Type II Error ($\beta$):} \\
+False negative \\
+Fail to reject false $H_0$ \\
+Affected by effect size, $n$, $\alpha$ \\[1mm]
+\textbf{Power ($1-\beta$):} \\
+Probability of detecting true effect \\
+Correctly reject a false null hypothesis \\
+Higher power is better \\[1mm]
+\textbf{Trade-off:} \\
+Decreasing $\alpha$ increases $\beta$ \\
+Increase $n$ to reduce both
+
+\end{multicols}
+
+\end{document}

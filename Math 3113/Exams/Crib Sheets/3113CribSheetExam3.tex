@@ -1,0 +1,294 @@
+\documentclass[7pt, letterpaper]{article}
+\usepackage[margin=0.25in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.5pt}
+\setlength{\columnsep}{0.3cm}
+\pagestyle{empty}
+\setlist[itemize]{nosep, leftmargin=6pt, itemsep=0pt, topsep=0pt}
+\setlist[enumerate]{nosep, leftmargin=10pt, itemsep=0pt, topsep=0pt}
+
+% Section header
+\newcommand{\sectionhead}[1]{%
+    \vspace{0.5mm}{\normalsize\bfseries#1}\vspace{0mm}\hrule\vspace{0.5mm}%
+}
+
+\begin{document}
+
+%-------------------------------------------------
+% PAGE 1: ANOVA & FACTORIAL
+%-------------------------------------------------
+\begin{center}
+    {\Large\bfseries Stat 3113: ANOVA \& Factorial Design}
+\end{center}
+\vspace{-2mm}
+
+\begin{multicols}{3}
+\small
+
+\sectionhead{Key Definitions}
+\textbf{Factor:} Independent variable (categorical) being manipulated. \\
+\textbf{Level:} Specific values/categories of a factor. \\
+\textbf{Response:} Dependent variable (numerical) measured. \\
+\textbf{Balanced Design:} Equal sample sizes in all groups. \\
+\textbf{Interaction:} Effect of one factor depends on level of another. Non-parallel lines. \\
+\textbf{Between-Group Variation:} Variation due to treatment/factor effects. \\
+\textbf{Within-Group Variation:} Variation due to random error/noise.
+
+\sectionhead{ANOVA Fundamentals}
+\textbf{Purpose:} Compare means of $k \ge 3$ groups. \\
+\textbf{Why not t-tests?} Multiple t-tests inflate Type I error. ANOVA controls experimentwise error rate. \\
+\textbf{Hypotheses:}
+\begin{itemize}
+    \item $H_0: \mu_1 = \mu_2 = \dots = \mu_k$ (All means equal)
+    \item $H_a$: At least one $\mu_i$ differs
+\end{itemize}
+\textbf{F-Ratio Logic:} $F = \frac{\text{Signal}}{\text{Noise}} = \frac{\text{Between Variance}}{\text{Within Variance}}$
+\begin{itemize}
+    \item Always $F \ge 0$
+    \item $F \approx 1 \implies$ No effect ($H_0$ True)
+    \item Large $F \implies$ Significant difference
+\end{itemize}
+
+\sectionhead{One-Way ANOVA}
+\textbf{Notation:} $N=$ Total subjects, $k=$ Groups
+\textbf{Degrees of Freedom:}
+\begin{itemize}
+    \item $df_{Total} = N - 1$
+    \item $df_{Between} = k - 1$
+    \item $df_{Within} = N - k$
+    \item Check: $df_{Tot} = df_{Bet} + df_{Wit}$
+\end{itemize}
+\textbf{Sums of Squares:} $SS_{Total} = SS_{Between} + SS_{Within}$ \\
+\textbf{Mean Squares:} (NOT additive)
+\begin{itemize}
+    \item $MSTr = SS_{Between} / df_{Between}$
+    \item $MSE = SS_{Within} / df_{Within}$
+\end{itemize}
+\textbf{Test Statistic:} $F = \frac{MSTr}{MSE}$
+
+\sectionhead{Assumptions}
+\begin{enumerate}
+    \item \textbf{Independence:} Random sampling
+    \item \textbf{Normality:} Normal Q-Q plot of residuals linear
+    \item \textbf{Equal Variance:} Residuals vs Predicted uniform band (no megaphone)
+\end{enumerate}
+
+\columnbreak
+
+\sectionhead{Two-Way ANOVA}
+\textbf{Sources:} Factor A, Factor B, $A \times B$, Error \\
+\textbf{Degrees of Freedom:}
+\begin{itemize}
+    \item $df_A = (\text{Levels of A}) - 1$
+    \item $df_B = (\text{Levels of B}) - 1$
+    \item $df_{A \times B} = df_A \times df_B$
+    \item $df_{Error} = df_{Total} - (df_A + df_B + df_{AxB})$
+\end{itemize}
+\textbf{Main Effects:} Effect of one factor averaged over levels of the other.
+
+\begin{tcolorbox}[colback=yellow!10, colframe=black, boxrule=0.5pt, title=\textbf{Analysis Hierarchy (Stop Rule)}]
+\textbf{Test highest-order interaction FIRST.}
+\begin{itemize}
+    \item \textbf{If Interaction Significant ($p < \alpha$):}
+    \begin{itemize}
+        \item \textbf{STOP.} Do NOT interpret main effects.
+        \item Conclusion: Factors interact.
+    \end{itemize}
+    \item \textbf{If NOT Significant ($p > \alpha$):}
+    \begin{itemize}
+        \item Proceed to test Main Effects.
+    \end{itemize}
+\end{itemize}
+\end{tcolorbox}
+
+\sectionhead{Factorial Experiments}
+\textbf{Treatment Combinations:} Product of levels
+\begin{itemize}
+    \item Ex: 3 factors, 2 levels each $\to 2^3 = 8$ runs
+    \item Ex: Levels 3, 5, 2 $\to 3 \times 5 \times 2 = 30$ runs
+\end{itemize}
+\textbf{Model Adequacy:} "Whole Model" p-value. If $p < \alpha$, model is significant.
+
+\sectionhead{Post-Hoc: Tukey's HSD}
+\textbf{When:} (1) Rejected $H_0$, (2) $k \ge 3$ groups \\
+\textbf{Connecting Letters Report:}
+\begin{itemize}
+    \item Levels sharing letter: NOT significantly different
+    \item Levels NOT sharing letter: ARE different
+\end{itemize}
+
+\sectionhead{Inference Recap}
+\textbf{Confidence Interval:} Estimate $\pm$ Margin of Error. "95\% confidence" = method reliability. $\mu_0$ outside CI $\iff$ Reject $H_0$. \\
+\textbf{Significance Level ($\alpha$):} Threshold for rejecting $H_0$ (usually 0.05). \\
+\textbf{p-value:} Probability of data this extreme if $H_0$ true. \\
+\textbf{Type I Error ($\alpha$):} Reject true $H_0$ (False Positive) \\
+\textbf{Type II Error ($\beta$):} Fail to reject false $H_0$ (False Negative) \\
+\textbf{Power ($1-\beta$):} Probability of detecting real effect
+
+\columnbreak
+
+\sectionhead{Reading JMP Output}
+\textbf{ANOVA Table:}
+\begin{itemize}
+    \item \textbf{Prob $>$ F:} p-value
+    \item If p-value $< 0.05$: Reject $H_0$
+\end{itemize}
+\textbf{Effect Tests (Factorial):}
+\begin{itemize}
+    \item Check interaction term p-value first
+\end{itemize}
+\textbf{Tukey's HSD:}
+\begin{itemize}
+    \item Connecting Letters Report
+    \item Ordered Differences (p-values $< 0.05$)
+\end{itemize}
+
+\end{multicols}
+
+\newpage
+
+%-------------------------------------------------
+% PAGE 2: REGRESSION & CORRELATION
+%-------------------------------------------------
+\begin{center}
+    {\Large\bfseries Stat 3113: Regression \& Correlation}
+\end{center}
+\vspace{-2mm}
+
+\begin{multicols}{3}
+\small
+
+\sectionhead{Key Definitions}
+\textbf{Response Variable ($Y$):} What we predict (Dependent). \\
+\textbf{Explanatory Variable ($X$):} Used to predict (Independent/Predictor). \\
+\textbf{Residual ($e$):} $e = \text{Observed} - \text{Predicted} = y - \hat{y}$ \\
+\textbf{Least Squares Line:} Minimizes $SSE = \sum (y_i - \hat{y}_i)^2$ \\
+\textbf{Slope ($\beta_1$):} Rate of change. If $\beta_1 = 0$, no linear relationship. \\
+\textbf{Intercept ($\beta_0$):} Value of $Y$ when $X=0$. Only interpret if $X=0$ is in data range. \\
+\textbf{Extrapolation:} Predicting outside data range. Unreliable. \\
+\textbf{Influential Point:} Outlier in $X$ that drastically changes slope. \\
+\textbf{Lurking Variable:} Hidden variable causing correlation (e.g., weather $\to$ ice cream sales AND shark attacks).
+
+\sectionhead{Correlation ($r$)}
+\textbf{Pearson's Correlation:}
+\begin{itemize}
+    \item Measures strength \& direction of LINEAR relationship
+    \item Range: $-1 \le r \le 1$
+    \item Unitless, Symmetric ($r_{xy} = r_{yx}$)
+    \item $r > 0$: Positive (uphill)
+    \item $r < 0$: Negative (downhill)
+    \item $r \approx 0$: No linear association
+\end{itemize}
+\textbf{Warning:}
+\begin{itemize}
+    \item NOT resistant to outliers
+    \item \textbf{Correlation $\ne$ Causation}
+\end{itemize}
+
+\sectionhead{Scatterplots}
+\textbf{Axes:} Explanatory ($X$) horizontal, Response ($Y$) vertical \\
+\textbf{4 Aspects to Describe:}
+\begin{enumerate}
+    \item \textbf{Form:} Linear, Curved, Random
+    \item \textbf{Direction:} Positive, Negative
+    \item \textbf{Strength:} Tight vs loose
+    \item \textbf{Outliers/Clusters}
+\end{enumerate}
+
+\columnbreak
+
+\sectionhead{Simple Linear Regression}
+\textbf{Model:} $Y_i = \beta_0 + \beta_1 X_i + \epsilon_i$ \\
+\textbf{Fitted Line:} $\hat{y} = b_0 + b_1 x$
+\begin{itemize}
+    \item $\hat{y}$: Predicted value
+    \item $b_0$: Intercept estimate
+    \item $b_1$: Slope estimate
+\end{itemize}
+\textbf{Slope Interpretation:} "For every 1-unit increase in X, Y changes by $b_1$." \\
+\textbf{Intercept:} "Predicted Y when X=0." (Only if X=0 is reasonable)
+
+\sectionhead{Inference for Regression}
+\textbf{Hypotheses:}
+\begin{itemize}
+    \item $H_0: \beta_1 = 0$ (No linear relationship)
+    \item $H_a: \beta_1 \ne 0$ (Linear relationship exists)
+\end{itemize}
+\textbf{Testing:}
+\begin{itemize}
+    \item t-test on slope: "Prob > |t|"
+    \item F-test: "Prob > F" (same for SLR)
+    \item If $p < \alpha$: Reject $H_0$, significant relationship
+\end{itemize}
+
+\sectionhead{Model Fit: $R^2$}
+\textbf{Coefficient of Determination:}
+\begin{itemize}
+    \item Formula: $R^2 = (r)^2$ (for SLR)
+    \item Range: $0 \le R^2 \le 1$
+    \item \textbf{Interpretation:} "\% of variation in $Y$ explained by linear relationship with $X$"
+    \item Higher $R^2$ = Better fit
+\end{itemize}
+
+\sectionhead{Assumption Checking}
+\textbf{1. Linearity}
+\begin{itemize}
+    \item \textbf{Check:} Scatterplot or Residuals vs X
+    \item \textbf{Good:} Random scatter around 0
+    \item \textbf{Bad:} Curved pattern
+\end{itemize}
+
+\columnbreak
+
+\textbf{2. Constant Variance}
+\begin{itemize}
+    \item \textbf{Check:} Residuals vs Predicted
+    \item \textbf{Good:} Uniform band
+    \item \textbf{Bad:} Megaphone/funnel
+\end{itemize}
+\textbf{3. Normality}
+\begin{itemize}
+    \item \textbf{Check:} Normal Q-Q Plot of Residuals
+    \item \textbf{Good:} Points follow line
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5, colframe=black, boxrule=0.5pt, title=\textbf{Common Pitfalls}]
+\begin{itemize}
+    \item \textbf{Extrapolation:} Don't predict outside data range
+    \item \textbf{Causation:} Correlation doesn't prove it
+    \item \textbf{Intercept:} Only meaningful if X=0 is reasonable
+    \item \textbf{Influential Points:} Can dramatically alter slope
+\end{itemize}
+\end{tcolorbox}
+
+\sectionhead{JMP Regression Output}
+\textbf{Parameter Estimates:}
+\begin{itemize}
+    \item \textbf{Intercept Estimate:} $b_0$
+    \item \textbf{X Variable Estimate:} $b_1$ (Slope)
+    \item \textbf{Prob > |t|:} p-value for that term
+\end{itemize}
+\textbf{Summary of Fit:}
+\begin{itemize}
+    \item \textbf{RSquare:} The $R^2$ value
+\end{itemize}
+\textbf{ANOVA Table:}
+\begin{itemize}
+    \item \textbf{Prob > F:} Whole model p-value
+    \item \textbf{F Ratio:} $MS_{Model} / MSE$
+\end{itemize}
+
+\sectionhead{Quick Reference}
+\textbf{Margin of Error:} Half-width of CI (precision measure) \\
+\textbf{Line Plot:} Scatterplot with regression line \\
+\textbf{When correlation misses relationship:} Curved patterns, discrete groups
+
+\end{multicols}
+
+\end{document}

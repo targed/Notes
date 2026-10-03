@@ -1,0 +1,234 @@
+\documentclass[10pt, letterpaper]{article}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% --- Customizations for compactness ---
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt plus 1pt minus 1pt}
+\setlength{\columnsep}{0.75cm}
+\pagestyle{empty}
+
+% --- Custom Command for Section Headers ---
+\newcommand{\sectionhead}[1]{%
+    \begin{center}%
+    \large\bfseries#1%
+    \end{center}%
+    \vspace{-2mm}%
+    \hrule%
+    \vspace{2mm}%
+}
+
+\begin{document}
+
+\begin{center}
+    \huge\bfseries Stat 3113 Formula Sheet (Exam 1: Lectures 0-13)
+\end{center}
+\vspace{2mm}
+
+\begin{multicols}{2}
+
+%-------------------------------------------------
+% SECTION 1: DESCRIPTIVE & PROBABILITY
+%-------------------------------------------------
+\sectionhead{Descriptive Statistics}
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item Sample Mean: \(\bar{x} = \frac{1}{n}\sum x_i\)
+    \item Sample Variance: \(s^2 = \frac{1}{n-1}\sum (x_i - \bar{x})^2\)
+    \item Sample Std. Dev.: \(s = \sqrt{s^2}\)
+    \item IQR: \(Q_3 - Q_1\)
+    \item Outlier Rule: \(< Q_1 - 1.5(\text{IQR})\) or \(> Q_3 + 1.5(\text{IQR})\).
+\end{itemize}
+
+\sectionhead{General Probability Rules}
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item \textbf{Axioms:} \(P(A) \ge 0\); \(P(S)=1\); For disjoint A, B, \(P(A \cup B) = P(A)+P(B)\).
+    \item \textbf{Complement Rule:} \(P(A^c) = 1 - P(A)\)
+    \item \textbf{Addition Rule:} \(P(A \cup B) = P(A) + P(B) - P(A \cap B)\)
+    \item \textbf{Conditional Probability:} \(P(A|B) = \frac{P(A \cap B)}{P(B)}\)
+    \item \textbf{Multiplication Rule:} \(P(A \cap B) = P(A|B)P(B)\)
+    \item \textbf{Independence:} A and B are independent if \(P(A|B) = P(A)\). For independent events, \(P(A \cap B) = P(A)P(B)\).
+    \item \textbf{Total Probability:} \(P(B) = \sum P(B|A_i)P(A_i)\)
+    \item \textbf{Bayes' Theorem:} \(P(A_j|B) = \frac{P(B|A_j)P(A_j)}{P(B)}\)
+\end{itemize}
+
+\sectionhead{General Discrete Random Variables}
+\begin{itemize}[leftmargin=*, itemsep=0pt]
+    \item \textbf{pmf:} \(p(x) = P(X=x)\). Properties: \(p(x)\ge 0, \sum p(x)=1\).
+    \item \textbf{cdf:} \(F(x) = P(X \le x) = \sum_{y \le x} p(y)\)
+    \item \textbf{Mean (Expected Value):} \(\mu = E[X] = \sum x \cdot p(x)\)
+    \item \textbf{Variance:} \(\sigma^2 = V[X] = E[X^2] - \mu^2\)
+        \begin{itemize}[itemsep=0pt]
+            \item where \(E[X^2] = \sum x^2 \cdot p(x)\)
+        \end{itemize}
+    \item \textbf{Linear Transformations:} (for constants \(a,b\))
+        \begin{itemize}[itemsep=0pt]
+            \item \(E[aX+b] = aE[X]+b\)
+            \item \(V[aX+b] = a^2V[X]\)
+        \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+%-------------------------------------------------
+% SECTION 2: NAMED DISCRETE DISTRIBUTIONS
+%-------------------------------------------------
+\sectionhead{Named Discrete Distributions}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, title=\textbf{Binomial Distribution: \(X \sim \text{Bin}(n, p)\)}]
+\textbf{What it models:} The number of "successes" (\(X\)) in a fixed number of trials (\(n\)).
+
+\textbf{Conditions:}
+\begin{enumerate}[itemsep=0pt, topsep=0pt, partopsep=0pt]
+    \item A fixed number of trials, \(n\).
+    \item Each trial is independent.
+    \item Each trial has two outcomes: Success or Failure.
+    \item The probability of success, \(p\), is constant for all trials.
+\end{enumerate}
+
+\textbf{Probability Mass Function (pmf):}
+\[ P(X=x) = \underbrace{\binom{n}{x}}_{\substack{\text{Number of ways} \\ \text{to arrange x} \\ \text{successes}}} \cdot \underbrace{p^x}_{\substack{\text{Probability of} \\ \text{x successes}}} \cdot \underbrace{(1-p)^{n-x}}_{\substack{\text{Probability of} \\ \text{n-x failures}}} \]
+
+\textbf{Mean \& Variance:}
+\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]
+    \item Mean: \(\mu = np\)
+    \item Variance: \(\sigma^2 = np(1-p)\)
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, title=\textbf{Poisson Distribution: \(X \sim \text{Poisson}(\mu)\)}]
+\textbf{What it models:} The number of events (\(X\)) occurring in a fixed interval of time, area, or volume.
+
+\textbf{Key Parameter:}
+\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]
+    \item \(\mu\) is the average number of events in that interval. It is a rate.
+\end{itemize}
+
+\textbf{Conditions:}
+\begin{enumerate}[itemsep=0pt, topsep=0pt, partopsep=0pt]
+    \item Events occur independently.
+    \item The average rate (\(\mu\)) at which events occur is constant.
+    \item Two events cannot occur at exactly the same instant.
+\end{enumerate}
+
+\textbf{Probability Mass Function (pmf):}
+\[ P(X=x) = \frac{e^{-\mu}\mu^x}{x!} \]
+
+\textbf{Mean \& Variance:}
+A key property of the Poisson distribution.
+\begin{itemize}[itemsep=0pt, topsep=0pt, partopsep=0pt]
+    \item Mean: \(E[X] = \mu\)
+    \item Variance: \(V[X] = \mu\)
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=white, colframe=black, boxrule=0.5pt, title=\textbf{Poisson Approximation to the Binomial}]
+If a process is Binomial with a large number of trials \(n\) and a small probability of success \(p\), its probabilities can be approximated by a Poisson distribution with mean \(\mu = np\).
+\[ \text{Bin}(n, p) \approx \text{Poisson}(\mu = np) \]
+\end{tcolorbox}
+
+\end{multicols}
+
+
+\begin{center}
+    {\LARGE\bfseries Stat 3113 Definitions \& Concepts}
+\end{center}
+\vspace{1mm}
+
+\begin{multicols}{2}
+\small
+
+\sectionhead{Study Design}
+
+\textbf{Population:} Entire group studied \\
+\textbf{Sample:} Subset of population \\
+\textbf{Parameter:} Population measure \\
+\textbf{Statistic:} Sample measure \\
+\textbf{Observational Study:} Observe only \\
+\textbf{Experiment:} Apply treatments \\
+\textbf{Confounding:} Effects indistinguishable \\
+\textbf{Control:} Use control groups \\
+\textbf{Randomization:} Random assignment \\
+\textbf{Replication:} Sufficient sample size
+
+\sectionhead{Variables}
+
+\textbf{Qualitative (Categorical):}
+\begin{itemize}
+    \item \textbf{Nominal:} No order (color, gender)
+    \item \textbf{Ordinal:} Natural order (grades)
+\end{itemize}
+
+\textbf{Quantitative (Numerical):}
+\begin{itemize}
+    \item \textbf{Discrete:} Countable (no. children)
+    \item \textbf{Continuous:} Any value (height)
+\end{itemize}
+
+\sectionhead{Descriptive Stats}
+
+\textbf{Center:}
+\begin{itemize}
+    \item \textbf{Mean:} Average, not resistant
+    \item \textbf{Median:} Middle value, resistant
+    \item \textbf{Mode:} Most frequent
+\end{itemize}
+
+\textbf{Spread:}
+\begin{itemize}
+    \item \textbf{Range:} Max - Min
+    \item \textbf{IQR:} $Q_3 - Q_1$, resistant
+    \item \textbf{Std Dev:} Typical distance from mean
+    \item \textbf{Variance:} $(Std Dev)^2$
+\end{itemize}
+
+\textbf{Shape:}
+\begin{itemize}
+    \item \textbf{Symmetric:} Mean $\approx$ Median
+    \item \textbf{Left Skewed:} Mean $<$ Median
+    \item \textbf{Right Skewed:} Mean $>$ Median
+\end{itemize}
+
+\textbf{Resistant:} Unaffected by outliers (median, IQR) \\
+\textbf{Non-resistant:} Affected by outliers (mean, std dev)
+
+\columnbreak
+
+\sectionhead{Probability}
+
+\textbf{Sample Space:} All possible outcomes \\
+\textbf{Event:} Subset of sample space \\
+\textbf{Probability:} Value between 0 and 1 \\
+\textbf{Conditional Prob:} $P(A|B)$ - prob of A given B \\
+\textbf{Independence:} $P(A|B) = P(A)$ \\
+$\Rightarrow P(A \cap B) = P(A)P(B)$ \\
+\textbf{Mutually Exclusive:} $P(A \cap B) = 0$ \\
+\textbf{Complement:} $P(A^c) = 1 - P(A)$
+
+\sectionhead{Random Variables}
+
+\textbf{Random Variable:} Assigns numbers to outcomes \\
+\textbf{pmf:} Prob mass function (discrete) \\
+$p(x) = P(X = x)$ \\
+\textbf{pdf:} Prob density function (continuous) \\
+Note: $P(X = c) = 0$ for continuous RV \\
+\textbf{cdf:} $F(x) = P(X \leq x)$ \\
+\textbf{Expected Value:} Long-run average \\
+\textbf{Variance:} Measures spread \\
+$\text{Var}(X) = E[(X - \mu)^2]$
+
+\sectionhead{Distribution Properties}
+
+\textbf{Binomial:} Fixed trials, constant prob \\
+\textbf{Poisson:} Events in fixed interval \\
+\textbf{Normal:} Bell-shaped, symmetric \\
+\textbf{Standard Normal:} $\mu = 0, \sigma = 1$ \\
+\textbf{Uniform:} All values equally likely \\
+\textbf{Exponential:} Waiting times, memoryless
+
+\end{multicols}
+
+\end{document}
+
