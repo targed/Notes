@@ -2,4 +2,7 @@
 - [[Math 3304 Chapter 2: First-Order Differential Equations]]
 - [[Math 3304 Chapter 3: Mathematical Modeling with First-Order Differential Equations]]
 - [[Math 3304 Chapter 4: Second-Order Linear Differential Equations]]
+- [[Math 3304 Chapter 6: Higher Order Linear DEs]]
+- [[Math 3304 Chapter 7: Laplace Transform]]
 - [[Math 3304 Exam 1]]
+- [[Math 3304 Exam 2]]

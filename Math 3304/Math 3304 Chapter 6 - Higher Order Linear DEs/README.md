@@ -1,0 +1,3 @@
+- [[Math 3304 Section 6.1: Theory and Properties of Solutions]]
+- [[Math 3304 Section 6.2: Solving Homogeneous Higher-Order DEs with Constant Coefficients]]
+- [[Math 3304 Section 6.3: Nonhomogeneous Equations & The Method of Undetermined Coefficients]]

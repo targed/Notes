@@ -1,3 +1,6 @@
 - [[Math 3304 Section 4.2: Theory of Second-Order Linear Equations and The Wronskian]]
 - [[Math 3304 Section 4.3: Homogeneous Equations with Constant Coefficients]]
 - [[Math 3304 Section 4.4 & 4.5: Nonhomogeneous (Forced) Differential Equations & The Method of Undetermined Coefficients]]
+- [[Math 3304 Section 4.6: Variation of Parameters]]
+- [[Math 3304 Section 4.7: Variable-Coefficient Equations with Cauchy-Euler Equations & Reduction of Order]]
+- [[Math 3304 Section 4.1, 4.9 & 4.10: Mass-Spring Systems & Mechanical Vibrations]]
