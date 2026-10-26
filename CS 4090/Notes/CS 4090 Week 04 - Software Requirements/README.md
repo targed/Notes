@@ -1,0 +1,4 @@
+- [[CS 4090 Foundations of Requirements Engineering: Problem Domain, Solution Domain, and Requirements Typology]]
+- [[CS 4090 Non-Functional Requirements Taxonomy, Architectural Impact, and Verifiable Metrics]]
+- [[CS 4090 Requirements Elicitation, Stakeholder Conflict, and Fact-Finding Techniques]]
+- [[CS 4090 Rapid Prototyping and Storyboarding]]

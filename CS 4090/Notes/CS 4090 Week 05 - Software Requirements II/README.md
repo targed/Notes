@@ -1,0 +1,4 @@
+- [[CS 4090 Foundations of Use Cases, Core Terminology, and UML Notation]]
+- [[CS 4090 The 5-Step Process for Building a Use-Case Model]]
+- [[CS 4090 Specification, Detailing, and Lifecycle Flows]]
+- [[CS 4090 Scope Heuristics, System Boundaries, Evolution, and Lifecycle Benefits]]

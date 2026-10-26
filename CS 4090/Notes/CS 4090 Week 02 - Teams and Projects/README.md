@@ -1,0 +1,3 @@
+- [[CS 4090 Team Formation Dynamics, Engineering Identity, and Skill Assessment]]
+- [[CS 4090 Project Selection Philosophy, Domain Ideation, and Faculty Project Tracks]]
+- [[CS 4090 The First Team Meeting, Operational Governance, and Team Policies]]

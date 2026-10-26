@@ -1,0 +1,4 @@
+- [[CS 4090 System Modeling Fundamentals, Architectural Perspectives, and Context Models]]
+- [[CS 4090 UML Class Modeling: Concepts, Three Perspectives, and Internal Anatomy]]
+- [[CS 4090 Structural Relationships: Associations, Multiplicities, Navigability, and Link Classes]]
+- [[CS 4090 Advanced Class Relationships: Generalization, Aggregation, Composition, and Dependency]]

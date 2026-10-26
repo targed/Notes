@@ -1,0 +1,4 @@
+- [[CS 4090 Course Overview and Team Engineering Structure]]
+- [[CS 4090 Core Foundations of Software Engineering and the SDLC]]
+- [[CS 4090 The Core Phases of the Software Engineering Lifecycle]]
+- [[CS 4090 Capstone I Execution Schedule, Deliverables Roadmap, and Academic Milestones]]

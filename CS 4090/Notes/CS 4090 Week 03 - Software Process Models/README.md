@@ -1,0 +1,3 @@
+- [[CS 4090 The Discipline of Software Engineering, Core Definitions, and Sociotechnical Impact]]
+- [[CS 4090 Software Process Models: Waterfall, Incremental, and Reuse-Oriented Engineering]]
+- [[CS 4090 Process Activities]]

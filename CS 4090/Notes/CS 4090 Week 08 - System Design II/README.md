@@ -1,0 +1,4 @@
+- [[CS 4090 Foundations of State Models, Behavioral Modeling, and Core Anatomy]]
+- [[CS 4090 Advanced State Constructs: Composite States, Orthogonal Regions, and Case Studies]]
+- [[CS 4090 State Engineering: Extracting States from Requirements, Heuristics, and Anti-Patterns]]
+- [[CS 4090 System Design Synthesis: Integrating Class Models and State Models]]

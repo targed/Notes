@@ -1,0 +1,4 @@
+- [[CS 4090 The Software Requirements Document: Purpose, Readership, Variability, and IEEE Structure]]
+- [[CS 4090 Specification Notations, Natural Language Pitfalls, Scenarios, and Structured Formats]]
+- [[CS 4090 Requirements Engineering in Real-World Practice: The Top 5 Techniques and Workflow Integration]]
+- [[CS 4090 Engineering Ownership and Human Judgment in the Era of AI]]
