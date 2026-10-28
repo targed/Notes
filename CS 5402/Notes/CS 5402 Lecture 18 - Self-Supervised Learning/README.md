@@ -1,0 +1,4 @@
+- [[CS 5402 Foundations and Motivation for SSL]]
+- [[CS 5402 Pretext Tasks in Vision and Evaluation Methods]]
+- [[CS 5402 Contrastive Learning (SimCLR and BYOL)]]
+- [[CS 5402 Multimodal SSL, Text (BERT), and Final Review]]

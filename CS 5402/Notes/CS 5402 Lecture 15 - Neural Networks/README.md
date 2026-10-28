@@ -1,0 +1,4 @@
+- [[CS 5402 Foundations and Forward Propagation]]
+- [[CS 5402 Loss Functions and The Chain Rule]]
+- [[CS 5402 Backpropagation]]
+- [[CS 5402 Architecture and Gradient Problems]]

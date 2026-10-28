@@ -1,0 +1,3 @@
+- [[CS 5402 Foundations and Convolution Mechanics]]
+- [[CS 5402 Pooling, Architectures, and Fine-Tuning]]
+- [[CS 5402 Applications and Unboxing the Black Box]]
