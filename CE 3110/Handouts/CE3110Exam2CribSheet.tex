@@ -1,0 +1,450 @@
+
+% % \documentclass[letterpaper]{article}
+% % \usepackage[fontsize=7pt]{scrextend} % Sets the global base to exactly 7pt
+
+% \documentclass[8pt, letterpaper]{extarticle}
+
+% % \documentclass[8pt, letterpaper]{article}
+% % \usepackage[margin=0.3in]{geometry}
+% \usepackage{amsmath, amssymb}
+% \usepackage{multicol}
+% \usepackage{tcolorbox}
+% \usepackage{enumitem}
+
+% % Compact settings
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{1pt}
+% \setlength{\columnsep}{0.4cm}
+% \pagestyle{empty}
+% \setlist[itemize]{nosep, leftmargin=8pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+% \setlist[enumerate]{nosep, leftmargin=12pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+
+% % Section header command
+% \newcommand{\sectionhead}[1]{%
+%     \vspace{1mm}{\large\bfseries#1}\vspace{0.2mm}\hrule\vspace{0.8mm}%
+% }
+
+\documentclass[8pt, letterpaper]{extarticle}
+\usepackage[margin=0.25in]{geometry} % Slightly tighter margins
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{lmodern} % Scales better at small sizes
+\usepackage{graphicx}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{0.3cm}
+\pagestyle{empty}
+
+% Ultra-compact lists
+\setlist[itemize]{nosep, leftmargin=10pt, labelsep=2pt, itemsep=0pt, topsep=1pt}
+\setlist[enumerate]{nosep, leftmargin=10pt, labelsep=2pt, itemsep=0pt, topsep=1pt}
+
+% Optimized Section header
+\newcommand{\sectionhead}[1]{%
+    \vspace{1.5mm}{\small\bfseries\uppercase{#1}}\vspace{0.2mm}\hrule\vspace{0.5mm}%
+}
+
+% Global TColorBox styling to save space
+\tcbset{
+    sharp corners,
+    boxrule=0.5pt,
+    left=2pt, right=2pt, top=2pt, bottom=2pt, % Reduced internal padding
+    title style={top=1pt, bottom=1pt},
+    fonttitle=\bfseries\small
+}
+
+\begin{document}
+
+\begin{multicols}{3}
+
+\sectionhead{Integer Arithmetic \& Overflow}
+\textbf{Addition/Subtraction Hardware:} Subtraction ($A - B$) is performed by adding the 2's complement of $B$ to $A$ ($A + \sim B + 1$). The same ALU does both.
+
+\begin{tcolorbox}[colback=red!5, colframe=black, boxrule=0.5pt, title=\textbf{Overflow Detection}]
+\textbf{Unsigned Overflow:} Occurs if there is a Carry-Out from the Most Significant Bit (MSB). \\
+\textbf{Signed Overflow (2's Complement):} 
+\begin{itemize}
+    \item Occurs if adding two positive numbers yields a negative result.
+    \item Occurs if adding two negative numbers yields a positive result.
+    \item \textbf{Hardware Check:} $V = C_{in} \oplus C_{out}$ (Overflow happens if the Carry-In to the MSB is different from the Carry-Out of the MSB).
+\end{itemize}
+\textit{Note:} Adding a positive and a negative number can \textbf{NEVER} result in an overflow.
+\end{tcolorbox}
+
+\sectionhead{Multiplication Hardware}
+\textbf{1. Standard/Unoptimized Multiplier:}
+\begin{itemize}
+    \item 64-bit ALU, 64-bit Product Register, 64-bit Multiplicand Register.
+    \item Multiplicand starts in the right half. Multiplier in a separate register.
+    \item \textbf{Algorithm:} If LSB of Multiplier = 1, add Multiplicand to Product. Shift Multiplicand \textbf{Left}. Shift Multiplier \textbf{Right}.
+\end{itemize}
+
+\sectionhead{Division Hardware}
+\textbf{Restoring Division Algorithm:}
+\begin{enumerate}
+    \item Shift Remainder/Quotient register left 1 bit.
+    \item Subtract Divisor from the left half (Remainder).
+    \item \textbf{If result $\ge$ 0:} Shift a \texttt{1} into the Quotient.
+    \item \textbf{If result $<$ 0:} Shift a \texttt{0} into the Quotient AND \textbf{Restore} (Add Divisor back to the Remainder).
+\end{enumerate}
+\textit{Divide by zero:} Hardware ignores it. Software must check.
+
+\textbf{2. Optimized Multiplier (Saves Hardware):}
+\begin{itemize}
+    \item 32-bit ALU, 64-bit Product Register, 32-bit Multiplicand.
+    \item \textbf{Setup:} Multiplicand stays fixed. Multiplier is placed in the \textbf{LOWER half} of the Product register. Upper half is 0.
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5, colframe=black, boxrule=0.5pt, title=\textbf{Decimal to IEEE 754 Conversion}]
+\textit{Example: Convert -21.75 to Double Precision.}
+\begin{enumerate}
+    \item \textbf{Determine Sign:} Negative, so $S = 1$.
+    \item \textbf{Convert to Binary:} $21 = 10101_2$. $0.75 = 1/2 + 1/4 = .11_2$. Binary magnitude = $10101.11_2$.
+    \item \textbf{Normalize:} Shift binary point left until $1.\text{XXXX}$. 
+    $10101.11_2 \rightarrow 1.010111 \times 2^4$.
+    \item \textbf{Determine Fraction:} Drop the leading "1.".
+    Fraction = \texttt{010111} (pad right with 0s to fill 52 bits).
+    \item \textbf{Calculate Stored Exponent:} 
+    $\text{Stored Exp} = \text{Actual Exp} + \text{Bias}$.
+    Stored Exp = $4 + 1023 = 1027$.
+    Convert $1027$ to 11-bit binary: \texttt{10000000011}.
+    \item \textbf{Assemble:} \texttt{[S] [Exponent] [Fraction]} \\
+    \texttt{1 10000000011 01011100...000}
+\end{enumerate}
+\end{tcolorbox}
+
+
+\sectionhead{IEEE 754 Floating-Point Format}
+\textbf{Formula:} $X = (-1)^S \times (1.\text{Fraction}) \times 2^{(\text{Exponent} - \text{Bias})}$
+
+\begin{itemize}
+\item \textbf{Field, Single Precision, Double Precision} \\
+\item \textbf{Total Bits:} 32 64 \\
+\item \textbf{Sign (S):} 1 bit 1 bit \\
+\item \textbf{Exponent (E):} 8 bits 11 bits \\
+\item \textbf{Fraction (F):} 23 bits 52 bits \\
+\item \textbf{Bias:} \textbf{127} \textbf{1023} \\
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\sectionhead{Floating Point Special Values}
+Hardware relies on the \textbf{Exponent} to flag special cases:
+\begin{itemize}
+    \item \textbf{Zero:} Exp = \texttt{00...0}, Frac = \texttt{00...0}.
+    \item \textbf{Denormalized:} Exp = \texttt{00...0}, Frac $\neq$ 0. 
+    \begin{itemize}
+        \item Used for gradual underflow (extremely small numbers).
+        \item \textbf{NO hidden 1!} Formula: $(-1)^S \times (0.\text{Frac}) \times 2^{1-\text{Bias}}$
+    \end{itemize}
+    \item \textbf{Infinity ($\pm\infty$):} Exp = \texttt{11...1}, Frac = \texttt{00...0}. (Used for divide by zero).
+    \item \textbf{NaN (Not a Number):} Exp = \texttt{11...1}, Frac $\neq$ 0. (Used for 0/0 or $\sqrt{-1}$).
+\end{itemize}
+
+\sectionhead{SIMD / Subword Parallelism}
+\begin{itemize}
+    \item \textbf{Data-Level Parallelism:} Operating on short vectors simultaneously (e.g., 4 pixels at once).
+    \item \textbf{ARM NEON:} Uses 32 128-bit registers (\texttt{V0}-\texttt{V31}).
+    \item \textit{Example:} A 128-bit adder can do sixteen 8-bit adds, eight 16-bit adds, or four 32-bit adds in parallel.
+\end{itemize}
+
+\sectionhead{Floating-Point Multiplication}
+\begin{enumerate}
+    \item \textbf{Add Exponents:} \textit{Careful!} If you just add the two stored exponents, you add the bias twice. \\
+    $\text{New Exp} = (\text{Stored Exp}_1 + \text{Stored Exp}_2) - \text{Bias}$
+    \item \textbf{Multiply Significands:} Multiply the $1.\text{XX}$ values like normal binary multiplication.
+    \item \textbf{Normalize:} Shift the product to get $1.\text{XXXX}$ and adjust the new exponent accordingly.
+    \item \textbf{Sign:} XOR the original sign bits. (Pos $\times$ Neg = Neg).
+\end{enumerate}
+
+\sectionhead{FP Instructions (LEGv8)}
+\begin{itemize}
+    \item Uses separate registers: \texttt{S0-S31} (32b) \& \texttt{D0-D31} (64b). \texttt{Sn} is the lower half of \texttt{Dn}.
+    \item Math: \texttt{FADDS}, \texttt{FSUBS}, \texttt{FMULS}, \texttt{FDIVS} (Single). Change trailing 'S' to 'D' for Double.
+    \item Loads/Stores: \texttt{LDURS}, \texttt{STURS}, \texttt{LDURD}, \texttt{STURD}.
+    \item Compare: \texttt{FCMPS}, \texttt{FCMPD}. (Sets FP condition flags).
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!5, colframe=black, boxrule=0.5pt, title=\textbf{Step-by-Step FP Addition}]
+\textbf{1. Align Binary Points:} 
+\begin{itemize}
+    \item Compare Exponents. Find the number with the \textbf{smaller} exponent.
+    \item Shift the significand (fraction with hidden 1 added back) of the smaller number to the \textbf{RIGHT} by the difference between the exponents.
+    \item \textit{Example:} If $Exp1 = 5$ and $Exp2 = 3$, shift Significand 2 right by 2 bits. Now both exponents are 5.
+\end{itemize}
+
+\textbf{2. Add Significands:}
+\begin{itemize}
+    \item Perform standard binary addition on the aligned significands. (Remember to include the hidden 1s!).
+\end{itemize}
+
+\textbf{3. Normalize Result \& Check Over/Underflow:}
+\begin{itemize}
+    \item Shift the resulting significand left or right to get it back into normalized $1.\text{XXXX}$ form.
+    \item \textbf{If you shift right} (e.g., $10.101 \to 1.0101$), you must \textbf{ADD 1} to the exponent for each shift.
+    \item \textbf{If you shift left} (e.g., $0.011 \to 1.1$), you must \textbf{SUBTRACT 1} from the exponent for each shift.
+    \item Check if the new Exponent exceeds the max (overflow) or min (underflow) bounds.
+\end{itemize}
+
+\textbf{4. Round and Renormalize:}
+\begin{itemize}
+    \item If the significand has more bits than the Fraction field allows (23 for single, 52 for double), round it according to IEEE rules.
+    \item If rounding causes a carry that breaks normalization (e.g., $1.111 + .001 = 10.000$), renormalize again (shift right 1, add 1 to Exp).
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=blue!5, colframe=black, boxrule=0.5pt, title=\textbf{Optimized Multiply Trace Table Rules}]
+\textbf{Columns needed:} Iteration, Step, Multiplicand, Product.\\
+\textbf{Product Format:} \texttt{[Carry] Upper\_Half | Lower\_Half}
+\begin{enumerate}
+    \item Check the LSB (rightmost bit) of the Product register.
+    \item \textbf{If LSB == 1:} Add the Multiplicand to the \textbf{Upper Half} of the Product register. Save any Carry-Out in a temporary Carry bit \texttt{[C]}.
+    \item \textbf{If LSB == 0:} Do nothing (skip addition).
+    \item \textbf{Shift:} Shift the \textit{entire} Product register (including the Carry bit) \textbf{Right by 1 bit}. The Carry bit drops into the MSB of the Upper Half.
+    \item Repeat $N$ times (where $N$ is the number of bits).
+\end{enumerate}
+\end{tcolorbox}
+
+\sectionhead{Sign-Extend Unit Usage}
+Which instructions use the 64b output from Sign-Extend?
+\begin{itemize}
+    \item \textbf{LDUR / STUR:} Uses 9-bit constant offset. Sign-extended to 64b, routed via ALUSrc mux to ALU to add to base register.
+    \item \textbf{CBZ / B:} Uses 19-bit or 26-bit instruction offset. Sign-extended to 64b, then shifted left by 2 and sent to the Branch Adder (PC + offset).
+    \item \textbf{NOT used by:} R-type (ADD, SUB, AND, ORR). These only use register values. ALUSrc routes "Read Data 2" instead.
+\end{itemize}
+
+\sectionhead{Logic Design Basics}
+\textbf{Combinational Logic:} Outputs depend ONLY on current inputs. No memory/state. 
+\begin{itemize}
+    \item \textbf{ALU:} Performs arithmetic and logical ops.
+    \item \textbf{Adders:} Two used (PC + 4, and Branch Target).
+    \item \textbf{Multiplexors (Mux):} Routes data based on a control signal (0 or 1).
+    \item \textbf{Control Units:} Main Control and ALU Control.
+    \item \textbf{Sign-Extend:} Expands 9, 19, or 26-bit offsets to 64b.
+    \item \textbf{Shift Left 2:} Multiplies branch offset by 4.
+    \item \textbf{Logic Gates:} AND / OR gates for branch decisions.
+\end{itemize}
+
+\textbf{Sequential Logic:} State elements. Store data and update synchronously with a clock edge.
+\begin{itemize}
+    \item \textbf{PC (Program Counter):} Holds current memory address.
+    \item \textbf{Instruction Memory:} Stores the program's code.
+    \item \textbf{Registers:} The 32 general-purpose 64-bit registers.
+    \item \textbf{Data Memory:} Read/written during LDUR/STUR.
+\end{itemize}
+
+\sectionhead{Instruction Execution Cycle}
+\textbf{1. Fetch:} PC $\to$ IM. Update PC = PC + 4. \\
+\textbf{2. Decode:} Read RF. Control unit sets muxes.\\
+\textbf{3. Execute:} ALU performs math or calculates addresses.\\
+\textbf{4. Memory:} Access Data Memory (if LDUR/STUR). \\
+\textbf{5. Write-Back:} Write result back to RF.
+
+\sectionhead{Unoptimized Multiplication Table}
+Iteration | Multiplier | Multiplicand | Product \\
+
+\sectionhead{Optimized Multiplication Table}
+Iteration | Step Desc | Multiplicand | Product \\
+
+A x B | Multiplicand x Multiplier \\
+
+\sectionhead{Division Table}
+Quotient | Divisor | Remainder
+
+A/B | Divisor = A 0000 | Remainder = 0000 B | Quotient = 0000 \\
+
+\newpage
+
+\end{multicols}
+
+\begin{multicols}{3}
+
+
+
+
+
+\sectionhead{Datapath Control Signals}
+The Main Control Unit decodes the instruction and sets the Muxes and read/write flags. 
+
+
+
+\begin{tcolorbox}[colback=red!5, colframe=black, boxrule=0.5pt, title=\textbf{Control Signal Master Table}]
+\textit{R2=Reg2Loc, UB=UncondBr, Br=Branch, M=MemR/W, M2=MemtoReg, AOp=ALUOp, AS=ALUSrc, RW=RegWrite, AC=ALUControl}
+
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{Instr} & \textbf{R2} & \textbf{UB} & \textbf{Br} & \textbf{M} & \textbf{M2} & \textbf{AOp} & \textbf{AS} & \textbf{RW} & \textbf{AC} \\
+\hline
+\textbf{ADD} & 0 & 0 & 0 & 00 & 0 & 10 & 0 & 1 & 0010 \\
+\hline
+\textbf{SUB} & 0 & 0 & 0 & 00 & 0 & 10 & 0 & 1 & 0110 \\
+\hline
+\textbf{LDUR} & X & 0 & 0 & 10 & 1 & 00 & 1 & 1 & 0010 \\
+\hline
+\textbf{STUR} & 1 & 0 & 0 & 01 & X & 00 & 1 & 0 & 0010 \\
+\hline
+\textbf{CBZ} & 1 & 0 & 1 & 00 & X & 01 & 0 & 0 & 0111 \\
+\hline
+\textbf{B} & X & 1 & X & 00 & X & XX & X & 0 & XXXX \\
+\hline
+\end{tabular}
+}
+
+\vspace{1mm}
+\textbf{Justifying "Don't Cares" (X):}
+\begin{itemize}
+    \item \textbf{LDUR (R2=X):} Does not read a second register; only reads the base register and uses immediate offset.
+    \item \textbf{STUR \& CBZ (M2=X):} RegWrite is 0. Since no data is saved to the register file, it doesn't matter what data the MemtoReg mux routes to it.
+    \item \textbf{B (Unconditional):} Uncondbranch=1 forces the PC mux to jump. Therefore, it doesn't matter what the ALU calculates (AOp, AS, AC), what registers are read (R2), or what the CBZ AND-gate outputs (Br).
+\end{itemize}
+\end{tcolorbox}
+
+
+
+\begin{tcolorbox}[colback=blue!5, colframe=black, boxrule=0.5pt, title=\textbf{Branch Target Math (Shift Left 2)}]
+\textbf{Why Shift Left 2?} The offset stored in a branch instruction is the number of \textit{instructions}. Memory is byte-addressed (1 instruction = 4 bytes). Shifting a binary number left by 2 multiplies it by 4, converting the instruction offset to a byte offset.
+
+\textbf{Step-by-Step Calculation (CBZ / B):}
+\begin{enumerate}
+    \item \textbf{Calculate Offset:} Target Line - Current Line.
+    \item \textbf{Determine Binary:} Convert offset to binary. If negative, use \textbf{2's Complement} (Invert bits, Add 1).
+    \item \textbf{Sign-Extend:} Pad the left side with 1s (if negative) or 0s (if positive) until it is exactly 64 bits long.
+    \item \textbf{Shift Left 2:} Shift the entire 64-bit string left by 2 bits. (Append \texttt{00} to the right side, drop the two leftmost bits to maintain exactly 64 bits).
+\end{enumerate}
+\textit{Example (Jump back 5 lines):}
+Offset = -5. Binary +5 = \texttt{...00101}. 
+Invert = \texttt{...11010}. Add 1 = \texttt{...11011}.
+Sign Extended = \texttt{1111...1111 1011}.
+Shift Left 2 = \texttt{1111...1110 1100} (Decimal -20).
+\end{tcolorbox}
+
+
+
+\textbf{Signal Definitions:}
+\begin{itemize}
+    \item \textbf{Reg2Loc:} \texttt{0} reads Rm (R-types). \texttt{1} reads Rt (STUR, CBZ).
+    \item \textbf{Uncondbranch:} \texttt{1} for B. \texttt{0} for others.
+    \item \textbf{Branch:} \texttt{1} for CBZ. \texttt{0} for others.
+    \item \textbf{MemR/W (Combined):} \texttt{00} (Hold), \texttt{10} (Read/LDUR), \texttt{01} (Write/STUR).
+    \item \textbf{MemtoReg:} \texttt{1} (Data Memory $\to$ Reg). \texttt{0} (ALU $\to$ Reg).
+    \item \textbf{ALUOp:} \texttt{10} (R-type), \texttt{00} (Load/Store), \texttt{01} (CBZ).
+    \item \textbf{ALUSrc:} \texttt{0} (Reg 2 $\to$ ALU). \texttt{1} (Sign-Ext Offset $\to$ ALU).
+    \item \textbf{RegWrite:} \texttt{1} (Writing to a register). \texttt{0} (Not writing).
+    \item \textbf{ALU Control (4b):} \texttt{0010} (Add), \texttt{0110} (Sub), \texttt{0111} (Pass input B).
+\end{itemize}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\sectionhead{Extended Multiplication (128-bit)}
+Multiplying two 64-bit registers produces a 128-bit result, which cannot fit in a single register. The ISA provides instructions to capture both halves:
+\begin{itemize}
+    \item \texttt{MUL X3, X1, X2}: Calculates and stores the \textbf{Lower 64 bits} of the product.
+    \item \texttt{SMULH X4, X1, X2}: Calculates and stores the \textbf{Upper 64 bits} (Signed).
+    \item \texttt{UMULH X4, X1, X2}: Calculates and stores the \textbf{Upper 64 bits} (Unsigned).
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5, colframe=black, boxrule=0.5pt, title=\textbf{Critical Path \& Clock Speed}]
+In a Single-Cycle Datapath, the clock cycle must be long enough for the slowest instruction to complete. 
+\textbf{The longest delay is ALWAYS the Load (\texttt{LDUR}) instruction.}
+\begin{itemize}
+    \item \textbf{Path:} Instr Mem $\to$ Reg File (Read) $\to$ ALU $\to$ Data Mem (Read) $\to$ Reg File (Write).
+    \item \textbf{Impact:} The physical time it takes for a Load to travel this entire path dictates the absolute minimum clock cycle time ($T_c$) and the maximum clock frequency ($f$) for the entire CPU.
+\end{itemize}
+\end{tcolorbox}
+
+\sectionhead{ALU Control (2-Level Decoding)}
+The Main Control Unit doesn't micromanage the ALU. It sends a 2-bit \textbf{ALUOp} signal to a smaller "ALU Control Unit", which then outputs the final 4-bit command.
+\begin{itemize}
+    \item \textbf{\texttt{ALUOp = 00} (Memory):} Used for \texttt{LDUR} \& \texttt{STUR}. The ALU Control immediately outputs \texttt{0010} (Add) to calculate the address.
+    \item \textbf{\texttt{ALUOp = 01} (Branch):} Used for \texttt{CBZ}. The ALU Control outputs \texttt{0111} (Pass Input B) to check if the register is zero.
+    \item \textbf{\texttt{ALUOp = 10} (R-Type):} Used for \texttt{ADD}, \texttt{SUB}, \texttt{AND}, \texttt{ORR}. The ALU Control looks at the 11-bit \textbf{Opcode} of the instruction to decide the final 4-bit command (\texttt{0010}, \texttt{0110}, \texttt{0000}, etc.).
+\end{itemize}
+
+\sectionhead{Datapath Usage: Who Uses What?}
+Every instruction must first do \textbf{Instruction Fetch}: PC $\to$ Instr Mem, and PC+4 Adder $\to$ PC. After fetch, the paths diverge:
+
+\textbf{1. R-Format (\texttt{ADD}, \texttt{SUB}, \texttt{AND}, \texttt{ORR})}
+\begin{itemize}
+    \item \textbf{Active:} Reg File (Reads Rm \& Rn, Writes Rd), ALU.
+    \item \textbf{Bypassed/Ignored:} Sign-Extend, Data Memory, Branch Adders.
+    \item Instr Mem + Reg Read + ALU + Reg Write
+\end{itemize}
+
+\textbf{2. Load (\texttt{LDUR})}
+\begin{itemize}
+    \item \textbf{Active:} Reg File (Reads Rn, Writes Rt), Sign-Extend (9b offset), ALU (Adds Base+Offset), Data Memory (Reads).
+    \item \textbf{Bypassed/Ignored:} Reg File "Read 2" port, Branch Adders.
+    \item Instr Mem + Reg Read + ALU + Data Mem + Reg Write (CRITICAL PATH)
+\end{itemize}
+
+\textbf{3. Store (\texttt{STUR})}
+\begin{itemize}
+    \item \textbf{Active:} Reg File (Reads Rn \& Rt), Sign-Extend (9b offset), ALU (Adds Base+Offset), Data Memory (Writes).
+    \item \textbf{Bypassed/Ignored:} Reg File "Write" port (does not update registers), Branch Adders.
+    \item Instr Mem + Reg Read + ALU + Data Mem
+\end{itemize}
+
+\textbf{4. Conditional Branch (\texttt{CBZ})}
+\begin{itemize}
+    \item \textbf{Active:} Reg File (Reads Rt via Reg2Loc), ALU (Passes B, outputs Zero flag), Sign-Extend (19b offset), Shift Left 2, Top Branch Adder, AND Gate.
+    \item \textbf{Bypassed/Ignored:} Reg File "Write" port, Data Memory.
+    \item Instr Mem + Reg Read + ALU
+\end{itemize}
+
+\textbf{5. Unconditional Branch (\texttt{B})}
+\begin{itemize}
+    \item \textbf{Active:} Sign-Extend (26b offset), Shift Left 2, Top Branch Adder, OR Gate (forces PC Mux).
+    \item \textbf{Bypassed/Ignored (Everything else!):} Register File, ALU, Data Memory.
+    \item Instr Mem + Sign Extend + Branch Adder
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-04-13 121157.png}
+    % Optional: add a caption manually since you aren't using the figure environment
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-04-13 121005.png}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-04-13 122140.png}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-04-13 121029.png}
+\end{center}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-04-13 121859.png}
+\end{center}
+
+
+
+\end{multicols}
+
+
+
+
+\end{document}

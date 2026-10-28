@@ -1,0 +1,330 @@
+\documentclass[6pt, letterpaper]{article}
+\usepackage[margin=0.2in]{geometry}
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\setlength{\columnsep}{0.4cm}
+\pagestyle{empty}
+\setlist[itemize]{nosep, leftmargin=8pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+\setlist[enumerate]{nosep, leftmargin=12pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+
+% Section header command
+\newcommand{\sectionhead}[1]{%
+    \vspace{1mm}{\large\bfseries#1}\vspace{0.2mm}\hrule\vspace{0.8mm}%
+}
+
+\begin{document}
+
+\begin{multicols}{3}
+
+\sectionhead{The 8 Great Ideas in Architecture}
+\begin{enumerate}
+    \item \textbf{Design for Moore’s Law:} Anticipate where technology will be when the chip finishes design.
+    \item \textbf{Use abstraction to simplify design:} Hide lower-level details (ISA hides hardware from software).
+    \item \textbf{Make the common case fast:} Optimize what happens most often (immediate operands).
+    \item \textbf{Performance via parallelism:} Do multiple things at once (multicore processors).
+    \item \textbf{Performance via pipelining:} Overlap instruction execution (assembly line).
+    \item \textbf{Performance via prediction:} Guessing is often faster than waiting for a sure answer.
+    \item \textbf{Hierarchy of memories:} Small/fast cache near CPU; large/slow disk further away.
+    \item \textbf{Dependability via redundancy:} Provide backups for failing components.
+\end{enumerate}
+
+\sectionhead{Defining Performance}
+\textbf{Response Time (Latency):} How long to do \textit{one} task. \\
+\textbf{Throughput (Bandwidth):} Total work done per unit time. \\
+\textbf{Measuring Time:}
+\begin{itemize}
+    \item \textbf{Elapsed (Wall-clock):} Total response time, includes I/O, OS overhead, other apps. (System perf).
+    \item \textbf{CPU Time:} Time spent processing a specific job. Discounts I/O time. (CPU perf).
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5, colframe=black, boxrule=0.5pt, title=\textbf{Amdahl's Law}]
+\textbf{Concept:} The overall speedup is limited by the fraction of the time the enhancement can actually be used.
+\[ T_{new} = \frac{T_{affected}}{\text{Improvement Factor}} + T_{unaffected} \]
+\[ \text{Speedup} = \frac{1}{(1 - f) + \frac{f}{S}} \]
+\textit{How to use:} ($f$) is the \% of time the enhancement is used. ($S$) is the speedup of that specific feature. If a feature is used 50\% of the time ($f=0.5$), the max overall speedup is 2x, even if $S = \infty$.
+\end{tcolorbox}
+
+
+
+\sectionhead{CPU Clocking \& The Iron Law}
+\textbf{Clock Period ($T_c$):} Duration of a clock cycle (e.g., 250ps). \\
+\textbf{Clock Frequency ($f$):} Cycles per second (e.g., 4.0 GHz). \\
+\textit{Conversion:} $f = 1 / T_c$ \quad ($1 \text{ns} = 10^{-9}\text{s}$, $1 \text{GHz} = 10^9\text{Hz}$)
+
+\columnbreak
+
+\begin{tcolorbox}[colback=red!5, colframe=black, boxrule=0.5pt, title=\textbf{The Iron Law of Performance}]
+\[ \text{Clock Cycles} = \text{IC} \times \text{CPI} \]
+\[ \text{CPU Time} = \text{IC} \times \text{CPI} \times T_c = \frac{\text{IC} \times \text{CPI}}{f} \]
+\[ \frac{\text{Instructions}}{\text{Program}} \times \frac{\text{Clock Cycles}}{\text{Instructions}} \times \frac{\text{Seconds}}{\text{Clock Cycle}}\]
+\begin{itemize}
+    \item \textbf{IC (Instruction Count):} Determined by program, ISA, and Compiler.
+    \item \textbf{CPI (Cycles Per Instruction):} Determined by CPU hardware/architecture.
+    \item \textbf{$T_c$ (Clock Cycle Time):} Determined by physics/manufacturing.
+\end{itemize}
+You cannot optimize one metric without checking the others. Faster clock ($f$) might increase CPI. Less instructions (IC) might require a slower clock.
+\end{tcolorbox}
+
+\sectionhead{Advanced CPI \& MIPS}
+\textbf{Weighted Average CPI:} Different instruction classes (ALU, Load, Branch) take different amounts of cycles.
+\[ \text{Global CPI} = \sum_{i=1}^{n} \left( \text{CPI}_i \times \frac{\text{IC}_i}{\text{Total IC}} \right) \]
+\textit{How to use:} Multiply the CPI of a specific instruction type by its percentage of occurrence in the code, then sum them up.
+
+\textbf{Pitfall: MIPS}
+\[ \text{MIPS} = \frac{\text{IC}}{\text{Time} \times 10^6} = \frac{f}{\text{CPI} \times 10^6} \]
+\textit{Why it's bad:} MIPS ignores the \textit{complexity} of instructions. It varies between programs on the same CPU and cannot reliably compare different ISAs.
+
+
+\begin{tcolorbox}[colback=blue!5, colframe=black, boxrule=0.5pt, title=\textbf{Relative Performance}]
+\[ \text{Performance} = \frac{1}{\text{Execution Time}} \]
+\textbf{"X is $n$ times faster than Y"}
+\[ n = \frac{\text{Perf}_X}{\text{Perf}_Y} = \frac{\textbf{Time}_Y}{\textbf{Time}_X} \]
+\textit{How to use:} Always put the SLOWER machine's time (the larger number) on top to get a speedup $> 1$.
+\end{tcolorbox}
+
+\sectionhead{Registers}
+\textbf{Size:} 32 registers, 64-bits wide each.
+\begin{itemize}
+    \item \textbf{Doubleword:} 64-bit data.
+    \item \textbf{Word:} 32-bit data.
+\end{itemize}
+
+\columnbreak
+
+\sectionhead{ISA \& Design Principles}
+
+\textbf{Principle 1: Simplicity favors regularity}
+\begin{itemize}
+    \item  All arithmetic operations have exactly 3 operands (1 destination, 2 sources).
+    \item \textit{Why:} Regularity makes hardware implementation simpler, enabling higher performance at lower cost.
+\end{itemize}
+
+\textbf{Principle 2: Smaller is faster}
+\begin{itemize}
+    \item  LEGv8 has a strict 32 $\times$ 64-bit Register File instead of keeping variables in massive RAM.
+    \item \textit{Why:} Electrical signals travel faster over smaller physical distances (32 registers vs millions of memory locations).
+\end{itemize}
+
+\textbf{Principle 3: Make the common case fast}
+\begin{itemize}
+    \item  Immediate operands (\texttt{ADDI X1, X2, \#4}).
+    \item \textit{Why:} Small constants are common in programming (loops, array indexing). Encoding them directly in the instruction avoids a slow memory load.
+\end{itemize}
+
+\textbf{Principle 4: Good design demands good compromises}
+\begin{itemize}
+    \item  Keeping all instructions exactly 32-bits long, but allowing different formats (R, D, I, B, CB) inside those 32 bits.
+\end{itemize}
+
+
+
+
+\sectionhead{Basic Blocks \& Compilation}
+\textbf{Basic Block:} A sequence of instructions with:
+\begin{enumerate}
+    \item No embedded branches (except at the very end).
+    \item No branch targets (except at the very beginning).
+\end{enumerate}
+Compilers easily optimize basic blocks because they guarantee straight-line execution.
+
+\textbf{Inverted Logic for If-Statements:}
+When compiling \texttt{if (i == j) f=g+h;}, Assembly checks the \textit{opposite} condition to jump over the block:
+\texttt{SUB X9, i, j} \\
+\texttt{CBNZ X9, Skip}  (If $i-j \ne 0$, jump past the ADD) \\
+\texttt{ADD f, g, h} \\
+\texttt{Skip: ...}
+
+\sectionhead{Memory}
+\textbf{Hierarchy:} Registers $\to$ Cache $\to$ Main Mem $\to$ Disk. \\
+\textbf{Byte Addressed:} Every memory address identifies an 8-bit byte. Because a Doubleword is 64 bits (8 bytes), \textbf{array indices must be multiplied by 8} to find the byte offset! \\
+\textbf{Alignment:} LEGv8 does not strictly require word alignment for data, but does for instructions and the stack.
+
+\textbf{Data Transfer Instructions:}
+\begin{itemize}
+    \item \textbf{LDUR (Load):} Memory $\to$ Register. 
+    \item \textbf{STUR (Store):} Register $\to$ Memory.
+    \item \textit{Syntax:} \texttt{LDUR Rt, [Rn, \#offset]} 
+    \item \textit{Calculation:} Address = $Rn + offset$.
+\end{itemize}
+
+
+
+
+
+
+
+
+
+\end{multicols}
+
+\begin{multicols}{3}
+
+\sectionhead{Arithmetic \& Immediates}
+\textbf{Base Arithmetic:} \texttt{ADD X1, X2, X3} \\
+\textbf{Subtraction:} \texttt{SUB X1, X2, X3} \\
+\textbf{Immediate Math:} \texttt{ADDI X1, X2, \#10} \\
+\textbf{Negative Immediates:} LEGv8 machine code has \textbf{no} \texttt{SUBI} opcode. The Assembler translates an assembly \texttt{SUBI X1, X2, \#5} into \texttt{ADDI X1, X2, \#-5} (using 2's complement).
+
+\sectionhead{Binary Numbers \& Math}
+\textbf{Unsigned Integers:} Range is $0$ to $+2^n - 1$. \\
+\textbf{Signed Integers (2's Complement):} 
+\begin{itemize}
+    \item Range: $-2^{n-1}$ to $+2^{n-1} - 1$.
+    \item \textbf{Sign Bit (MSB):} 0 = Positive, 1 = Negative.
+\end{itemize}
+
+
+
+\textbf{Sign Extension:}
+When moving an 8-bit or 32-bit number into a 64-bit register, you must preserve the value.
+\begin{itemize}
+    \item \textbf{Positive:} Pad left with 0s. (\texttt{LDURB} zero-extends).
+    \item \textbf{Negative:} Pad left with 1s. (\texttt{LDURSB} sign-extends).
+\end{itemize}
+
+\sectionhead{Logical Operations}
+Used for bitwise manipulation rather than standard math.
+\begin{itemize}
+    \item \textbf{LSL (Logical Shift Left):} Shifts bits left, fills with 0s. Mathematically \textbf{multiplies by $2^i$}.
+    \item \textbf{LSR (Logical Shift Right):} Shifts bits right, fills with 0s. Mathematically \textbf{divides by $2^i$} (unsigned).
+    \item \textbf{AND:} Output 1 if \textit{both} are 1. Used for \textbf{Masking} (forcing specific bits to 0 while keeping others).
+    \item \textbf{ORR:} Output 1 if \textit{either} is 1. Used to \textbf{Set} bits to 1 without affecting others.
+    \item \textbf{EOR (XOR):} Output 1 if inputs are \textit{different}. Used to \textbf{Invert} (NOT) bits by XORing with a string of 1s.
+\end{itemize}
+
+
+
+\sectionhead{Base Conditional Branches}
+\begin{itemize}
+    \item \texttt{CBZ register, L1}: If (register == 0), goto L1.
+    \item \texttt{CBNZ register, L1}: If (register != 0), goto L1.
+    \item \texttt{B L1}: Unconditionally goto L1.
+\end{itemize}
+
+\sectionhead{Condition Codes (Flags)}
+Instructions ending in \textbf{S} (\texttt{ADDS}, \texttt{SUBS}, \texttt{ANDIS}) set 4 condition flags based on the ALU result:
+\begin{itemize}
+    \item \textbf{N (Negative):} Result had a 1 in the MSB.
+    \item \textbf{Z (Zero):} Result was exactly 0.
+    \item \textbf{V (Overflow):} Signed overflow occurred.
+    \item \textbf{C (Carry):} Unsigned carryout occurred.
+\end{itemize}
+
+\columnbreak
+
+\textbf{Using Flags for "If" Statements:}
+Instead of just checking for zero, use \texttt{SUBS} to set flags, then branch based on the result.
+\begin{itemize}
+    \item \textbf{Pattern:} \texttt{SUBS XZR, X1, X2} (Performs X1-X2, throws away answer into XZR, but sets NZVC flags).
+\end{itemize}
+
+\textbf{Branch Flag Instructions (Green Card):}
+\begin{itemize}
+    \item \texttt{B.EQ}: Equal (Z=1)
+    \item \texttt{B.NE}: Not Equal (Z=0)
+    \item \texttt{B.LT}: Less Than (\textit{Signed})
+    \item \texttt{B.LE}: Less Than or Equal (\textit{Signed})
+    \item \texttt{B.GT}: Greater Than (\textit{Signed})
+    \item \texttt{B.GE}: Greater Than or Equal (\textit{Signed})
+    \item \texttt{B.LO}: Less Than (\textit{Unsigned})
+    \item \texttt{B.HI}: Greater Than (\textit{Unsigned})
+\end{itemize}
+\textit{Signed vs Unsigned Trap:} \texttt{-1 < +1} in Signed. But in Unsigned, \texttt{-1} is \texttt{0xFFFFFF...} which is $> +1$.
+
+\begin{tcolorbox}[colback=blue!5, colframe=black, boxrule=0.5pt, title=\textbf{Branch Offset Calculation}]
+All branch addresses use \textbf{PC-Relative Addressing}.
+
+\textbf{Assembly $\to$ Machine Code:}
+\begin{itemize}
+    \item The offset placed in the binary instruction is the number of \textbf{INSTRUCTIONS} (lines of code) to skip.
+    \item \textbf{Forward jump:} Positive number.
+    \item \textbf{Backward jump:} Negative number (Use 2's comp!).
+    \item \textit{Example:} If \texttt{CBZ} is line 1, and the target is line 4, the offset is $+3$.
+\end{itemize}
+
+\textbf{Machine Code $\to$ Memory Address (CPU logic):}
+\begin{itemize}
+    \item Because every instruction is 4 bytes (32 bits), the CPU must calculate the \textit{Byte Offset}.
+    \item $\text{Byte Offset} = \text{Instruction Offset} \times 4$.
+    \item \textbf{Hardware shift:} The CPU shifts the binary instruction offset \textbf{Left by 2} to multiply by 4.
+    \item $\text{Target PC} = \text{Current PC} + (\text{Offset} \ll 2)$.
+\end{itemize}
+\end{tcolorbox}
+
+
+\sectionhead{Instruction Formats}
+Every LEGv8 instruction is exactly \textbf{32 bits}. \\
+
+\textbf{R-Format (Register Math: ADD, SUB, AND)} \\
+\textit{shamt:} Shift amount (usually \texttt{000000} unless LSL/LSR). \\
+
+\textbf{I-Format (Immediate Math: ADDI, SUBI)} \\
+I-Format opcodes are 10 bits. The remaining 1 bit becomes part of the immediate. Zero-extended. \\
+
+\columnbreak
+
+
+\sectionhead{Instruction Syntax \& Behavior Guide}
+\textit{In Assembly text, the Destination is written FIRST (Left). In Machine Code binary, the Destination is slotted LAST (Right).}
+
+\textbf{1. Arithmetic \& Logical (R-Format)}
+\begin{itemize}
+    \item \texttt{ADD Rd, Rn, Rm} $\rightarrow$ \texttt{Rd = Rn + Rm}
+    \item \texttt{SUB Rd, Rn, Rm} $\rightarrow$ \texttt{Rd = Rn - Rm}
+    \item \texttt{AND Rd, Rn, Rm} $\rightarrow$ \texttt{Rd = Rn \& Rm}
+    \item \texttt{ORR Rd, Rn, Rm} $\rightarrow$ \texttt{Rd = Rn | Rm}
+    \item \texttt{EOR Rd, Rn, Rm} $\rightarrow$ \texttt{Rd = Rn \textasciicircum{} Rm}
+\end{itemize}
+
+\textbf{2. Immediate Math (I-Format)}
+\begin{itemize}
+    \item \texttt{ADDI Rd, Rn, \#imm} $\rightarrow$ \texttt{Rd = Rn + imm}
+    \item \texttt{SUBI Rd, Rn, \#imm} $\rightarrow$ \texttt{Rd = Rn - imm}
+    \item \textit{Note:} \texttt{\#imm} is a 12-bit unsigned number.
+\end{itemize}
+
+\textbf{3. Data Transfer (D-Format)}
+\begin{itemize}
+    \item \texttt{LDUR Rt, [Rn, \#offset]} $\rightarrow$ \texttt{Rt = Memory[Rn + offset]}
+    \item \texttt{STUR Rt, [Rn, \#offset]} $\rightarrow$ \texttt{Memory[Rn + offset] = Rt}
+    \item \texttt{Rt} is Destination for LDUR, but \textbf{Source} for STUR.
+\end{itemize}
+
+\textbf{4. Shifts (R-Format)}
+\begin{itemize}
+    \item \texttt{LSL Rd, Rn, \#shamt} $\rightarrow$ Shift \texttt{Rn} left by \texttt{shamt} (Fills w/ 0s. Multiplies by $2^{shamt}$).
+    \item \texttt{LSR Rd, Rn, \#shamt} $\rightarrow$ Shift \texttt{Rn} right by \texttt{shamt} (Fills w/ 0s. Divides by $2^{shamt}$).
+\end{itemize}
+
+\textbf{5. Branching (CB / B Formats)}
+\begin{itemize}
+    \item \texttt{CBZ Rt, Label} $\rightarrow$ If \texttt{Rt == 0}, jump to \texttt{Label}.
+    \item \texttt{CBNZ Rt, Label} $\rightarrow$ If \texttt{Rt != 0}, jump to \texttt{Label}.
+    \item \texttt{B Label} $\rightarrow$ Unconditionally jump to \texttt{Label}.
+    \item \texttt{B.cond Label} $\rightarrow$ Jump to \texttt{Label} if condition flag is met.
+    \item \textit{Address:} PC-Relative. \textbf{Instruction} offset.
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=black, boxrule=0.5pt, title=\textbf{The "Times 8" Rule (Arrays \& Memory)}]
+Memory is Byte-Addressed. Registers hold 64-bit Doublewords (8 Bytes). To find the address of an array element, \textbf{multiply the index by 8}. \\
+\textbf{Scenario A: Constant Index (e.g., A[3])}
+\begin{itemize}
+    \item Offset = $3 \times 8 = 24$.
+    \item Assembly: \texttt{LDUR X9, [X20, \#24]}
+\end{itemize}
+\textbf{Scenario B: Variable Index (e.g., A[i] where i is in X22)}
+\begin{itemize}
+    \item Multiply $i$ by 8 using shift: \texttt{LSL X10, X22, \#3} (X10 is now Byte Offset)
+    \item Add to Base Address: \texttt{ADD X10, X10, X25} (X10 is now Physical Addr)
+    \item Load data: \texttt{LDUR X9, [X10, \#0]}
+\end{itemize}
+\end{tcolorbox}
+
+\end{multicols}
+\end{document}

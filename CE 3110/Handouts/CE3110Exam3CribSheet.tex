@@ -1,0 +1,420 @@
+% \documentclass[8pt, letterpaper]{article}
+% \usepackage[margin=0.3in]{geometry}
+% \usepackage{amsmath, amssymb}
+% \usepackage{multicol}
+% \usepackage{tcolorbox}
+% \usepackage{enumitem}
+
+% % Compact settings
+% \setlength{\parindent}{0pt}
+% \setlength{\parskip}{1pt}
+% \setlength{\columnsep}{0.4cm}
+% \pagestyle{empty}
+% \setlist[itemize]{nosep, leftmargin=8pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+% \setlist[enumerate]{nosep, leftmargin=12pt, itemsep=0pt, topsep=0pt, partopsep=0pt}
+
+% % Section header command
+% \newcommand{\sectionhead}[1]{%
+%     \vspace{1mm}{\large\bfseries#1}\vspace{0.2mm}\hrule\vspace{0.8mm}%
+% }
+
+\documentclass[8pt, letterpaper]{extarticle}
+\usepackage[margin=0.25in]{geometry} % Slightly tighter margins
+\usepackage{amsmath, amssymb}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{lmodern} % Scales better at small sizes
+\usepackage{graphicx}
+
+% Compact settings
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\columnsep}{0.3cm}
+\pagestyle{empty}
+
+% Ultra-compact lists
+\setlist[itemize]{nosep, leftmargin=10pt, labelsep=2pt, itemsep=0pt, topsep=1pt}
+\setlist[enumerate]{nosep, leftmargin=10pt, labelsep=2pt, itemsep=0pt, topsep=1pt}
+
+% Optimized Section header
+\newcommand{\sectionhead}[1]{%
+    \vspace{1.5mm}{\small\bfseries\uppercase{#1}}\vspace{0.2mm}\hrule\vspace{0.5mm}%
+}
+
+% Global TColorBox styling to save space
+\tcbset{
+    sharp corners,
+    boxrule=0.5pt,
+    left=2pt, right=2pt, top=2pt, bottom=2pt, % Reduced internal padding
+    title style={top=1pt, bottom=1pt},
+    fonttitle=\bfseries\small
+}
+
+\begin{document}
+
+\begin{multicols}{3}
+
+\sectionhead{Pipelining Performance}
+\textbf{The 5 Stages:} IF (Fetch), ID (Decode), EX (Execute), MEM (Memory), WB (Write-Back).
+\begin{itemize}
+    \item \textbf{Latency:} Time for \textit{one} instruction. Pipelining does NOT improve this.
+    \item \textbf{Throughput:} Instructions per second. Pipelining vastly improves this.
+\end{itemize}
+
+\textbf{Execution Time Math:} Let $N$ = Number of Instructions, $k$ = Number of Pipeline Stages (usually 5), $T_c$ = Clock Cycle Time.
+\begin{itemize}
+    \item \textbf{Single-Cycle Time:} $= N \times T_c$
+    \item \textbf{Pipelined Time (Ideal):} $= (k + N - 1) \times T_c_{pipe}$
+    \item \textbf{Speedup:} $= \frac{Time_{single}}{Time_{pipelined}}$
+\end{itemize}
+If no hazards, instructions finish at a rate of 1 per cycle after the initial $k$ cycles.
+
+\sectionhead{Pipeline Registers ("Suitcases")}
+Registers inserted between stages to hold data \& control signals for the current instruction.
+\begin{itemize}
+    \item \textbf{IF/ID:} Holds PC and 32-bit Instruction.
+    \item \textbf{ID/EX:} Holds Read Data 1 \& 2, Sign-Ext Offset, and Control Signals (EX, MEM, WB).
+    \item \textbf{EX/MEM:} Holds ALU Result, Data to Store, and Control Signals (MEM, WB).
+    \item \textbf{MEM/WB:} Holds Memory Read Data, ALU Result, and Control Signals (WB).
+\end{itemize}
+The destination register (\texttt{Rd} or \texttt{Rt}) must be passed down the pipeline registers to WB so it doesn't write to the wrong register!
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 161242.png}
+\end{center}
+
+\sectionhead{Pipeline Stage Usage (Who Uses What?)}
+\begin{itemize}
+    \item \textbf{R-Type (\texttt{ADD, SUB, AND}):} \textbf{IF, ID, EX, WB}
+    \begin{itemize}
+        \item \textit{Idle in MEM:} Math stays in CPU; doesn't access RAM.
+    \end{itemize}
+    \item \textbf{Load (\texttt{LDUR}):} \textbf{IF, ID, EX, MEM, WB}
+    \begin{itemize}
+        \item \textit{Uses all 5 stages:} This is the critical path!
+    \end{itemize}
+    \item \textbf{Store (\texttt{STUR}):} \textbf{IF, ID, EX, MEM}
+    \begin{itemize}
+        \item \textit{Idle in WB:} Writes to RAM, does NOT overwrite registers.
+    \end{itemize}
+    \item \textbf{Cond. Branch (\texttt{CBZ}):} \textbf{IF, ID, EX}
+    \begin{itemize}
+        \item \textit{Idle in MEM, WB:} No RAM access, no register writes. ALU checks zero flag in EX.
+    \end{itemize}
+    \item \textbf{Uncond. Branch (\texttt{B}):} \textbf{IF, ID}
+    \begin{itemize}
+        \item \textit{Idle in EX, MEM, WB:} Offset is shifted/added and PC is updated by the end of ID.
+    \end{itemize}
+\end{itemize}
+
+\columnbreak
+
+\sectionhead{Hazards Overview}
+\textbf{1. Structural Hazard:} Hardware conflict (e.g., trying to read instructions and data from one memory simultaneously). \textit{Fix:} Separate I-Mem and D-Mem (Caches). \\
+\textbf{2. Data Hazard:} Instruction needs data before the previous instruction finishes writing it (RAW - Read After Write). \\
+\textbf{3. Control Hazard:} Fetching next instruction depends on a branch outcome not yet calculated.
+
+
+
+
+
+\sectionhead{Data Hazards \& Forwarding}
+Instead of stalling, pass the computed data directly to the ALU from the pipeline registers.
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!75!black, boxrule=0.5pt, title=\textbf{Forwarding Unit Logic (in EX stage)}]
+Compares EX/MEM and MEM/WB destination registers with the ID/EX source registers.
+
+\textbf{1. EXE-Forwarding (1-Cycle Gap):}
+\textit{e.g., ADD X1... followed by SUB X2, X1...}
+\begin{itemize}
+    \item \texttt{if (EX/MEM.RegWrite = 1} AND
+    \item \texttt{EX/MEM.Rd == ID/EX.Rn)}
+    \item $\to$ Forward from EX/MEM pipeline register.
+\end{itemize}
+
+\textbf{2. MEM-Forwarding (2-Cycle Gap):}
+\textit{e.g., ADD X1... followed by dummy, then SUB X2, X1...}
+\begin{itemize}
+    \item \texttt{if (MEM/WB.RegWrite = 1} AND
+    \item \texttt{MEM/WB.Rd == ID/EX.Rn)}
+    \item $\to$ Forward from MEM/WB pipeline register.
+\end{itemize}
+
+\textbf{Double Data Hazard Rule:} If both hazards occur (e.g., two consecutive ADDs write to X1), the \textbf{most recent} instruction wins. EXE-forwarding takes priority!
+\end{tcolorbox}
+
+\sectionhead{Load-Use Data Hazard (Stalls)}
+You cannot forward backward in time! If an instruction needs data from a \texttt{LDUR} immediately, the data isn't retrieved from Memory until the end of MEM, but the ALU needs it at the start of EX.
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 161625.png}
+\end{center}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!75!black, boxrule=0.5pt, title=\textbf{Hazard Detection Unit (in ID stage)}]
+\textbf{Condition:}
+\texttt{if (ID/EX.MemRead = 1} AND 
+\texttt{(ID/EX.Rt == IF/ID.Rn1} OR \texttt{IF/ID.Rn2))}
+
+\textbf{Action (Insert 1 Bubble / Stall):}
+\begin{enumerate}
+    \item Force all control values in ID/EX to 0 (creates a NOP in the pipeline).
+    \item Prevent update of PC (fetches same instruction again).
+    \item Prevent update of IF/ID register (decodes same instruction again).
+\end{enumerate}
+After 1 cycle stall, standard MEM-Forwarding resolves the hazard.
+\end{tcolorbox}
+\textbf{Code Scheduling:} A compiler can fix Load-Use hazards by reordering instructions. Move an independent instruction between the Load and the Use to fill the delay slot without stalling.
+
+\columnbreak
+
+
+
+\sectionhead{Control (Branch) Hazards}
+\textbf{The Problem:} If a branch is decided in the EX stage, the CPU has already fetched 3 wrong instructions if the branch is taken. 
+\textbf{Hardware Fix:} Move target address adder and register comparator to the \textbf{ID stage}. This reduces the flush penalty from 3 cycles to \textbf{1 cycle}.
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 160930.png}
+\end{center}
+
+\sectionhead{Branch Prediction}
+To avoid the 1-cycle penalty entirely, guess!
+\begin{itemize}
+    \item \textbf{Static:} Always predict Taken (or Not Taken). Best for loops if you guess "Taken".
+    \item \textbf{Dynamic:} Hardware records recent history in a Branch Prediction Buffer.
+\end{itemize}
+
+\begin{tcolorbox}[colback=green!5, colframe=green!75!black, boxrule=0.5pt, title=\textbf{Dynamic Predictors}]
+\textbf{1-Bit Predictor:}
+\begin{itemize}
+    \item Guesses whatever happened last time.
+    \item \textbf{Flaw:} Fails TWICE on nested loops. (Mispredicts at the loop exit, then mispredicts on the first iteration of the next run).
+\end{itemize}
+
+\textbf{2-Bit Predictor (FSM):}
+\begin{itemize}
+    \item 4 States: Strongly Taken (00), Weakly Taken (01), Weakly Not Taken (10), Strongly Not Taken (11).
+    \item Must guess wrong \textbf{twice} in a row to flip its core prediction. Solves the loop exit problem.
+\end{itemize}
+
+\textbf{Prediction Accuracy Math:}
+\begin{itemize}
+    \item Map sequence (e.g., T, T, N, T).
+    \item \textit{Accuracy} = (Correct Guesses) / (Total Guesses).
+\end{itemize}
+\end{tcolorbox}
+
+\sectionhead{Instruction-Level Parallelism (ILP)}
+\begin{itemize}
+    \item \textbf{Deeper Pipeline:} Less work per stage $\implies$ Shorter clock cycle.
+    \item \textbf{Multiple Issue (Superscalar):} Replicate pipeline stages to start multiple instructions per clock cycle.
+    \item \textbf{IPC (Instructions Per Cycle):} Used instead of CPI when CPI < 1. (e.g., A 4-way multiple-issue processor has a peak IPC of 4, or CPI of 0.25).
+\end{itemize}
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 155837.png}
+\end{center}
+
+\end{multicols}
+
+\newpage
+
+\begin{multicols}{3}
+
+\sectionhead{Memory Hierarchy \& Locality}
+\textbf{The Goal:} Present the user with as much memory as is available in the cheapest technology (Disk) at the speed offered by the fastest technology (SRAM).
+\begin{itemize}
+    \item \textbf{SRAM (Static RAM):} Cache. Fast (0.5ns), expensive, flip-flop based.
+    \item \textbf{DRAM (Dynamic RAM):} Main Memory. Slower (50ns), cheaper, capacitor based (needs refreshing).
+    \item \textbf{Flash/Disk:} Non-volatile, very slow, cheapest.
+\end{itemize}
+
+\textbf{Principle of Locality:} Programs access a small proportion of their address space at any time.
+\begin{itemize}
+    \item \textbf{Temporal (Time):} If an item is accessed, it will likely be accessed again soon (e.g., loops).
+    \item \textbf{Spatial (Space):} If an item is accessed, items whose addresses are close by will likely be accessed soon (e.g., arrays). Block transfers exploit this.
+\end{itemize}
+
+\sectionhead{Cache Organizations}
+\textbf{1. Direct Mapped:} Each memory block maps to exactly ONE cache slot.
+\begin{itemize}
+    \item \textit{Block Addr:} $\left\lfloor \frac{Byte Addr}{Bytes Per Block} \right\rfloor$ \\
+    \item \textit{Location:} \texttt{Block Addr \% (\# Blocks in Cache)}.
+    \item \textit{Pros/Cons:} Fast and simple, but high conflict miss rate.
+\end{itemize}
+\textbf{2. Fully Associative:} A block can be placed ANYWHERE.
+\begin{itemize}
+    \item \textit{Location:} No index. Compare tags of all slots simultaneously.
+    \item \textit{Pros/Cons:} Lowest miss rate, but hardware is very expensive (needs a comparator for every entry).
+\end{itemize}
+\textbf{3. N-Way Set Associative:} Cache is divided into sets. Each set contains $N$ blocks. A block maps to a specific Set, but can go in any of the $N$ slots within that Set.
+\begin{itemize}
+    \item \textit{Location:} \texttt{Block Addr \% (\# Sets in Cache)}.
+\end{itemize}
+
+\textbf{Replacement Policies (When a Set is Full):}
+\begin{itemize}
+    \item \textbf{LRU (Least Recently Used):} Replace the block untouched for the longest time. Hard to track for $>4$-way.
+    \item \textbf{Random:} Evict a random block. Almost as good as LRU for high associativity, much cheaper to build.
+\end{itemize}
+
+\sectionhead{Cache Tracing Table Setup (4-Block Cache)}
+\textit{Warning: If given BYTE addresses, divide by 4 first to get Word Addresses. Only use Word Addresses to find the Index and Tag!}
+
+\textbf{1. Direct Mapped Organization}
+\begin{itemize}
+    \item \textbf{Index:} 2 bits (Start from right) $\to 4$ slots.
+    \item \textbf{Tag:} 1 bit (Start from left).
+\end{itemize}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Addr}} & \multirow{2}{*}{\textbf{Tag}} & \multirow{2}{*}{\textbf{Index}} & \multirow{2}{*}{\textbf{H/M}} & \multicolumn{4}{c|}{\textbf{Cache Content after access}} \\ \cline{5-8}
+ & & & & \textbf{00} & \textbf{01} & \textbf{10} & \textbf{11} \\ \hline
+010 & 0 & 10 & M & --- & --- & M[010] & --- \\ \hline
+\end{tabular}
+}
+\vspace{1mm}
+
+\textbf{2. 2-Way Set Associative}
+\begin{itemize}
+    \item \textbf{Index:} 1 bit (Start from right) $\to 2$ Sets.
+    \item \textbf{Tag:} 2 bits (Start from left).
+    \item \textit{Rule:} Each Set holds 2 blocks. Update LRU on every hit/miss!
+\end{itemize}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\multirow{2}{*}{\textbf{Addr}} & \multirow{2}{*}{\textbf{Tag}} & \multirow{2}{*}{\textbf{Index}} & \multirow{2}{*}{\textbf{H/M}} & \multicolumn{2}{c|}{\textbf{Cache Content after access}} \\ \cline{5-6}
+ & & & & \textbf{Set 0 (Index 0)} & \textbf{Set 1 (Index 1)} \\ \hline
+010 & 01 & 0 & M & M[010], --- & ---, --- \\ \hline
+\end{tabular}
+}
+\vspace{1mm}
+
+\textbf{3. Fully Associative}
+\begin{itemize}
+    \item \textbf{Index:} 0 bits (No index).
+    \item \textbf{Tag:} 3 bits (The entire address is the tag).
+    \item \textit{Rule:} 1 Giant Set. Write list from MRU (Left) to LRU (Right).
+\end{itemize}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Addr} & \textbf{Tag} & \textbf{H/M} & \textbf{Cache Content (Fully Associative)} \\ \hline
+010 & 010 & M & M[010], ---, ---, --- \\ \hline
+\end{tabular}
+}
+
+\columnbreak
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 161922.png}
+\end{center}
+
+\begin{tcolorbox}[colback=blue!5, colframe=blue!75!black, boxrule=0.5pt, title=\textbf{Cache Address Subdivision (HW6 Math)}]
+Given a 32-bit address, the CPU chops it into fields: \\
+\texttt{[ Tag ] [ Index ] [ Word Offset ] [ Byte Offset ]}
+
+\textbf{1. Byte Offset:} Which byte in the word?
+\begin{itemize}
+    \item $\log_2(\text{Bytes per Word})$.
+    \item \textit{If 1 Word = 4 Bytes, Byte Offset is \textbf{ALWAYS 2 bits}.}
+\end{itemize}
+\textbf{2. Word Offset:} Which word in the block?
+\begin{itemize}
+    \item $\log_2(\text{Words per Block})$.
+    \item \textit{If 1 Word/Block, offset = 0 bits. If 4 Words/Block, offset = 2 bits. If 8 words, offset = 3 bits.}
+\end{itemize}
+\textbf{3. Index:} Which Set does it go to?
+\begin{itemize}
+    \item First, calculate Total Blocks: $\frac{\text{Total Capacity (Words)}}{\text{Words per Block}}$.
+    \item Calculate Total Sets: $\frac{\text{Total Blocks}}{\text{N-Way Associativity}}$. 
+    \item \textit{(For Direct Mapped, Associativity = 1).}
+    \item $\text{Index Bits} = \log_2(\text{Total Sets})$.
+\end{itemize}
+\textbf{4. Tag:} The unique ID of the block.
+\begin{itemize}
+    \item $\text{Tag Bits} = 32 - (\text{Index} + \text{Word Offset} + \text{Byte Offset})$.
+\end{itemize}
+\textit{HW6 Trap:} If a problem states memory is strictly \textbf{Word-Addressable} (like HW6 Q2), there is NO Byte Offset and NO Word Offset. The entire address is just \texttt{[ Tag ] [ Index ]}.
+\end{tcolorbox}
+
+% \begin{center}
+%     \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 162325.png}
+% \end{center}
+
+\sectionhead{Handling Cache Writes}
+When CPU executes \texttt{STUR}, it changes data. Cache and RAM are now inconsistent.
+\begin{itemize}
+    \item \textbf{Write-Through:} Update BOTH cache and Main Memory immediately.
+    \begin{itemize}
+        \item \textit{Problem:} Extremely slow. Memory takes ~100 cycles.
+        \item \textit{Solution:} Use a \textbf{Write Buffer}. CPU writes to buffer and keeps going. Buffer writes to RAM in background.
+    \end{itemize}
+    \item \textbf{Write-Back:} Update ONLY the cache.
+    \begin{itemize}
+        \item Adds a \textbf{Dirty Bit} to each block. ($1$ = modified, $0$ = clean).
+        \item The block is written back to Main Memory ONLY when it gets evicted/replaced. Fast, but complex.
+    \end{itemize}
+\end{itemize}
+
+\textbf{Write Miss Policies (When data isn't in cache):}
+\begin{itemize}
+    \item \textbf{Write Allocate:} Fetch block into cache, then write. (Used with Write-Back).
+    \item \textbf{Write Around (No-Allocate):} Don't fetch the block. Write directly to RAM. (Used with Write-Through).
+\end{itemize}
+
+\begin{tcolorbox}[colback=red!5, colframe=red!75!black, boxrule=0.5pt, title=\textbf{Cache Performance Equations}]
+\textbf{Average Memory Access Time (AMAT):}
+\[ \text{AMAT} = \]
+\[\text{Hit Time} + (\text{Miss Rate} \times \text{Miss Penalty}) \]
+\textit{Example:} 1ns clock, Hit = 1 cycle, Miss Penalty = 20 cycles, Miss Rate = 5\%. $\text{AMAT} = 1 + (0.05 \times 20) = 2\text{ cycles}$.
+
+\textbf{Memory Stall Cycles:}
+\[ \text{Stalls} = \text{Instrs} \times \frac{\text{Misses}}{\text{Instr}} \times \text{Miss Penalty} \]
+
+\textbf{Effective CPU Time:}
+\[ \text{Time} = \]
+\[(\text{Execution Cycles} + \text{Stall Cycles}) \times T_c \]
+\end{tcolorbox}
+
+\sectionhead{Multilevel Caches}
+One cache isn't enough.
+\begin{itemize}
+    \item \textbf{L1 Cache (Primary):} Attached to CPU. Focuses on \textbf{minimal hit time} to match CPU clock speed. Usually smaller, lower associativity.
+    \item \textbf{L2 Cache:} Services L1 misses. Focuses on \textbf{low miss rate} to avoid hitting slow Main Memory. Usually larger, higher associativity.
+\end{itemize}
+\textbf{Multilevel AMAT Math:}
+If L1 misses, it goes to L2. If L2 misses, it goes to RAM.
+The "Miss Penalty" of L1 is actually the AMAT of L2!
+\[ \text{Penalty}_{L1} = \]
+\[\text{Hit}_{L2} + (\text{MissRate}_{L2} \times \text{RAM Penalty}) \]
+\[ \text{Overall AMAT} = \]
+\[\text{Hit}_{L1} + (\text{MissRate}_{L1} \times \text{Penalty}_{L1}) \]
+
+\sectionhead{Improving Memory Bandwidth}
+If Cache misses, fetching from DRAM is slow.
+\begin{itemize}
+    \item \textbf{Wide Memory:} Increase bus width (fetch 4 words at once). Pays the setup latency only once per chunk.
+    \item \textbf{Interleaved Memory:} Organize RAM into Banks. Send addresses to multiple banks simultaneously.
+\end{itemize}
+
+
+\begin{center}
+    \includegraphics[width=\linewidth]{CE 3110 Images/Screenshot 2026-05-11 162126.png}
+\end{center}
+
+
+\sectionhead{Cache Valid Bits \& Tags}
+\begin{itemize}
+    \item \textbf{Valid Bit:} 1 bit per block. Initializes to 0 (garbage data). Becomes 1 when real data is loaded. CPU ignores blocks with Valid = 0.
+    \item \textbf{Tag Comparison:} On an access, CPU extracts the Index to find the Set. It then compares the Address Tag to ALL Tags in that Set simultaneously. If Tag matches AND Valid=1, it is a \textbf{HIT}.
+\end{itemize}
+
+\end{multicols}
+
+
+\end{document}
