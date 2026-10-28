@@ -1,0 +1,66 @@
+/* This C program example extends the two timer interrupt example worked in class to show how to extend time delays beyond the fosc prescaler (1, 8, 64, 256, 1024) and TCNTx preload values (8 bits for Timer 0 (TCNT0) and for Timer 2 (TCNT2) and 16 bits for Timer 1 (TCNT1H TCNT1L).  In this example, count0 is a global variable that the ISR for Timer 0 increments up to 100 before PB1 is toggled for the 
+waveform generated, which, in effect, multiples the preload value TCNT0 by 100 in getting the desired half-period for this waveform. */ 
+ * TimerInterruptCExampleAVR.c
+ *
+ * Author : stanleyj
+ */ 
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+ISR (TIMER0_OVF_vect);
+ISR (TIMER2_OVF_vect);
+int count0; // count for extended delay loop for Timer 0 
+
+int main(void)
+{
+	DDRB = 0x82;  // MAKE DDRB.1 AND DDRB.7 OUTPUT
+	DDRC = 0x00;   // PORTC INPUT
+	PORTC = 0xFF;  // ENABLE PULL-UP RESISTORS FOR INPUT PORT C
+	DDRD = 0xFF;   // MAKE PORTD OUTPUT
+ 
+	TCNT0 = -40;   // -40 TIMER 0 PRELOAD INITIALIZATION FOR HALF WAVE
+	count0 = 0;    // initialize count for extended delay
+//	TCCR0 = 0x01;  // TIMER 0 NORMAL MODE, CLK, NO PRESCALER - ATMEGA32
+	TCCR0A = 0x00; // TIMER 0 NORMAL MODE - ATMEGA324PB
+	TCCR0B = 0x01; // TIMER 0 CLK, NO PRESCALER - ATMEGA324PB
+	
+	TCNT2 = -30;   // -30 TIMER 2 PRELOAD INITIALIZATION FOR HALF WAVE
+ // TCCR2 = 0x01;  // TIMER2 NORMAL MODE, CLK, NO PRESCALER - ATMEGA32
+	TCCR2A = 0x00; // TIMER 2 NORMAL MODE - ATMEGA324PB
+	TCCR2B = 0x01; // TIMER 2 CLK, NO PRESCALER - ATMEGA324PB
+    
+//	TIMSK = (1<<TOIE0) | (1<<TOIE2); // ENABLE TIMER 0 AND TIMER 2 INTERRUPTS - ATMEGA32
+	TIMSK0 = 0x01;	// TIMER 0 OVERFLOW INTERRUPT ENABLE
+	TIMSK2 = 0x01;  // TIMER 2 OVERFLOW INTERRUPT ENABLE
+	
+	sei();          // I = 1 IN SREG FOR GLOBAL INTERRUPT ENABLE
+	
+	while (1)
+	{
+		PORTD = PINC; // ENDLESS LOOP - READ PORTC PINS AND COPY TO PORTD
+	}
+	
+		
+}
+
+
+// ----- TIMER 0 OVERFLOW ISR
+ISR (TIMER0_OVF_vect)
+{
+	count0 ++;  // count = count + 1; count += 1;
+	TCNT0 = -40;    // -40 RESET PRELOAD FOR TIMER 0 FOR HALF WAVE
+	if (count0 > 99) {  // count0 = 100 to get to long delay
+		PORTB ^= 0x02;  // TOGGLE PB1 FOR TIMER 0 WAVE FORM
+		count0 = 0;  // reinitialize for next long delay
+	}
+}
+
+
+// ------ TIMER 2 OVERFLOW ISR
+ISR (TIMER2_OVF_vect)
+{
+	TCNT2 = -30;    // -30 RESET PROLOAD FOR TIMER 2 FOR  HALF WAVE
+	PORTB ^= 0x80; 
+}
+
