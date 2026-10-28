@@ -1,0 +1,4 @@
+- [[CS 5420 The Maximum-Margin Principle and Geometry of the Hard-Margin SVM]]
+- [[CS 5420 SVM vs. Logistic Regression and The Soft-Margin Formulation]]
+- [[CS 5420 Basis Expansions and The Dual Formulation Perspective]]
+- [[CS 5420 Systems Implementation, Diagnostic Quizzes, and Lab Forensics]]

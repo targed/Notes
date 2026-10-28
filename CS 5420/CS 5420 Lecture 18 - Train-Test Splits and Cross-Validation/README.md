@@ -1,0 +1,4 @@
+- [[CS 5420 The Single-Split Lottery and Theoretical Foundations of k-Fold CV]]
+- [[CS 5420 The Bias-Variance Trade-Off in Choosing k and Stratification Theory]]
+- [[CS 5420 Model Selection, Hyperparameter Tuning, and Test Vaulting]]
+- [[CS 5420 Pipeline Encapsulation, Repeated CV, and The Anatomy of a Leak]]

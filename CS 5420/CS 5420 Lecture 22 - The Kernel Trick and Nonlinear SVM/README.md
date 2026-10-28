@@ -1,0 +1,4 @@
+- [[CS 5420 Geometric Lifting, Hand-Solving the Linear SVM, and The Origin of Dual Multipliers]]
+- [[CS 5420 The Kernel Trick and Polynomial Foundations]]
+- [[CS 5420 The Radial Basis Function Kernel and Infinite Dimensions]]
+- [[CS 5420 Computational Systems, Diagnostic Quizzes, and Lab Forensics]]

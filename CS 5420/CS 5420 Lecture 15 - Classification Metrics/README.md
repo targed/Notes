@@ -1,0 +1,3 @@
+- [[CS 5420 The Accuracy Paradox, Base-Rate Asymmetry, and The Confusion Matrix Substrate]]
+- [[CS 5420 Precision, Recall, Specificity, and The Trade-Off Frontier]]
+- [[CS 5420 Composite Metrics, Harmonic Means, and Cost-Sensitive Optimization]]

@@ -1,0 +1,4 @@
+- [[CS 5420 Parameters vs. Hyperparameters and The Tripartite Data Partition]]
+- [[CS 5420 GridSearchCV Mechanics and Objective Sensitivity]]
+- [[CS 5420 Information Criteria vs. Cross-Validation]]
+- [[CS 5420 Honest Model Comparison and Computational Lab Forensics]]
