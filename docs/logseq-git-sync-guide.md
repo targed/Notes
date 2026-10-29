@@ -1,6 +1,6 @@
-# Logseq Git Backup & Multi-Device Sync Guide
+# Logseq Git Backup & Multi-Device Sync Guide (Windows, Linux, Android)
 
-This guide documents the architecture, rationale, decisions, and exact setup instructions for your Logseq Git synchronization system across **Windows**, **Linux**, and **Android**.
+This guide documents the architecture, setup instructions, troubleshooting history, and daily workflow for synchronizing a Logseq graph across **Windows**, **Arch Linux**, and **Android** using GitHub.
 
 ---
 
@@ -12,7 +12,7 @@ This guide documents the architecture, rationale, decisions, and exact setup ins
 * **Linux**: Synced using **rclone** against Google Drive.
 
 ### The Pain Points
-* **rclone on Linux** was sluggish, lacked real-time sync, suffered from Google Drive API latency/rate limits, and had no automated conflict handling.
+* **rclone on Linux** was sluggish, lacked real-time sync, hit Google Drive API rate limits, and had no automated conflict handling.
 * **DriveSync on Android** caused battery drain, sync delays, and frequent duplicate conflict files (`Note (1).md`) due to collisions with Logseq's internal file indexing.
 * **No Version History**: Google Drive only syncs raw files. Accidental block deletions, graph corruptions, or bad edits could not be reverted via atomic history or diffs.
 
@@ -24,7 +24,7 @@ This guide documents the architecture, rationale, decisions, and exact setup ins
 Hosting a `.git` repository inside an active cloud synchronization folder (Google Drive, OneDrive, Dropbox, or iCloud) is an **anti-pattern**:
 * **File-Lock Collisions**: Git operations create and destroy lockfiles rapidly (`.git/index.lock`, `refs/heads/*.lock`). Google Drive actively scans and locks these files mid-operation, crashing Git with `fatal: Unable to create '.../.git/index.lock': File exists`.
 * **Database Corruption**: Git stores objects in a local content-addressed database (`.git/objects`). If Google Drive syncs files out of order or creates duplicate files (e.g., `index (1)`), the repository becomes corrupted and unrecoverable.
-* **Decision**: Decouple Git completely from Google Drive. Keep the Git working copy in a dedicated local folder (`Documents/GitHub/Logseq` on Windows, `~/Documents/Logseq` on Linux).
+* **Decision**: Decouple Git completely from Google Drive. Keep the Git working copy in a dedicated local folder (`Documents/GitHub/Logseq` on Windows, `~/Documents/Logseq` on Linux, and `Documents/Logseq` on Android).
 
 ### 2.2 Why Native Git Hooks Over Plugins or External Daemons?
 * Logseq has a built-in auto-commit feature (**Settings > Version control**), but it **only commits locally**—it does not push to GitHub.
@@ -32,15 +32,9 @@ Hosting a `.git` repository inside an active cloud synchronization folder (Googl
 * External sync daemons (`logseq/git-auto`) add background OS processes to manage.
 * **The Solution**: A native Git `post-commit` hook (`.git/hooks/post-commit`). When Logseq triggers an auto-commit, Git automatically fires the hook to run `git push origin HEAD` silently in the background. **Zero plugins, zero background services.**
 
-### 2.3 The Parallel Pilot Strategy
-Instead of immediately deleting or disconnecting the Google Drive folder, we established a **risk-free parallel pilot**:
-* The original Google Drive folder remains 100% untouched as a safety fallback.
-* All 1,757 files (~300 MB) were copied into the Git repository at `C:\Users\ltkli\Documents\GitHub\Logseq` and pushed to [`targed/Logseq`](https://github.com/targed/Logseq).
-* We validate the Git workflow on Windows and Linux first before transitioning Android and retiring Google Drive.
-
 ---
 
-## 3. What Was Done on Windows
+## 3. Windows Configuration
 
 1. **Configured `.gitignore`**:
    Filtered out transient backups and OS junk that bloat Git repositories:
@@ -71,106 +65,93 @@ Instead of immediately deleting or disconnecting the Google Drive folder, we est
 
 ---
 
-## 4. Linux Setup Instructions (Run When You Reboot)
+## 4. Arch Linux Setup & Troubleshooting History
 
-When you boot into Linux, setting up the exact same automated sync takes under 3 minutes.
+### Problem 1: Silent failure of Logseq auto-commits on Arch Linux
+* **Cause**: Logseq's bundled `dugite` package expected Git at an unpacked directory (`app.asar.unpacked/node_modules/dugite/git/bin/git`). The Arch AUR package archives everything into `app.asar` without unpacking, causing Git calls to fail silently.
+* **Solution**: Point `dugite` to the system Git binaries via environment variables:
+  ```bash
+  mkdir -p ~/.config/environment.d
+  cat << 'EOF' > ~/.config/environment.d/logseq.conf
+  LOCAL_GIT_DIRECTORY=/usr
+  GIT_EXEC_PATH=/usr/lib/git-core
+  EOF
+  ```
+  And override the launcher in `~/.local/share/applications/logseq-desktop.desktop` to ensure the environment variables are active when launched from desktop menus.
 
-### Step 1: Ensure Git & GitHub Authentication Are Ready
-Make sure Git is installed and you are authenticated to GitHub (via SSH key or GitHub CLI / Personal Access Token):
-```bash
-# Verify git is installed
-git --version
+### Problem 2: Expired GitHub CLI credentials blocking background pushes
+* **Cause**: The global git config used `gh auth git-credential`, whose token had expired. Because the hook sets `export GIT_TERMINAL_PROMPT=0`, pushes failed silently into `.git/post-commit.log`.
+* **Solution**: Re-authenticating with `gh auth login -h github.com` restored non-interactive background pushes.
 
-# Verify GitHub SSH connection (if using SSH)
-ssh -T git@github.com
-
-# Or verify GitHub CLI authentication (if using HTTPS)
-gh auth status
+### Automatic Pull on Launcher Startup
+To avoid uncommitted merge conflicts while ensuring notes written on other devices are pulled before editing:
+```ini
+[Desktop Entry]
+Type=Application
+Name=Logseq
+Exec=bash -c "git -C /home/targed/Documents/Logseq pull --rebase --autostash; env LOCAL_GIT_DIRECTORY=/usr GIT_EXEC_PATH=/usr/lib/git-core logseq %u"
+Icon=logseq
+Terminal=false
+StartupNotify=true
+Categories=Office;
 ```
-
-### Step 2: Clone the Repository
-Clone your Logseq notes into your preferred directory (e.g., `~/Documents/Logseq`):
-```bash
-# If using SSH (recommended on Linux):
-git clone git@github.com:targed/Logseq.git ~/Documents/Logseq
-
-# OR if using HTTPS:
-git clone https://github.com/targed/Logseq.git ~/Documents/Logseq
-```
-
-### Step 3: Install the Automated `post-commit` Push Hook
-Create the executable hook inside the local repository:
-```bash
-cat << 'EOF' > ~/Documents/Logseq/.git/hooks/post-commit
-#!/bin/sh
-export GIT_TERMINAL_PROMPT=0
-GIT_DIR="$(git rev-parse --git-dir 2>/dev/null || echo .git)"
-git push origin HEAD > "$GIT_DIR/post-commit.log" 2>&1
-EOF
-
-# Grant execution permissions
-chmod +x ~/Documents/Logseq/.git/hooks/post-commit
-```
-
-### Step 4: Test the Hook on Linux
-Verify that Git triggers an automatic push when a commit happens:
-```bash
-cd ~/Documents/Logseq
-git commit --allow-empty -m "chore: test linux post-commit hook"
-
-# Check the log file to confirm it pushed to GitHub
-cat .git/post-commit.log
-```
-*Expected output*: `To github.com:targed/Logseq.git ... HEAD -> master`.
-
-### Step 5: Configure Logseq on Linux
-1. Open Logseq on Linux.
-2. Click the graph switcher in the top-left corner $\rightarrow$ **Open graph**.
-3. Select `~/Documents/Logseq`.
-4. Open **Settings** (press `,` then `s`) $\rightarrow$ **Version control**:
-   * Toggle **Enable Git auto commit** $\rightarrow$ **ON**
-   * Toggle **Git commit on window close** $\rightarrow$ **ON**
-   * Set **Git auto commit seconds** $\rightarrow$ `60`
 
 ---
 
-## 5. Daily Multi-Device Workflow (Windows $\leftrightarrow$ Linux)
+## 5. Android Setup (via GitSync)
 
-Because Git is decentralized, you must ensure you have the latest notes before starting work on a different machine:
+Because Logseq Android has no built-in Git binaries and mobile terminal scripts require manual button-tapping, we use **GitSync** ([`ViscousPot/GitSync`](https://github.com/ViscousPot/GitSync)) to provide automatic pull on open and commit/push on close.
 
-### Starting Your Work Session
-Before opening Logseq on a machine, pull the latest changes made on the other machine:
-```bash
-# On Linux:
-cd ~/Documents/Logseq && git pull
+### Step 1: Install GitSync & Grant Permissions
+1. Install **GitSync** from the **Google Play Store** (by *ViscousPotential*) or via [GitHub Releases](https://github.com/ViscousPot/GitSync/releases).
+2. Open GitSync and grant **All Files Access** (`MANAGE_EXTERNAL_STORAGE`).
+3. In **Android Settings > Apps > GitSync > Battery**, set battery usage to **Unrestricted** (prevents Android Doze from suspending background syncs).
 
-# On Windows (PowerShell or Git Bash):
-cd "C:\Users\ltkli\Documents\GitHub\Logseq"; git pull
-```
+### Step 2: Connect GitHub & Clone Graph
+1. In GitSync, go to **Settings / Accounts > Add Account > GitHub**.
+2. Sign in via OAuth (or generate a Personal Access Token with `repo` scope).
+3. In the **Repositories** tab, tap **+ (Clone)**:
+   * **URL**: `https://github.com/targed/Logseq.git`
+   * **Path**: `Documents/Logseq`
+   * **Branch**: `master`
+4. Tap **Clone** and let the notes download completely.
 
-> [!TIP]
-> **Convenient Linux Launch Shortcut**:
-> You can create a one-line launcher script or shell alias in `~/.bashrc` or `~/.zshrc`:
-> ```bash
-> alias logseq-sync="cd ~/Documents/Logseq && git pull && logseq &"
-> ```
-> This automatically pulls down any notes you wrote on Windows right before launching Logseq on Linux.
+### Step 3: Configure Automation Triggers
+1. Open repository settings for `Logseq` inside GitSync.
+2. In **Automation / App Triggers**:
+   * Set **Target Application**: `Logseq`
+   * Enable **Sync on App Open** (pulls upstream changes before you start editing).
+   * Enable **Sync on App Close** (stages, commits, and pushes notes when Logseq is closed/minimized).
+   * (Optional) Add the **GitSync tile** to your Android Quick Settings notification shade for 1-tap manual sync anytime.
 
-### Ending Your Work Session
-You don't need to do anything manually! When you close Logseq (or wait 60 seconds after your last keystroke), Logseq auto-commits and the `post-commit` hook pushes the changes straight to GitHub.
+### Step 4: Link Logseq Android to the Cloned Graph
+1. Open the **Logseq** app on Android.
+2. Click the graph switcher in top-left $\rightarrow$ **Add a local graph**.
+3. Browse to and select `Documents/Logseq`. Confirm storage access.
+4. Open the left menu $\rightarrow$ tap your graph name $\rightarrow$ select **Re-index** to build the mobile cache.
 
 ---
 
-## 6. What Remains to Be Done (Next Steps)
+## 6. Daily Multi-Device Workflow
 
-1. **Verify Windows $\leftrightarrow$ Linux Two-Way Sync**:
-   * Edit a note on Linux, close Logseq, check GitHub.
-   * Boot into Windows, run `git pull`, and verify the note appears.
-2. **Determine the Android Strategy**:
-   Once desktop sync is validated, choose one of these two mobile paths:
-   * **Option A: Termux + Git (Direct Git)**
-     Install Termux and the Termux:Widget app on Android. Place a home screen widget button that runs `git pull && git push` against your notes folder.
-   * **Option B: Syncthing (Phone $\leftrightarrow$ PC) + Git (PC $\rightarrow$ GitHub)**
-     Use Syncthing to silently mirror your notes folder peer-to-peer between your Android phone and your PC/Linux machine when on the same Wi-Fi. The PC continues auto-pushing version history to GitHub.
-3. **Retire Google Drive / DriveSync / rclone**:
-   Once you are completely comfortable with Git on all devices, archive the old Google Drive folder and remove DriveSync/rclone background tasks.
+```
+[Desktop (Win/Linux)] ---> Launch app pulls upstream ---> Edit notes auto-commit (60s) ---> Close app pushes to GitHub
+                                                                    ^
+                                                                    |
+                                                            GitHub: targed/Logseq
+                                                                    |
+                                                                    v
+[Mobile (Android)]    ---> Open app: GitSync pulls    ---> Edit notes in Logseq       ---> Close app: GitSync auto-pushes
+```
+
+* **No manual terminal commands needed in daily use.**
+* Every device pulls when Logseq starts, and pushes when Logseq closes.
+
+---
+
+## 7. Retiring Legacy Google Drive / DriveSync
+
+Once you verify notes flow smoothly across Windows, Linux, and Android:
+1. On Android: Open **DriveSync** $\rightarrow$ delete/pause the sync pair pointing to Google Drive.
+2. On Linux: Disable any remaining `rclone` background timers or cron jobs.
+3. On Google Drive: The old folder (`My Graph`) can be left as a frozen historical backup or archived.
